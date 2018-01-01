@@ -1,0 +1,36 @@
+<div ng-app="myApp" ng-controller="tasks">
+    <h2 ng-bind="title"></h2>
+    <div class="row flex-wrap-reverse">
+        <div class="col-md-10">
+            <div ng-repeat="header in headers">
+                <h2 ng-bind="header"></h2>
+                <hr/>
+                <table class="mb-3">
+                    <tr ng-if="task.fields.status.name == header " ng-repeat="task in tasks">
+                        <td class="align-top">
+                            <i ng-if="task.fields.status.name != 'Closed' " class='far fa-circle' style='color:green; margin-left:0.5em; margin-right:0.5em;'></i>
+                            <i ng-if="task.fields.status.name == 'Closed' " class='far fa-check-circle' style='color:green; margin-left:0.5em; margin-right:0.5em;'></i>
+                        </td>
+                        <td>
+                            <a ng-href="/task?id={%raw%}{{task.id}}{%endraw%}" ng-bind="task.fields.summary"></a>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="col-md-2">
+            {% include task_nav.html %}
+        </div>
+    </div>
+</div>
+<script>
+app.controller('tasks', function($scope, $http) {
+    function setView(tasks){
+        $scope.headers = statuses;
+        $scope.tasks = tasks;
+        $scope.title = title;
+        $scope.$digest();
+    }
+    getTasks(query,setView);
+});
+</script>

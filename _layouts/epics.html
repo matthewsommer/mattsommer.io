@@ -2,40 +2,11 @@
 layout: default
 ---
 {{ content }}
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
 <script>
-function setView(tasks){
-    $.each(tasks, function(i, task) {
-        if (task.fields.status.id == 3) {
-            $("#in_progress_epics").append("<i class='far fa-circle' style='color:green; margin-left:0.5em; margin-right:0.5em;'></i>");
-            $("#in_progress_epics").append("<a href='/task?id=" + task.id + "'>" + task.fields.summary + "</a> - " + task.fields.project.name + "<br/>");
-        } else if (task.fields.status.id == 6) {
-            $("#completed_epics").append("<i class='fas fa-check-circle' style='color:green; margin-left:0.5em; margin-right:0.5em;'></i>");
-            $("#completed_epics").append("<a href='/task?id=" + task.id + "'>" + task.fields.summary + "</a> - " + task.fields.project.name + "<br/>");
-        } else if (task.fields.status.id == 1) {
-            $("#epics_to_be_done").append("<i class='far fa-circle' style='color:green; margin-left:0.5em; margin-right:0.5em;'></i>");
-            $("#epics_to_be_done").append("<a href='/task?id=" + task.id + "'>" + task.fields.summary + "</a> - " + task.fields.project.name + "<br/>");
-        }
-    });
-};
-$(document).ready(function(){
-    getTasksAsync("issuetype%20%3D%20Epic&fields=summary,project,status,customfield_10100", 0, setView)
-});
+    var app = angular.module('myApp', []);
+    var title = "My Epics";
+    var query = "issuetype=Epic";
+    var statuses = ["In Progress","Open","Closed"];
 </script>
-<div class="row flex-wrap-reverse">
-    <div class="col-md-10">
-        <h2>My Epics</h2>
-        <p>An Epic is the place between a project and a dream!</p>
-        <h4>In Progress Epics</h4>
-        <div id="in_progress_epics"></div>
-        <br/>
-        <h4>Epics To Be Done</h4>
-        <div id="epics_to_be_done"></div>
-        <div id="count"></div>
-        <br/>
-        <h4>Completed Epics</h4>
-        <div id="completed_epics"></div>
-    </div>
-    <div class="col-md-2">
-        {% include task_nav.html %}
-    </div>
-</div>
+{% include tasks_list.html %}

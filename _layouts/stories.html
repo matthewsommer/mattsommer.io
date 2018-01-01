@@ -2,35 +2,11 @@
 layout: default
 ---
 {{ content }}
-<h2>My Stories</h2>
-<div ng-app="myApp" ng-controller="tasks">
-    <div class="row flex-wrap-reverse">
-        <div class="col-md-10">
-            <table>
-                <tr ng-repeat="x in tasks">
-                    <td>
-                        <i class='far fa-circle' style='color:green; margin-left:0.5em; margin-right:0.5em;'></i>
-                    </td>
-                    <td>
-                        {% raw %}
-                            {{x.fields.summary}}
-                        {% endraw %}
-                    </td>
-                </tr>
-            </table>
-        </div>
-        <div class="col-md-2">
-            {% include task_nav.html %}
-        </div>
-    </div>
-</div>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
 <script>
-var app = angular.module('myApp', []);
-app.controller('tasks', function($scope, $http) {
-    $.getJSON("http://54.190.22.140/rest/api/2/search?jql=issuetype%20%3D%20Story&fields=summary,project,status,customfield_10100&startAt=0", function(result) {
-        $scope.tasks = result.issues;
-        $scope.$digest();
-    });
-});
+    var app = angular.module('myApp', []);
+    var title = "My Stories";
+    var query = "issuetype=Story";
+    var statuses = ["In Progress","Open","Closed"];
 </script>
+{% include tasks_list.html %}

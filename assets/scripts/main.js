@@ -19,3 +19,21 @@ function getRepoData(id,callback) {
         callback(result);
     });
 }
+
+function getTasks(query,callback) {
+    var tasks = [];
+    var startAt = 0;
+    var maxResults = 100;
+    $.getJSON("http://54.190.22.140/rest/api/2/search?jql=" + query + "&startAt=" + startAt + "&maxResults=" + maxResults, function(result1) {
+        tasks = result1.issues;
+        startAt = startAt + maxResults;
+        if(result1.total > (result1.startAt + result1.maxResults)) {
+            $.getJSON("http://54.190.22.140/rest/api/2/search?jql=" + query + "&startAt=" + startAt + "&maxResults=" + maxResults, function(result2) {
+                tasks = $.merge(result1.issues, result2.issues);
+                callback(tasks);
+            });
+        } else {
+            callback(tasks);
+        }
+    });
+}
