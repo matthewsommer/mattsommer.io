@@ -1,0 +1,154 @@
+---
+layout: default
+---
+{{ content }}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.8.5/showdown.min.js"></script>
+<script>
+$(document).ready(function(){
+    
+    function setBreadcrumb(task){
+        $("#epic_project").append(task.fields.project.name);
+        $("#breadcrumb").append(" > <a href='/task?id=" + task.id + "'>" + task.fields.summary + "</a>");
+    };
+
+    function setStories(tasks){
+        if(tasks.length > 0) {
+            var projects = $.unique(tasks.map(function (task) {return task.fields.project.name;}));
+            projects.reverse();
+            $.each($.unique(projects), function(i, project) {
+                $("#stories").append("<hr class='mt-2'/>");
+                $("#stories").append("<h5>" + project + " Stories</h5>");
+                $.each(tasks, function(i, task) {
+                    if(task.fields.project.name == project){
+                        if (task.fields.status.id == 6) {
+                            $("#stories").append("<i class='fas fa-check-circle' style='color:green; margin-left:0.5em;'></i>");
+                        } else {
+                            $("#stories").append("<i class='far fa-circle' style='color:green; margin-left:0.5em;'></i>");
+                        }
+                        $("#stories").append("<a class='align-top' style='padding-left: 0.5em;' href='/task?id=" + task.id + "'>" + task.fields.summary + "</a><br/>");
+                    }
+                });
+            });
+        } else {
+            $("#stories_row").remove();
+        }
+    };
+
+    function setRepoData(result){
+        if(result.detail.length > 0 && result.detail[0].repositories.length > 0) {
+            $("#commits").append("<div>Repo Data</div><hr/>");
+        } else {
+            $("#commits").remove();
+        }
+        $.each(result.detail, function(i, detail) {
+            $.each(detail.repositories, function(i, repo) {
+                $.each(repo.commits, function(i, commit) {
+                    $("#commits").append("<a href='" + commit.url + "' target='_blank'>" + commit.message + "</a> - " + commit.fileCount + " Files - " + commit.author.name);
+                });
+            });
+        });
+    };
+
+    function setView(task) {
+        $("#summary").text(task.fields.summary);
+        $("#project").text(task.fields.project.name);
+
+        if (task.fields.status.id == 3) {
+            $("#status").append("<img src='https://img.shields.io/badge/Status-In--Progress-blue.svg' class='align-top'></img>");
+        } else if (task.fields.status.id == 6) {
+            $("#status").append("<img src='https://img.shields.io/badge/Status-Closed-brightgreen.svg' class='align-top'></img>");
+        } else if (task.fields.status.id == 1) {
+            $("#status").append("<img src='https://img.shields.io/badge/Status-To--Do-red.svg' class='align-top'></img>");
+        }
+
+        if (task.fields.customfield_10700 != null) {
+            $("#description").append(task.fields.customfield_10700.value + " Description<hr/>");
+        } else {
+            $("#description").append(task.fields.issuetype.name + " Description<hr/>");
+        }
+
+        if(task.fields.description != null) {
+            $("#description").append(task.fields.description);
+        } else {
+            $("#description").remove();
+        }
+
+        if(task.fields.customfield_10009 != null) {
+            getTaskAsync(task.fields.customfield_10009,setBreadcrumb);
+        }
+
+        if(task.fields.attachment.length > 0) {
+            $("#attachment").append("<hr/>");
+            $.each(task.fields.attachment, function(i, attachment) {
+                $("#attachment").append("<img style='padding:0.5em; width: 200px;' src='" + attachment.thumbnail + "'></img>");
+            });
+        } else {
+            $("#attachment_row").remove();
+        }
+
+        $("#status").append("<a href='https://timetopretend.atlassian.net/browse/" + task.key + "' target='_blank' style='text-align:right' class='pl-2'><i class='fas fa-database'></i></a>");
+
+        $("#status").append(" " + task.fields.priority.name + " Priority");
+        if(task.fields.customfield_11401 != null) {
+            $("#status").append("<a href='" + task.fields.customfield_11401 + "' target='_blank' class='pl-2'><i class='fab fa-github fa-lg pr-1'></i>Github</a>");
+            $.get("https://raw.githubusercontent.com/matthewsommer/popular_movies/master/readme.md", function(readme){
+                var converter = new showdown.Converter(),
+                text      = readme,
+                html      = converter.makeHtml(text);
+                $("#readme").append("<hr/>");
+                $("#readme").append(html);
+            });
+        }
+
+        getTasksAsync("\"Epic%20Link\"%20%3D%20" + id + "&fields=summary,project,status", 0, setStories);
+
+        getRepoData(id, setRepoData);
+    }
+
+    function getParameterByName(name) {
+        var match = RegExp('[?&]' + name + '=([^&]*)').exec(window.location.search);
+        return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+    }
+
+    var id = getParameterByName("id");
+
+    getTaskAsync(id,setView);
+});
+</script>
+<div class="row">
+    <div class="col-12">
+        <div id="project" class="pr-2"></div>
+        <h5 id="summary"></h5>
+        <div class="row pb-1">
+            <div class="col-12 d-flex flex-row">
+                <div id="epic_project" class="pr-2"></div>
+                <div id="breadcrumb" class="pr-2"></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-12">
+        <div id="status" class="text-left align-top"></div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12">
+        <div id="links"></div>
+        <div id="description" class="pb-1 pt-2"></div>
+        <div id="commits" class="pb-1 pt-2"></div>
+    </div>
+</div>
+<div id="stories_row" class="row">
+    <div class="col-12">
+        <div id="stories" class="mt-1"></div>
+    </div>
+</div>
+<div id="attachment_row" class="row">
+    <div class="col-12">
+        <div id="attachment" class="pt-3"></div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12">
+        <div id="readme"></div>
+    </div>
+</div>

@@ -1,0 +1,26 @@
+---
+layout: compress
+---
+
+<!DOCTYPE html>
+<html lang="{{ page.lang | default: site.lang | default: " en " }}">
+{% include head.html %}
+
+<body>
+    {% include header.html %}
+    <div class="container">
+        <div class="row justify-content-md-center">
+            <div class="col-lg-8">
+                <section>
+                    <div class="">
+                        {{ content }}
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+    {% include footer.html %}
+    {% include bootstrap_scripts.html %}
+    {% include google-analytics.html %}
+</body>
+</html>

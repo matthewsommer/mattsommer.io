@@ -1,0 +1,34 @@
+---
+layout: default
+---
+{{ content }}
+<script>
+    function setView(tasks){
+        var projects = $.unique(tasks.map(function (task) {return task.fields.project.name;}));
+        projects.reverse();
+        $.each($.unique(projects), function(i, project) {
+            $("#projects").append("<h2>" + project + "</h2>");
+            $.each(tasks, function(i, projectTask) {
+                if(projectTask.fields.project.name == project) {
+                    if(projectTask.fields.issuetype.name != "Epic" && projectTask.fields.issuetype.name != "Story") {
+                        $("#projects").append(projectTask.fields.issuetype.name + ": ");
+                    }
+                    $("#projects").append("<a href='/task?id=" + projectTask.id + "'>" + projectTask.fields.summary + "</a><br/>");
+                }
+            });
+            $("#projects").append("<br/>");
+        });
+    };
+    $(document).ready(function(){
+        getTasksAsync("status%20%3D%20'In%20Progress'&fields=summary,project,status,customfield_10100,issuetype", 0, setView)
+    });
+</script>
+<div class="row flex-wrap-reverse">
+    <div class="col-md-10">
+        <h2>What I'm currently up to...</h2>
+        <div id="projects"></div>
+    </div>
+    <div class="col-md-2">
+        {% include task_nav.html %}
+    </div>
+</div>

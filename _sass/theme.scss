@@ -1,0 +1,14 @@
+@charset "utf-8";
+
+$font-family1: 'Josefin Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif !default;
+$font-weight1: 300;
+$font-weight2: 600;
+
+$palette1_color1:       darkslategray !default;
+$palette1_color2:       lightslategray !default;
+$palette1_color3:       lightgray !default;
+$palette1_color4:       white !default;
+$palette1_color5:       gray !default;
+
+// Import partials
+@import "theme/base";
