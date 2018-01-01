@@ -22,6 +22,8 @@ $(document).ready(function(){
                     if(task.fields.project.name == project){
                         if (task.fields.status.id == 6) {
                             $("#stories").append("<i class='fas fa-check-circle' style='color:green; margin-left:0.5em;'></i>");
+                        } else if (task.fields.status.id == 3) {
+                            $("#stories").append("<i class='fas fa-spinner' style='color:green; margin-left:0.5em;'></i>");
                         } else {
                             $("#stories").append("<i class='far fa-circle' style='color:green; margin-left:0.5em;'></i>");
                         }
@@ -126,11 +128,13 @@ $(document).ready(function(){
             </div>
         </div>
         <div class="col-12">
-            <img ng-if="task.fields.status.name == 'In Progress' " src='https://img.shields.io/badge/Status-In--Progress-blue.svg' class='align-top'></img>
-            <img ng-if="task.fields.status.name == 'Closed' " src='https://img.shields.io/badge/Status-Closed-brightgreen.svg' class='align-top'></img>
-            <img ng-if="task.fields.status.name == 'Open' " src='https://img.shields.io/badge/Status-To--Do-red.svg' class='align-top'></img>
-            <a ng-href="https://timetopretend.atlassian.net/browse/{%raw%}{{task.key}}{%endraw%}" target='_blank' style='text-align:right' class='pl-2'><i class='fas fa-database'></i></a>
-            <div ng-bind="task.fields.priority.name"></div>
+            <div class="d-flex flex-row">
+                <img ng-if="task.fields.status.name == 'In Progress' " src='https://img.shields.io/badge/Status-In--Progress-blue.svg' class='align-top'></img>
+                <img ng-if="task.fields.status.name == 'Closed' " src='https://img.shields.io/badge/Status-Closed-brightgreen.svg' class='align-top'></img>
+                <img ng-if="task.fields.status.name == 'Open' " src='https://img.shields.io/badge/Status-To--Do-red.svg' class='align-top'></img>
+                <a ng-href="https://timetopretend.atlassian.net/browse/{%raw%}{{task.key}}{%endraw%}" target='_blank' style='text-align:right' class='pl-2 pr-2'><i class='fas fa-database'></i></a>
+                <div ng-bind="task.fields.priority.name" class="pr-2"></div>
+            </div>
         </div>
     </div>
     <div class="row">
