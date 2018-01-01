@@ -5,7 +5,7 @@ layout: default
 <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.8.5/showdown.min.js"></script>
 <script>
     $(document).ready(function(){
-        $.get("https://raw.githubusercontent.com/matthewsommer/matthewsommer.github.io/master/readme.md", function(readme){
+        $.get("https://raw.githubusercontent.com/matthewsommer/mattsommer.io/master/readme.md", function(readme){
             var converter = new showdown.Converter(),
             text      = readme,
             html      = converter.makeHtml(text);
