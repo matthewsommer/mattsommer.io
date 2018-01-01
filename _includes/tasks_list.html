@@ -8,8 +8,9 @@
                 <table class="mb-3">
                     <tr ng-if="task.fields.status.name == header " ng-repeat="task in tasks">
                         <td class="align-top">
-                            <i ng-if="task.fields.status.name != 'Closed' " class='far fa-circle' style='color:green; margin-left:0.5em; margin-right:0.5em;'></i>
-                            <i ng-if="task.fields.status.name == 'Closed' " class='far fa-check-circle' style='color:green; margin-left:0.5em; margin-right:0.5em;'></i>
+                            <i ng-if="task.fields.status.name == 'In Progress' " class='fas fa-spinner' style='color:green; margin-left:0.5em; margin-right:0.5em;'></i>
+                            <i ng-if="task.fields.status.name == 'Open' " class='far fa-circle' style='color:green; margin-left:0.5em; margin-right:0.5em;'></i>
+                            <i ng-if="task.fields.status.name == 'Closed' " class='fas fa-check-circle' style='color:green; margin-left:0.5em; margin-right:0.5em;'></i>
                         </td>
                         <td>
                             <a ng-href="/task?id={%raw%}{{task.id}}{%endraw%}" ng-bind="task.fields.summary"></a>
