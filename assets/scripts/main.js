@@ -48,3 +48,12 @@ function getTasks(query,callback) {
         }
     });
 }
+
+function getReadme(callback) {
+    $.get("https://raw.githubusercontent.com/matthewsommer/popular_movies/master/readme.md", function(readme){
+        var converter = new showdown.Converter(),
+        text      = readme,
+        html      = converter.makeHtml(text);
+        callback(html);
+    });
+}

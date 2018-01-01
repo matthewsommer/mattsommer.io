@@ -28,6 +28,7 @@
 * [Disqus][16] - Blog comment hosting service
 * [TravisCI][18] - Hosted continuous integration service for automated build
 * [Gemnasium][19] - Cloud based dependency analysis tool
+* [AngularJS][20] - Javascript MVC framework
 
 ## Running Locally
 ```bash
@@ -93,3 +94,4 @@ bundle exec htmlproofer ./_site --allow-hash-href --alt-ignore /assets/imgs/gall
 [17]: https://github.com
 [18]: https://travis-ci.org/
 [19]: https://gemnasium.com
+[20]: https://angularjs.org
