@@ -1,51 +1,12 @@
 ---
 layout: default
 ---
-
 {{ content }}
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
 <script>
-function setView(tasks){
-    $.each(tasks, function(i, task) {
-        if (task.fields.status.id == 3) {
-            $("#currently_reading").append(task.fields.summary);
-            if(task.fields.customfield_10100 != null) {
-                $("#currently_reading").append(" by " + task.fields.customfield_10100 + "<br/>");
-            } else {
-                $("#currently_reading").append("<br/>");
-            }
-        } else if (task.fields.status.id == 6) {
-            $("#have_reading").append(task.fields.summary);
-            if(task.fields.customfield_10100 != null) {
-                $("#have_reading").append(" by " + task.fields.customfield_10100 + "<br/>");
-            } else {
-                $("#have_reading").append("<br/>");
-            }
-        } else if (task.fields.status.id == 1) {
-            $("#will_read").append(task.fields.summary);
-            if(task.fields.customfield_10100 != null) {
-                $("#will_read").append(" by " + task.fields.customfield_10100 + "<br/>");
-            } else {
-                $("#will_read").append("<br/>");
-            }
-        }
-    });
-};
-$(document).ready(function(){
-    getTasksAsync("issuetype%20%3D%20Reading&fields=summary,status,customfield_10100", 0, setView)
-});
+    var app = angular.module('myApp', []);
+    var title = "What I'm Reading";
+    var query = "issuetype=Reading";
+    var statuses = ["In Progress","Open","Closed"];
 </script>
-<div class="row flex-wrap-reverse">
-    <div class="col-md-10">
-        <h4>Currently Reading</h4>
-        <div id="currently_reading"></div>
-        <br/>
-        <h4>Have Read</h4>
-        <div id="have_reading"></div>
-        <br/>
-        <h4>Will Read</h4>
-        <div id="will_read"></div>
-    </div>
-    <div class="col-md-2 pb-1">
-        {% include task_nav.html %}
-    </div>
-</div>
+{% include tasks_list.html %}
