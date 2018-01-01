@@ -22,6 +22,8 @@ $(document).ready(function(){
                     if(task.fields.project.name == project){
                         if (task.fields.status.id == 6) {
                             $("#stories").append("<i class='fas fa-check-circle' style='color:green; margin-left:0.5em;'></i>");
+                        } else if (task.fields.status.id == 3) {
+                            $("#stories").append("<i class='fas fa-spinner' style='color:green; margin-left:0.5em;'></i>");
                         } else {
                             $("#stories").append("<i class='far fa-circle' style='color:green; margin-left:0.5em;'></i>");
                         }
@@ -43,7 +45,7 @@ $(document).ready(function(){
         $.each(result.detail, function(i, detail) {
             $.each(detail.repositories, function(i, repo) {
                 $.each(repo.commits, function(i, commit) {
-                    $("#commits").append("<a href='" + commit.url + "' target='_blank'>" + commit.message + "</a> - " + commit.fileCount + " Files - " + commit.author.name);
+                    $("#commits").append("<a href='" + commit.url + "' target='_blank'>" + commit.message + "</a> - " + commit.fileCount + " Files - " + commit.author.name + "<br/>");
                 });
             });
         });
@@ -105,50 +107,67 @@ $(document).ready(function(){
         getRepoData(id, setRepoData);
     }
 
-    function getParameterByName(name) {
-        var match = RegExp('[?&]' + name + '=([^&]*)').exec(window.location.search);
-        return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
-    }
-
     var id = getParameterByName("id");
 
     getTaskAsync(id,setView);
 });
 </script>
-<div class="row">
-    <div class="col-12">
-        <div id="project" class="pr-2"></div>
-        <h5 id="summary"></h5>
-        <div class="row pb-1">
-            <div class="col-12 d-flex flex-row">
-                <div id="epic_project" class="pr-2"></div>
-                <div id="breadcrumb" class="pr-2"></div>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+<div ng-app="myApp" ng-controller="task">
+    <div class="row">
+        <div class="col-12">
+            <div ng-bind="task.fields.project.name" class="pr-2"></div>
+            <h5 ng-bind="task.fields.summary"></h5>
+            <div class="row pb-1">
+                <div class="col-12 d-flex flex-row">
+                    <div ng-if="epic != null" ng-bind="epic.fields.project.name" class="pr-2"></div>
+                    <div ng-if="epic != null" class="pr-2">
+                        <a ng-href="/task?id={%raw%}{{epic.id}}{%endraw%}" ng-bind="epic.fields.summary"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="d-flex flex-row">
+                <img ng-if="task.fields.status.name == 'In Progress' " src='https://img.shields.io/badge/Status-In--Progress-blue.svg' class='align-top'></img>
+                <img ng-if="task.fields.status.name == 'Closed' " src='https://img.shields.io/badge/Status-Closed-brightgreen.svg' class='align-top'></img>
+                <img ng-if="task.fields.status.name == 'Open' " src='https://img.shields.io/badge/Status-To--Do-red.svg' class='align-top'></img>
+                <a ng-href="https://timetopretend.atlassian.net/browse/{%raw%}{{task.key}}{%endraw%}" target='_blank' style='text-align:right' class='pl-2 pr-2'><i class='fas fa-database'></i></a>
+                <div ng-bind="task.fields.priority.name" class="pr-2"></div>
             </div>
         </div>
     </div>
-    <div class="col-12">
-        <div id="status" class="text-left align-top"></div>
+    <div class="row">
+        <div class="col-12">
+            <div ng-bind="task.fields.description" class="pb-1 pt-2"></div>
+            <div id="commits" class="pb-1 pt-2"></div>
+        </div>
+    </div>
+    <div id="stories_row" class="row">
+        <div class="col-12">
+            <div id="stories" class="mt-1"></div>
+        </div>
+    </div>
+    <div id="attachment_row" class="row">
+        <div class="col-12">
+            <div id="attachment" class="pt-3"></div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div id="readme"></div>
+        </div>
     </div>
 </div>
-<div class="row">
-    <div class="col-12">
-        <div id="links"></div>
-        <div id="description" class="pb-1 pt-2"></div>
-        <div id="commits" class="pb-1 pt-2"></div>
-    </div>
-</div>
-<div id="stories_row" class="row">
-    <div class="col-12">
-        <div id="stories" class="mt-1"></div>
-    </div>
-</div>
-<div id="attachment_row" class="row">
-    <div class="col-12">
-        <div id="attachment" class="pt-3"></div>
-    </div>
-</div>
-<div class="row">
-    <div class="col-12">
-        <div id="readme"></div>
-    </div>
-</div>
+<script>
+var app = angular.module('myApp', []);
+app.controller('task', function($scope, $http) {
+    function setView(task,epic){
+        $scope.task = task;
+        $scope.epic = epic;
+        $scope.$digest();
+    }
+    var id = getParameterByName("id");
+    getTaskAsync(getParameterByName("id"),setView);
+});
+</script>

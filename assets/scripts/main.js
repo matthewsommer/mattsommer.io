@@ -10,8 +10,19 @@ function getTasksAsync(jql,startAt,callback) {
 
 function getTaskAsync(id,callback) {
     $.getJSON("http://54.190.22.140/rest/api/2/issue/" + id + "?fields=summary,project,status,description,customfield_11401,customfield_10009,self,attachment,priority,customfield_10700,issuetype", function(task) {
-        callback(task);
+        if(task.fields.customfield_10009 != null) {
+            $.getJSON("http://54.190.22.140/rest/api/2/issue/" + task.fields.customfield_10009 + "?fields=summary,project", function(epic) {
+                callback(task,epic);
+            });
+        } else {
+            callback(task,null);
+        }
     });
+}
+
+function getParameterByName(name) {
+    var match = RegExp('[?&]' + name + '=([^&]*)').exec(window.location.search);
+    return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
 }
 
 function getRepoData(id,callback) {
