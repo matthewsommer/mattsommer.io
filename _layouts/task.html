@@ -43,7 +43,7 @@ $(document).ready(function(){
         $.each(result.detail, function(i, detail) {
             $.each(detail.repositories, function(i, repo) {
                 $.each(repo.commits, function(i, commit) {
-                    $("#commits").append("<a href='" + commit.url + "' target='_blank'>" + commit.message + "</a> - " + commit.fileCount + " Files - " + commit.author.name);
+                    $("#commits").append("<a href='" + commit.url + "' target='_blank'>" + commit.message + "</a> - " + commit.fileCount + " Files - " + commit.author.name + "<br/>");
                 });
             });
         });
@@ -110,42 +110,6 @@ $(document).ready(function(){
     getTaskAsync(id,setView);
 });
 </script>
-<div class="row">
-    <div class="col-12">
-        <div id="project" class="pr-2"></div>
-        <h5 id="summary"></h5>
-        <div class="row pb-1">
-            <div class="col-12 d-flex flex-row">
-                <div id="epic_project" class="pr-2"></div>
-                <div id="breadcrumb" class="pr-2"></div>
-            </div>
-        </div>
-    </div>
-    <div class="col-12">
-        <div id="status" class="text-left align-top"></div>
-    </div>
-</div>
-<div class="row">
-    <div class="col-12">
-        <div id="description" class="pb-1 pt-2"></div>
-        <div id="commits" class="pb-1 pt-2"></div>
-    </div>
-</div>
-<div id="stories_row" class="row">
-    <div class="col-12">
-        <div id="stories" class="mt-1"></div>
-    </div>
-</div>
-<div id="attachment_row" class="row">
-    <div class="col-12">
-        <div id="attachment" class="pt-3"></div>
-    </div>
-</div>
-<div class="row">
-    <div class="col-12">
-        <div id="readme"></div>
-    </div>
-</div>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
 <div ng-app="myApp" ng-controller="task">
     <div class="row">
@@ -173,6 +137,21 @@ $(document).ready(function(){
         <div class="col-12">
             <div ng-bind="task.fields.description" class="pb-1 pt-2"></div>
             <div id="commits" class="pb-1 pt-2"></div>
+        </div>
+    </div>
+    <div id="stories_row" class="row">
+        <div class="col-12">
+            <div id="stories" class="mt-1"></div>
+        </div>
+    </div>
+    <div id="attachment_row" class="row">
+        <div class="col-12">
+            <div id="attachment" class="pt-3"></div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div id="readme"></div>
         </div>
     </div>
 </div>
