@@ -1,12 +1,14 @@
 <div ng-app="myApp" ng-controller="tasks">
-    <h2 ng-bind="title"></h2>
+    {% include task_nav.html %}
+    <h2 ng-bind="title" ng-cloak></h2>
+
     <div class="row flex-wrap-reverse">
-        <div class="col-md-10">
+        <div class="col-md-12">
             <div ng-repeat="header in headers">
-                <h2 ng-bind="header"></h2>
-                <hr/>
+                <h2 ng-bind="header" ng-cloak></h2>
+                <hr ng-cloak/>
                 <table class="mb-3">
-                    <tr ng-if="task.fields.status.name == header " ng-repeat="task in tasks">
+                    <tr ng-if="task.fields.status.name == header " ng-repeat="task in tasks" ng-cloak>
                         <td class="align-top">
                             <i ng-if="task.fields.status.name == 'In Progress' " class='fas fa-spinner' style='color:green; margin-left:0.5em; margin-right:0.5em;'></i>
                             <i ng-if="task.fields.status.name == 'Open' " class='far fa-circle' style='color:green; margin-left:0.5em; margin-right:0.5em;'></i>
@@ -18,9 +20,6 @@
                     </tr>
                 </table>
             </div>
-        </div>
-        <div class="col-md-2">
-            {% include task_nav.html %}
         </div>
     </div>
 </div>
