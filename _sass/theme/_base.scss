@@ -16,6 +16,14 @@ h1,h2,h3,h4,h5,h6 {
 h1 {
   font-weight: $font-weight2; }
 
+h4 {
+    padding-top: .6rem;
+}
+
+h5 {
+    padding-top: .2rem;
+}
+
 .emojis {
   letter-spacing: 2px;
   font-size: 2em; }
@@ -43,15 +51,15 @@ a, a:hover {
 
 .topline {
     border-top: .1rem solid $palette1_color3;
-    margin-top: 1rem;
+    margin-top: 0.8rem;
     padding-top: 1rem; }
 
 .navbar-nav {
     background-color: $palette1_color4; }
 
 hr {
-    margin-top: .2rem;
-    margin-bottom: 1rem; }
+    margin-top: 0.2rem;
+    margin-bottom: 0.8rem; }
 
 .extra-bottom-padding{
     padding-bottom: 20px; }
