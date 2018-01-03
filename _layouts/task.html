@@ -7,7 +7,8 @@ layout: default
 <div ng-app="myApp" ng-controller="task">
     <div ng-if="epic != null" class="row">
         <div class="col-12">
-            <a ng-href="/task?id={%raw%}{{epic.id}}{%endraw%}" ng-bind="epic.fields.summary" ng-cloak class="mr-1"></a> (<span ng-bind="epic.fields.project.name"></span>)
+            <span ng-bind="epic.fields.project.name"></span> - <span ng-bind="epic.fields.issuetype.name"></span>
+            <a ng-href="/task?id={%raw%}{{epic.id}}{%endraw%}" ng-bind="epic.fields.summary" ng-cloak class="mr-1"></a>
         </div>
     </div>
     <div class="row">
