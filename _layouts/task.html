@@ -45,13 +45,21 @@ layout: default
     </div>
     <div class="row">
         <div class="col-12">
-            <h4 ng-if="stories.length > 0" ng-cloak>Stories</h4>
-            <hr ng-if="stories.length > 0" ng-cloak/>
-            <div ng-repeat="task in stories" ng-cloak>
-                <i ng-if="task.fields.status.id == 6" class='fas fa-check-circle' style='color:green; margin-left:0.5em;'></i>
-                <i ng-if="task.fields.status.id == 3" class='fas fa-spinner' style='color:green; margin-left:0.5em;'></i>
-                <i ng-if="task.fields.status.id == 1" class='far fa-circle' style='color:green; margin-left:0.5em;'></i>
-                <a ng-href="/task?id={%raw%}{{task.id}}{%endraw%}" ng-bind="task.fields.summary"></a>
+            <div ng-repeat="project in projects" ng-cloak>
+                <h4 ng-bind="project"></h4>
+                <hr ng-if="stories.length > 0" ng-cloak/>
+                <table class="mb-3">
+                    <tr ng-repeat="task in stories" ng-if="task.fields.project.name == project" ng-cloak>
+                        <td class="align-top">
+                            <i ng-if="task.fields.status.id == 6" class='fas fa-check-circle mr-1' style='color:green;'></i>
+                            <i ng-if="task.fields.status.id == 3" class='fas fa-spinner mr-1' style='color:green;'></i>
+                            <i ng-if="task.fields.status.id == 1" class='far fa-circle mr-1' style='color:green;'></i>        
+                        </td>
+                        <td>
+                            <a ng-href="/task?id={%raw%}{{task.id}}{%endraw%}" ng-bind="task.fields.summary"></a>
+                        </td>
+                    </tr>
+                </table>
             </div>
         </div>
     </div>
@@ -75,6 +83,9 @@ app.controller('task', function($scope, $http) {
     
     function setStories(tasks) {
         $scope.stories = tasks;
+        var projects = $.unique(tasks.map(function (task) {return task.fields.project.name;}));
+        projects.reverse();
+        $scope.projects = projects;
         $scope.$digest();
     }
 
