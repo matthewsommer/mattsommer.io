@@ -28,7 +28,6 @@ app.controller('tasks', function($scope, $http) {
         var projects = $.unique(tasks.map(function (task) {return task.fields.project.name;}));
         projects.reverse();
         $scope.projects = projects;
-        $scope.headers = statuses;
         $scope.tasks = tasks;
         $scope.title = title;
         $scope.$digest();
