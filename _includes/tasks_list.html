@@ -14,7 +14,7 @@
                             <i ng-if="task.fields.status.name == 'Closed' " class='fas fa-check-circle' style='color:green; margin-left:0.5em; margin-right:0.5em;'></i>
                         </td>
                         <td>
-                            <a ng-href="/task?id={%raw%}{{task.id}}{%endraw%}" ng-bind="task.fields.summary"></a>
+                            <a ng-href="/task/?id={%raw%}{{task.id}}{%endraw%}" ng-bind="task.fields.summary"></a>
                         </td>
                     </tr>
                 </table>

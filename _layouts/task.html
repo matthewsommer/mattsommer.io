@@ -8,7 +8,7 @@ layout: default
     <div ng-if="epic != null" class="row">
         <div class="col-12">
             <span ng-bind="epic.fields.project.name"></span> - <span ng-bind="epic.fields.issuetype.name"></span>
-            <a ng-href="/task?id={%raw%}{{epic.id}}{%endraw%}" ng-bind="epic.fields.summary" ng-cloak class="mr-1"></a>
+            <a ng-href="/task/?id={%raw%}{{epic.id}}{%endraw%}" ng-bind="epic.fields.summary" ng-cloak class="mr-1"></a>
         </div>
     </div>
     <div class="row">
@@ -56,7 +56,7 @@ layout: default
                             <i ng-if="task.fields.status.id == 1" class='far fa-circle mr-1' style='color:green;'></i>        
                         </td>
                         <td>
-                            <a ng-href="/task?id={%raw%}{{task.id}}{%endraw%}" ng-bind="task.fields.summary"></a>
+                            <a ng-href="/task/?id={%raw%}{{task.id}}{%endraw%}" ng-bind="task.fields.summary"></a>
                         </td>
                     </tr>
                 </table>
