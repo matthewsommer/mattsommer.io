@@ -7,4 +7,4 @@ Matt Sommer is a human, being; this is a website about his being. He enjoys trav
 
 Matt's [blog][1] covers a range of topics from lifestyle to software programming.
 
-[1]: /blog
+[1]: /blog/
