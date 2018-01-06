@@ -1,5 +1,5 @@
 ---
 layout: task
 title: Task
-permalink: /task
+permalink: /task/
 ---
