@@ -13,7 +13,7 @@ layout: default
                     <a ng-href="/task/?id={%raw%}{{epic.id}}{%endraw%}" ng-bind="epic.fields.summary" ng-cloak class="mr-1"></a> 
                 </span>
                 <span ng-if="epic != null" ng-cloak>
-                    <span> has {%raw%}{{task.fields.project.name}}{%endraw%} {%raw%}{{task.fields.issuetype.name}}{%endraw%}</span>
+                    <span> {%raw%}{{task.fields.project.name}}{%endraw%} {%raw%}{{task.fields.issuetype.name}}{%endraw%}</span>
                 </span>
                 <span ng-if="epic == null" ng-cloak>
                     <span>{%raw%}{{task.fields.project.name}}{%endraw%} {%raw%}{{task.fields.issuetype.name}}{%endraw%}</span>
@@ -46,8 +46,7 @@ layout: default
     <hr ng-if="task.renderedFields.description != ''" class="mb-2 mt-2" ng-cloak/>
     <div ng-if="task.renderedFields.description != ''" class="row" ng-cloak>
         <div ng-cloak class="col-12">
-            <u><h6 class="mb-0">Details</h6></u>
-            <div ng-if="task.renderedFields.description != null" ng-bind-html="task.renderedFields.description" class="ml-3" ng-cloak></div>
+            <div ng-if="task.renderedFields.description != null" ng-bind-html="task.renderedFields.description" ng-cloak></div>
             <div ng-repeat="detail in result.detail" ng-cloak>
                 <div ng-repeat="repo in detail.repositories" ng-cloak>
                     <h4 ng-if="repo.commits.length > 0" class="mt-2" ng-cloak>Commits</h4>
@@ -62,11 +61,10 @@ layout: default
     <hr ng-if="task.fields.components.length > 0" class="mb-2 mt-2" ng-cloak/>
     <div ng-if="task.fields.components.length > 0" class="row mt-2">
         <div class="col-12">
-            <u><h6 class="mb-0">Topics</h6></u>
-            <div class="mt-1 mb-1 ml-3" ng-cloak>
+            <u><span class="mb-0">Topics:</span></u>
+            <span class="mt-1 mb-1" ng-cloak>
                 <span data-ng-repeat="component in task.fields.components"><a ng-href="{%raw%}{{component.description}}{%endraw%}" target="_blank">{%raw%}{{component.name}}{%endraw%}</a><font ng-show="!$last">, </font></span>
-            </div>
-            <hr/>
+            </span>
         </div>
     </div>
     <hr ng-if="stories.length > 0" />
@@ -98,19 +96,23 @@ layout: default
     </div>
     <div ng-if="subtasks.length > 0" class="row" ng-cloak>
         <div class="col-12">
+            <hr/>
+            <h3>Tasks</h3>
+            <hr/>
             <div ng-repeat="subtaskId in task.fields.subtasks" ng-init="sectionIndex = $index" ng-cloak>
-                <div ng-repeat="subtask in subtasks" ng-if="subtask.id == subtaskId.id" class="pt-1" ng-cloak>
-                    <div class="d-flex flex-md-row flex-column">
-                        <span class="mr-1 color-primary"><i ng-if="subtask.fields.status.id == 6" class='fas fa-check-circle' style='color:green;'></i>
-                                <i ng-if="subtask.fields.status.id == 3" class='fas fa-spinner mr-1' style='color:green;'></i>
-                                <i ng-if="subtask.fields.status.id == 1" class='far fa-circle mr-1' style='color:green;'></i>
-                            Task {%raw%}{{sectionIndex + 1}}{%endraw%}: </span>
-                        <span class="color-primary">{%raw%}{{subtask.fields.summary}}{%endraw%}</span>
-                    </div>
-                </div>
-                <hr class="mb-1"/>
-                <div ng-repeat="subtask in subtasks" ng-if="subtask.id == subtaskId.id" ng-bind-html="subtask.renderedFields.description" class="ml-0"></div>
-                <hr class="mb-1">
+                <table class="mb-3 ml-2">
+                    <tr ng-repeat="subtask in subtasks" ng-if="subtask.id == subtaskId.id" ng-cloak>
+                        <td class="align-top">
+                            <i ng-if="subtask.fields.status.id == 6" class='fas fa-check-circle mr-1' style='color:green;'></i>
+                            <i ng-if="subtask.fields.status.id == 3" class='fas fa-spinner mr-1' style='color:green;'></i>
+                            <i ng-if="subtask.fields.status.id == 1" class='far fa-circle mr-1' style='color:green;'></i>        
+                        </td>
+                        <td>
+                            <a ng-href="/task/?id={%raw%}{{task.id}}{%endraw%}" ng-bind="subtask.fields.summary"></a>
+                            <span ng-bind-html="subtask.renderedFields.description"></span>
+                        </td>
+                    </tr>
+                </table>
             </div>
         </div>
     </div>
