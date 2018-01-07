@@ -4,6 +4,7 @@ layout: default
 {{ content }}
 {% include task_nav.html %}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.8.5/showdown.min.js"></script>
+<div id="mylightbox"></div>
 <div ng-app="myApp" ng-controller="task">
     <div class="row">
         <div class="col-12">
@@ -33,7 +34,7 @@ layout: default
             <img ng-if="task.fields.priority.id == 3" ng-src='https://img.shields.io/badge/Priority-Medium-blue.svg' class='align-top' style="align-self: center" ng-cloak></img>
             <img ng-if="task.fields.priority.id == 4" ng-src='https://img.shields.io/badge/Priority-Medium-blue.svg' class='align-top' style="align-self: center" ng-cloak></img>
             <img ng-if="task.fields.priority.id == 5" ng-src='https://img.shields.io/badge/Priority-Medium-lightgrey.svg' class='align-top' style="align-self: center" ng-cloak></img>
-            <img ng-if="percentClosed != 'NaN'" ng-src='https://img.shields.io/badge/Completion-{%raw%}{{percentClosed}}{%endraw%}%25-green.svg' class='align-top' style="align-self: center" ng-cloak></img>
+            <img ng-if="percentClosed != 'NaN'" ng-src='https://img.shields.io/badge/%25%20Complete-{%raw%}{{percentClosed}}{%endraw%}-green.svg' class='align-top' style="align-self: center" ng-cloak></img>
             <span><a ng-if="task" ng-href="https://timetopretend.atlassian.net/browse/{%raw%}{{task.key}}{%endraw%}" target='_blank' style='text-align:right' class='p-0 m-0' ng-cloak><i class='fas fa-database' ng-cloak></i></a></span>
             <span ng-if="percentClosed != 'NaN'" style="width:100%">
                 <span class="progress" style="height: 7px;">
@@ -42,18 +43,22 @@ layout: default
             </span>
         </div>
     </div>
-    <hr ng-if="task.renderedFields.description != ''" class="mb-2 mt-2" ng-cloak/>
-    <div ng-if="task.renderedFields.description != ''" class="row" ng-cloak>
+    <hr ng-if="task.renderedFields.description != null" class="mb-2 mt-2" ng-cloak/>
+    <div ng-if="task.fields.components.length > 0" class="row" ng-cloak>
         <div ng-cloak class="col-12">
             <u><span class="mb-0">Topics:</span></u>
             <span class="mt-1 mb-1" ng-cloak>
                 <span data-ng-repeat="component in task.fields.components"><a ng-href="{%raw%}{{component.description}}{%endraw%}" target="_blank">{%raw%}{{component.name}}{%endraw%}</a><font ng-show="!$last">, </font></span>
             </span>
             <hr ng-if="task.renderedFields.description != null"/>
-            <span ng-if="task.renderedFields.description != null" ng-bind-html="task.renderedFields.description" class="mt-1 mb-1" ng-cloak></span>
-            <hr ng-if="task.renderedFields.description != null"/>
         </div>
     </div>
+    <div ng-if="task.renderedFields.description != ''" class="row" ng-cloak>
+            <div ng-cloak class="col-12">
+                <span ng-if="task.renderedFields.description != null" ng-bind-html="task.renderedFields.description" class="mt-1 mb-1" ng-cloak></span>
+                <hr ng-if="task.renderedFields.description != null"/>
+            </div>
+        </div>
     <div ng-if="task.renderedFields.description != null" class="row" ng-cloak>
         <div ng-cloak class="col-12">
             <div ng-repeat="detail in result.detail" ng-cloak>
@@ -70,8 +75,9 @@ layout: default
     <div ng-if="stories.length > 0" class="row">
         <div class="col-12">
             <div ng-repeat="project in projects" ng-cloak>
-                <u><h5>{%raw%}{{project}}{%endraw%} Stories</h5></u>
-                <table class="mb-3 ml-2">
+                <h3>{%raw%}{{project}}{%endraw%} Stories</h3>
+                <hr/>
+                <table class="mb-3">
                     <tr ng-repeat="taskStory in stories" ng-if="taskStory.fields.project.name == project" ng-cloak>
                         <td class="align-top">
                             <i ng-if="taskStory.fields.status.id == 6" class='fas fa-check-circle mr-1' style='color:green;'></i>
@@ -88,7 +94,6 @@ layout: default
     </div>
     <div ng-if="readme != null" class="row">
         <div class="col-12">
-            <hr/>
             <div ng-bind-html="readme"></div>
         </div>
     </div>
@@ -114,14 +119,15 @@ layout: default
             </div>
         </div>
     </div>
-    <h4 ng-if="task.fields.attachment.length > 0" ng-cloak>Pictures</h4>
+    <h3 ng-if="task.fields.attachment.length > 0" ng-cloak>Pictures</h3>
     <hr ng-if="task.fields.attachment.length > 0" ng-cloak/>
-    <div ng-if="task.fields.attachment.length > 0" class="row ml-0">
+    <div ng-if="task.fields.attachment.length > 0" class="row">
         <div ng-repeat="attachment in task.fields.attachment" class="col-md-4 mb-4">
-            <img ng-src="{%raw%}{{attachment.thumbnail}}{%endraw%}"></img>
+            <a href="#" data-featherlight="{%raw%}{{attachment.content}}{%endraw%}"><img ng-src="{%raw%}{{attachment.thumbnail}}{%endraw%}" style="width: 100%"/></a>
         </div>
     </div>
 </div>
+{% include featherlight_scripts.html %}
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
 <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-sanitize.js"></script>
 <script>
