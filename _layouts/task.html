@@ -46,25 +46,26 @@ layout: default
     <hr ng-if="task.renderedFields.description != ''" class="mb-2 mt-2" ng-cloak/>
     <div ng-if="task.renderedFields.description != ''" class="row" ng-cloak>
         <div ng-cloak class="col-12">
-            <div ng-if="task.renderedFields.description != null" ng-bind-html="task.renderedFields.description" ng-cloak></div>
+            <u><span class="mb-0">Topics:</span></u>
+            <span class="mt-1 mb-1" ng-cloak>
+                <span data-ng-repeat="component in task.fields.components"><a ng-href="{%raw%}{{component.description}}{%endraw%}" target="_blank">{%raw%}{{component.name}}{%endraw%}</a><font ng-show="!$last">, </font></span>
+            </span>
+            <hr/>
+            <u><span>Details:</span></u>
+            <span ng-if="task.renderedFields.description != null" ng-bind-html="task.renderedFields.description" class="mt-1 mb-1" ng-cloak></span>
+        </div>
+    </div>
+    <div ng-if="task.renderedFields.description != null" class="row" ng-cloak>
+        <div ng-cloak class="col-12">
             <div ng-repeat="detail in result.detail" ng-cloak>
                 <div ng-repeat="repo in detail.repositories" ng-cloak>
-                    <h4 ng-if="repo.commits.length > 0" class="mt-2" ng-cloak>Commits</h4>
+                    <h5 ng-if="repo.commits.length > 0" class="mt-2" ng-cloak>Commits</h5>
                     <hr ng-if="repo.commits.length > 0" ng-cloak/>
                     <div ng-repeat="commit in repo.commits">
                         <a ng-href="{%raw%}{{commit.url}}{%endraw%}" ng-bind="commit.message" target="_blank"></a>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-    <hr ng-if="task.fields.components.length > 0" class="mb-2 mt-2" ng-cloak/>
-    <div ng-if="task.fields.components.length > 0" class="row mt-2">
-        <div class="col-12">
-            <u><span class="mb-0">Topics:</span></u>
-            <span class="mt-1 mb-1" ng-cloak>
-                <span data-ng-repeat="component in task.fields.components"><a ng-href="{%raw%}{{component.description}}{%endraw%}" target="_blank">{%raw%}{{component.name}}{%endraw%}</a><font ng-show="!$last">, </font></span>
-            </span>
         </div>
     </div>
     <hr ng-if="stories.length > 0" />
@@ -74,14 +75,14 @@ layout: default
                 <h5>{%raw%}{{project}}{%endraw%} Stories</h5>
                 <hr ng-cloak/>
                 <table class="mb-3 ml-2">
-                    <tr ng-repeat="task in stories" ng-if="task.fields.project.name == project" ng-cloak>
+                    <tr ng-repeat="taskStory in stories" ng-if="taskStory.fields.project.name == project" ng-cloak>
                         <td class="align-top">
-                            <i ng-if="task.fields.status.id == 6" class='fas fa-check-circle mr-1' style='color:green;'></i>
-                            <i ng-if="task.fields.status.id == 3" class='fas fa-spinner mr-1' style='color:green;'></i>
-                            <i ng-if="task.fields.status.id == 1" class='far fa-circle mr-1' style='color:green;'></i>        
+                            <i ng-if="taskStory.fields.status.id == 6" class='fas fa-check-circle mr-1' style='color:green;'></i>
+                            <i ng-if="taskStory.fields.status.id == 3" class='fas fa-spinner mr-1' style='color:green;'></i>
+                            <i ng-if="taskStory.fields.status.id == 1" class='far fa-circle mr-1' style='color:green;'></i>        
                         </td>
                         <td>
-                            <a ng-href="/task/?id={%raw%}{{task.id}}{%endraw%}" ng-bind="task.fields.summary"></a>
+                            <a ng-href="/task/?id={%raw%}{{taskStory.id}}{%endraw%}" ng-bind="taskStory.fields.summary"></a>
                         </td>
                     </tr>
                 </table>
@@ -97,10 +98,8 @@ layout: default
     <div ng-if="subtasks.length > 0" class="row" ng-cloak>
         <div class="col-12">
             <hr/>
-            <h3>Tasks</h3>
-            <hr/>
             <div ng-repeat="subtaskId in task.fields.subtasks" ng-init="sectionIndex = $index" ng-cloak>
-                <table class="mb-3 ml-2">
+                <table>
                     <tr ng-repeat="subtask in subtasks" ng-if="subtask.id == subtaskId.id" ng-cloak>
                         <td class="align-top">
                             <i ng-if="subtask.fields.status.id == 6" class='fas fa-check-circle mr-1' style='color:green;'></i>
@@ -108,11 +107,12 @@ layout: default
                             <i ng-if="subtask.fields.status.id == 1" class='far fa-circle mr-1' style='color:green;'></i>        
                         </td>
                         <td>
-                            <a ng-href="/task/?id={%raw%}{{task.id}}{%endraw%}" ng-bind="subtask.fields.summary"></a>
+                            <u><span ng-bind="subtask.fields.summary" class="color-primary"></span></u>
                             <span ng-bind-html="subtask.renderedFields.description"></span>
                         </td>
                     </tr>
                 </table>
+                <hr/>
             </div>
         </div>
     </div>
