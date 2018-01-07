@@ -8,8 +8,14 @@ function getTasksAsync(jql,startAt,callback) {
     });
 }
 
+function getSubtasksAsync(id,callback) {
+    $.getJSON("https://jira.mattsommer.io/rest/api/2/search?jql=parent=" + id + "&expand=renderedFields", function(result) {
+        callback(result.issues);
+    });
+}
+
 function getTaskAsync(id,callback) {
-    $.getJSON("https://jira.mattsommer.io/rest/api/2/issue/" + id + "?fields=summary,project,status,description,customfield_11401,customfield_10009,self,attachment,priority,customfield_10700,issuetype", function(task) {
+    $.getJSON("https://jira.mattsommer.io/rest/api/2/issue/" + id + "?fields=summary,project,status,description,customfield_11401,customfield_10009,self,attachment,priority,customfield_10700,issuetype,components,subtasks&expand=renderedFields", function(task) {
         if(task.fields.customfield_10009 != null) {
             $.getJSON("https://jira.mattsommer.io/rest/api/2/issue/" + task.fields.customfield_10009 + "?fields=summary,project", function(epic) {
                 callback(task,epic);
