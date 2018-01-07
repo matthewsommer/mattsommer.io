@@ -5,48 +5,56 @@ layout: default
 {% include task_nav.html %}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.8.5/showdown.min.js"></script>
 <div ng-app="myApp" ng-controller="task">
-    <div ng-if="epic != null" class="row">
-        <div class="col-12">
-            <span ng-bind="epic.fields.project.name"></span> - <span ng-bind="epic.fields.issuetype.name"></span>
-            <a ng-href="/task/?id={%raw%}{{epic.id}}{%endraw%}" ng-bind="epic.fields.summary" ng-cloak class="mr-1"></a>
-        </div>
-    </div>
     <div class="row">
         <div class="col-12">
-            <span ng-bind="task.fields.project.name"></span>
-            <span ng-bind="task.fields.issuetype.name"></span>
-            <h3 ng-bind="task.fields.summary" class="mb-2"></h3>
+            <div class="d-flex flex-md-row flex-column">
+                <span ng-if="epic != null" ng-cloak>
+                    <span ng-bind="epic.fields.project.name"></span> <span ng-bind="epic.fields.issuetype.name"></span> Epic 
+                    <a ng-href="/task/?id={%raw%}{{epic.id}}{%endraw%}" ng-bind="epic.fields.summary" ng-cloak class="mr-1"></a> 
+                </span>
+                <span ng-if="epic != null" ng-cloak>
+                    <span> has a {%raw%}{{task.fields.project.name}}{%endraw%} {%raw%}{{task.fields.issuetype.name}}{%endraw%}</span>
+                </span>
+                <span ng-if="epic == null" ng-cloak>
+                    <span>{%raw%}{{task.fields.project.name}}{%endraw%} {%raw%}{{task.fields.issuetype.name}}{%endraw%}</span>
+                </span>
+            </div>
+            <h4 ng-bind="task.fields.summary" class="mb-1" ng-cloak></h4>
         </div>
     </div>
-    <div class="row">
+    <hr class="mb-2"/>
+    <div class="row" ng-cloak>
         <div class="col-12">
             <img ng-if="task.fields.status.name == 'In Progress' " ng-src='https://img.shields.io/badge/Status-In--Progress-blue.svg' class='align-top' style="align-self: center" ng-cloak></img>
             <img ng-if="task.fields.status.name == 'Closed' " ng-src='https://img.shields.io/badge/Status-Closed-brightgreen.svg' class='align-top' style="align-self: center" ng-cloak></img>
             <img ng-if="task.fields.status.name == 'Open' " ng-src='https://img.shields.io/badge/Status-To--Do-red.svg' class='align-top' style="align-self: center" ng-cloak></img>
-            <a ng-if="task" ng-href="https://timetopretend.atlassian.net/browse/{%raw%}{{task.key}}{%endraw%}" target='_blank' style='text-align:right' class='pl-2 pr-2' ng-cloak><i class='fas fa-database' ng-cloak></i></a>
-            <span ng-bind="task.fields.priority.name" ng-cloak></span>
-            <div ng-if="task.fields.components" ng-cloak>
+            <img ng-if="task.fields.priority.id == 1" ng-src='https://img.shields.io/badge/Priority-Highest-red.svg' class='align-top' style="align-self: center" ng-cloak></img>
+            <img ng-if="task.fields.priority.id == 2" ng-src='https://img.shields.io/badge/Priority-High-orange.svg' class='align-top' style="align-self: center" ng-cloak></img>
+            <img ng-if="task.fields.priority.id == 3" ng-src='https://img.shields.io/badge/Priority-Medium-blue.svg' class='align-top' style="align-self: center" ng-cloak></img>
+            <img ng-if="task.fields.priority.id == 4" ng-src='https://img.shields.io/badge/Priority-Medium-blue.svg' class='align-top' style="align-self: center" ng-cloak></img>
+            <img ng-if="task.fields.priority.id == 5" ng-src='https://img.shields.io/badge/Priority-Medium-lightgrey.svg' class='align-top' style="align-self: center" ng-cloak></img>
+            <img ng-if="percentClosed != 'NaN'" ng-src='https://img.shields.io/badge/Completion-{%raw%}{{percentClosed}}{%endraw%}%25-green.svg' class='align-top' style="align-self: center" ng-cloak></img>
+            <span ng-if="percentClosed != 'NaN'" style="width:100%">
+                <span class="progress" style="height: 7px;">
+                    <div class="progress-bar bg-success ng-cloak" role="progressbar" style="width: {%raw%}{{percentClosed}}{%endraw%}%" aria-valuenow="{%raw%}{{percentClosed}}{%endraw%}" aria-valuemin="0" aria-valuemax="100"></div>
+                </span>
+            </span>
+        </div>
+    </div>
+    <hr ng-if="percentClosed != 'NaN'" class="mb-2 mt-2" ng-cloak/>
+    <div class="row mt-2">
+        <div class="col-12">
+            <div ng-if="task.fields.components.length > 0" class="mt-0 mb-1" ng-cloak>
+                Topics: 
                 <span data-ng-repeat="component in task.fields.components"><a ng-href="{%raw%}{{component.description}}{%endraw%}" target="_blank">{%raw%}{{component.name}}{%endraw%}</a><font ng-show="!$last">, </font></span>
+                <span><a ng-if="task" ng-href="https://timetopretend.atlassian.net/browse/{%raw%}{{task.key}}{%endraw%}" target='_blank' style='text-align:right' class='pl-1 pr-1' ng-cloak><i class='fas fa-database' ng-cloak></i></a></span>
             </div>
         </div>
     </div>
-    <div ng-if="percentClosed != 'NaN'" class="row" ng-cloak>
-        <div class="col-12 mt-2">
-            <table>
-                <td>
-                    {%raw%}{{percentClosed}}{%endraw%}%  
-                </td>
-                <td style="width:100%">
-                    <div class="progress" style="height: 4px;">
-                        <div class="progress-bar bg-success mr-1 ng-cloak" role="progressbar" style="width: {%raw%}{{percentClosed}}{%endraw%}%" aria-valuenow="{%raw%}{{percentClosed}}{%endraw%}" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                </td>
-            </table>
-        </div>
-    </div>
-    <div ng-if="task.renderedFields.description != null" class="row">
+    <div ng-if="task.renderedFields.description != null" class="row" ng-cloak>
         <div ng-cloak class="col-12">
             <h4 ng-if="task.renderedFields.description != ''" ng-cloak>Description</h4>
+            <hr ng-if="task.renderedFields.description != ''"/>
             <div ng-if="task.renderedFields.description != null" ng-bind-html="task.renderedFields.description" ng-cloak></div>
             <div ng-repeat="detail in result.detail" ng-cloak>
                 <div ng-repeat="repo in detail.repositories" ng-cloak>
@@ -62,7 +70,7 @@ layout: default
     <div class="row">
         <div class="col-12">
             <div ng-repeat="project in projects" ng-cloak>
-                <h4 ng-bind="project"></h4>
+                <h4 ng-bind="{%raw%}project{%endraw%} + ' Stories'"></h4>
                 <hr ng-if="stories.length > 0" ng-cloak/>
                 <table class="mb-3">
                     <tr ng-repeat="task in stories" ng-if="task.fields.project.name == project" ng-cloak>
@@ -79,34 +87,33 @@ layout: default
             </div>
         </div>
     </div>
-    <div ng-if="subtasks.length > 0" class="row">
+    <div ng-if="subtasks.length > 0" class="row" ng-cloak>
         <div class="col-12">
-            <h4>Tasks</h4>
-            <hr/>
-            <div ng-repeat="subtaskId in task.fields.subtasks" ng-init="sectionIndex = $index">
-            <table class="mb-3">
-                <tr ng-repeat="subtask in subtasks" ng-if="subtask.id == subtaskId.id" ng-cloak>
-                    <td class="align-top pt-1 pr-2">
-                        <u><h4 ng-bind="{%raw%}{{sectionIndex + 1}}{%endraw%}" class="pt-0" style="text-align: center;"></h4></u>
-                        <div>
-                            <i ng-if="subtask.fields.status.id == 6" class='fas fa-check-circle mr-1' style='color:green;'></i>
-                            <i ng-if="subtask.fields.status.id == 3" class='fas fa-spinner mr-1' style='color:green;'></i>
-                            <i ng-if="subtask.fields.status.id == 1" class='far fa-circle mr-1' style='color:green;'></i>
-                        </div>
-                        <div>
-                            <a ng-if="task" ng-href="https://timetopretend.atlassian.net/browse/{%raw%}{{subtask.key}}{%endraw%}" target='_blank' style='text-align:center' ng-cloak><i class='fas fa-database' ng-cloak></i></a>
-                        </div>
-                        <div ng-bind="{%raw%}subtask.fields.priority.name | limitTo:2 {%endraw%}">
+            <div ng-repeat="subtaskId in task.fields.subtasks" ng-init="sectionIndex = $index" ng-cloak>
+                <div ng-repeat="subtask in subtasks" ng-if="subtask.id == subtaskId.id" class="pt-1" ng-cloak>
+                    <h5>Step {%raw%}{{sectionIndex + 1}}{%endraw%} - {%raw%}{{subtask.fields.summary}}{%endraw%}</h5>
+                </div>
+                <hr class="mb-1"/>
+                <table class="mb-3">
+                    <tr ng-repeat="subtask in subtasks" ng-if="subtask.id == subtaskId.id" ng-cloak>
+                        <td class="align-top pt-1 pr-2 pl-1">
+                            <div>
+                                <i ng-if="subtask.fields.status.id == 6" class='fas fa-check-circle mr-1' style='color:green;'></i>
+                                <i ng-if="subtask.fields.status.id == 3" class='fas fa-spinner mr-1' style='color:green;'></i>
+                                <i ng-if="subtask.fields.status.id == 1" class='far fa-circle mr-1' style='color:green;'></i>
+                            </div>
+                            <div>
+                                <a ng-if="task" ng-href="https://timetopretend.atlassian.net/browse/{%raw%}{{subtask.key}}{%endraw%}" target='_blank' style='text-align:center' ng-cloak><i class='fas fa-database' ng-cloak></i></a>
+                            </div>
+                            <div ng-bind="{%raw%}subtask.fields.priority.name | limitTo:2 {%endraw%}">
 
-                        </div>
-                    </td>
-                    <td class="align-top">
-                        <u><h4 ng-bind="{%raw%}subtask.fields.summary{%endraw%}" class="pt-1"></h4></u>
-                        <div ng-bind-html="subtask.renderedFields.description"></div>
-                    </td>
-                </tr>
-            </table>
-            <hr/>
+                            </div>
+                        </td>
+                        <td class="align-top">
+                            <div ng-bind-html="subtask.renderedFields.description"></div>
+                        </td>
+                    </tr>
+                </table>
             </div>
         </div>
     </div>
