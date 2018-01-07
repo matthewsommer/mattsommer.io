@@ -50,9 +50,9 @@ layout: default
             <span class="mt-1 mb-1" ng-cloak>
                 <span data-ng-repeat="component in task.fields.components"><a ng-href="{%raw%}{{component.description}}{%endraw%}" target="_blank">{%raw%}{{component.name}}{%endraw%}</a><font ng-show="!$last">, </font></span>
             </span>
-            <hr/>
-            <u><span>Details:</span></u>
+            <hr ng-if="task.renderedFields.description != null"/>
             <span ng-if="task.renderedFields.description != null" ng-bind-html="task.renderedFields.description" class="mt-1 mb-1" ng-cloak></span>
+            <hr ng-if="task.renderedFields.description != null"/>
         </div>
     </div>
     <div ng-if="task.renderedFields.description != null" class="row" ng-cloak>
@@ -68,12 +68,10 @@ layout: default
             </div>
         </div>
     </div>
-    <hr ng-if="stories.length > 0" />
     <div ng-if="stories.length > 0" class="row">
         <div class="col-12">
             <div ng-repeat="project in projects" ng-cloak>
-                <h5>{%raw%}{{project}}{%endraw%} Stories</h5>
-                <hr ng-cloak/>
+                <u><h5>{%raw%}{{project}}{%endraw%} Stories</h5></u>
                 <table class="mb-3 ml-2">
                     <tr ng-repeat="taskStory in stories" ng-if="taskStory.fields.project.name == project" ng-cloak>
                         <td class="align-top">
@@ -97,6 +95,7 @@ layout: default
     </div>
     <div ng-if="subtasks.length > 0" class="row" ng-cloak>
         <div class="col-12">
+            <h3>Tasks</h3>
             <hr/>
             <div ng-repeat="subtaskId in task.fields.subtasks" ng-init="sectionIndex = $index" ng-cloak>
                 <table>
@@ -107,7 +106,7 @@ layout: default
                             <i ng-if="subtask.fields.status.id == 1" class='far fa-circle mr-1' style='color:green;'></i>        
                         </td>
                         <td>
-                            <u><span ng-bind="subtask.fields.summary" class="color-primary"></span></u>
+                            <span ng-bind="subtask.fields.summary" class="color-primary"></span>
                             <span ng-bind-html="subtask.renderedFields.description"></span>
                         </td>
                     </tr>
