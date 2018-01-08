@@ -9,6 +9,9 @@ author: Matt Sommer
 custom_js:
 - jekyll-jira-chart
 ---
+
+I use Jira as my task tracking tool for both work and personal life and I integrated it with my personal website. Here is some background and a basic overview of what I set up.
+
 #### Some History
 
 The past few years I've been struggling to find a task management tool good enough to sufficiently cooridinate the complexity of my life. On the surface it may seem like a simple problem to solve, there are thousands of tasks management tools surely one of them would be sufficient right? Nope; not in my opinion.
@@ -41,7 +44,7 @@ GitHub Pages is a webhosting service that's becoming popular and it's easy to se
 
 #### 3. Displaying dyanmic Jira data within the webpage
 
-Jira is a great tool but the UI/UX is just okay and has some shortcomings, hence why I wanted to build my own tool. To get a better visualization I wanted to be able to control my UX but still use Jira has the backend database/controller. So tying it all together I used Javascript Ajax to get data from my Jira instance and display it on my website.
+Jira is a great tool but the UI/UX is just okay and has some shortcomings, hence why I wanted to build my own tool. To get a better visualization I wanted to be able to control my UX but still use Jira has the backend database/controller. So tying it all together I used Javascript Ajax to get data from my Jira instance and display it on my website. For example [my task for writing this blog post][BlogPost]{:target="_blank"}.
 
 I've glossed over a lot here but to help get a better visual here are some examples. All the information shown is pulled from Jira.
 
@@ -53,6 +56,7 @@ I've glossed over a lot here but to help get a better visual here are some examp
 
 I'm happy with what I have so far but I feel this is only the tip of the iceberg. There are some cool features I want to implement such as displaying book cover images for my reading list and using Google maps to display location information. There are also some code issues such as page data refreshing I need to fix. Time to start planning MattSommer.io V1.2!
 
+[BlogPost]: https://mattsommer.io/task/?id=21648
 [MattSommer.io]: https://mattsommer.io
 [MATTSOMMERV1.1]: https://mattsommer.io/task/?id=21599
 [Android Nanodegree]: https://mattsommer.io/task/?id=13201
