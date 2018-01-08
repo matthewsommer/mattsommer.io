@@ -14,17 +14,17 @@ I use Jira as my task tracking tool for both work and personal life and I integr
 
 #### Some History
 
-The past few years I've been struggling to find a task management tool good enough to sufficiently cooridinate the complexity of my life. On the surface it may seem like a simple problem to solve, there are thousands of tasks management tools surely one of them would be sufficient right? Nope; not in my opinion.
+The past few years I've been struggling to find a task management tool good enough to sufficiently coordinate the complexity of my life. On the surface it may seem like a simple problem to solve, there are thousands of tasks management tools surely one of them would be sufficient right? Nope; not in my opinion.
 
 The thing is I'm not really looking for a task management tool, I'm looking for a life management tool. Task management tools are great for managing simple things such as 'mow the lawn' or 'go to the store' but with the increasing complexity of living life many of these task tracking tools break down. After all these years I'm still looking for some tool and I even tried to build my own product called Brisbe (unfortunately it didn't work out).
 
-Until I find that holy grail of a productivity tool I'm going to use a tool called Jira. Jira is a popular, feature rich task tracking tool that I help implement at Tesla Motors, GoPro, and some other start-ups. Most people laugh when I tell them I use Jira to organize my personal life because Jira seem to them to be overkill for personal life but I think it's not poweful enough. I'll discuss why I think it's not good enough in fugure blog posts but for this blog post I'll give some insight into how I'm extending Jira by integrating it with my personal website MattSommer.io.
+Until I find that holy grail of a productivity tool I'm going to use a tool called Jira. Jira is a popular, feature rich task tracking tool that I help implement at Tesla Motors, GoPro, and some other start-ups. Most people laugh when I tell them I use Jira to organize my personal life because Jira seem to them to be overkill for personal life but I think it's not powerful enough. I'll discuss why I think it's not good enough in future blog posts but for this blog post I'll give some insight into how I'm extending Jira by integrating it with my personal website MattSommer.io.
 
 #### There are three main components to my setup:
 
 1. Jira Configuration
 2. Static website hosted on Github Pages
-3. Displaying dyanmic Jira data within the webpage
+3. Displaying dynamic Jira data within the webpage
 
 #### 1. Jira Configuration
 I've learned a lot over the years on how people work and collaborate, I'll write a book about it someday but for this blog post I'm going to be as high level as possible.
@@ -42,7 +42,7 @@ That's the basics. There is a lot more involved then when I could type here but 
 GitHub Pages is a webhosting service that's becoming popular and it's easy to see why. Simple, great versioning with Git, serverless, and you can't beat the free price! I have one location for the website source code and I don't have to manage any servers. Great!
 
 
-#### 3. Displaying dyanmic Jira data within the webpage
+#### 3. Displaying dynamic Jira data within the webpage
 
 Jira is a great tool but the UI/UX is just okay and has some shortcomings, hence why I wanted to build my own tool. To get a better visualization I wanted to be able to control my UX but still use Jira has the backend database/controller. So tying it all together I used Javascript Ajax to get data from my Jira instance and display it on my website. For example [my task for writing this blog post][BlogPost]{:target="_blank"}.
 
