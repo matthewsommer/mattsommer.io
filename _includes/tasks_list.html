@@ -7,7 +7,7 @@
                 <h4 ng-bind="project"></h4>
                 <hr ng-cloak/>
                 <table class="mb-3">
-                    <tr ng-if="task.fields.project.name == project " ng-repeat="task in tasks" ng-cloak>
+                    <tr ng-repeat="task in tasks" ng-if="task.fields.project.name == project " ng-cloak>
                         <td class="align-top">
                             <i ng-if="task.fields.status.name == 'In Progress' " class='fas fa-spinner' style='color:green; margin-left:0.5em; margin-right:0.5em;'></i>
                             <i ng-if="task.fields.status.name == 'Open' " class='far fa-circle' style='color:green; margin-left:0.5em; margin-right:0.5em;'></i>

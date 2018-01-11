@@ -1,0 +1,32 @@
+<div ng-app="myApp" ng-controller="tasks">
+    {% include task_nav.html %}
+    <h2 ng-bind="title" ng-cloak></h2>
+    <div class="row flex-wrap-reverse">
+        <div class="col-md-12">
+            <table class="mb-3">
+                <tr ng-repeat="task in tasks" ng-cloak>
+                    <td class="align-top pt-1">
+                        <i ng-if="task.fields.status.name == 'In Progress' " class='fas fa-spinner' style='color:green; margin-left:0.5em; margin-right:0.5em;'></i>
+                        <i ng-if="task.fields.status.name == 'Open' " class='far fa-circle' style='color:green; margin-left:0.5em; margin-right:0.5em;'></i>
+                        <i ng-if="task.fields.status.name == 'Closed' " class='fas fa-check-circle' style='color:green; margin-left:0.5em; margin-right:0.5em;'></i>
+                    </td>
+                    <td>
+                        <h4><a ng-href="/task/?id={%raw%}{{task.id}}{%endraw%}" ng-bind="task.fields.summary"></a></h4>
+                        <span ng-bind-html="task.renderedFields.description"></span>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-sanitize.js"></script>
+<script>
+var app = angular.module('myApp', ['ngSanitize']);
+app.controller('tasks', function($scope, $http) {
+    function setView(tasks){
+        $scope.tasks = tasks;
+        $scope.$digest();
+    }
+    getTasks(query,setView);
+});
+</script>
