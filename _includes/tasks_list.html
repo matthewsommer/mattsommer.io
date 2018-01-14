@@ -1,6 +1,7 @@
 <div ng-app="myApp" ng-controller="tasks">
     {% include task_nav.html %}
     <h2 ng-bind="title" ng-cloak></h2>
+    <hr/>
     <div class="row flex-wrap-reverse">
         <div class="col-md-12">
         <div ng-repeat="project in projects" ng-cloak>

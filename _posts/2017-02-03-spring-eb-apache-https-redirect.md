@@ -52,7 +52,7 @@ I'm most likly going to change the rewrite rule to include HTTP response status 
 <hr/>
     RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
 <hr/>
-If you notice another wrong with this post or know a better way, please [create an issue on github.][ISSUES]{:target="_blank"}
+If you notice another wrong with this post or know a better way, please [create an issue on my personal website.][ISSUES]{:target="_blank"}
 
 I've created an example Spring Boot app to help get you started: [<i class="fa fa-github-square fa-2x" aria-hidden="true"></i> Github Example Code][EXAMPLE_CODE]{:target="_blank"}
 
@@ -65,4 +65,4 @@ I've created an example Spring Boot app to help get you started: [<i class="fa f
 [ZAGS]: http://stackoverflow.com/users/2800876/zags
 [STACK_QA]: http://stackoverflow.com/questions/14693852/how-to-force-https-on-elastic-beanstalk
 [EXAMPLE_CODE]: https://github.com/matthewsommer/spring-elasticbeanstalk-loadbalancer-https-redirect
-[ISSUES]: https://github.com/matthewsommer/matthewsommer.github.io/issues
+[ISSUES]: /component/?component=MattSommer.io
