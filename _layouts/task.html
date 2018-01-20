@@ -8,19 +8,20 @@ layout: default
 <div ng-app="myApp" ng-controller="task">
     <div class="row">
         <div class="col-12">
+            <span ng-if="epic != null" ng-cloak>
+                <span> {%raw%}{{task.fields.project.name}}{%endraw%} {%raw%}{{task.fields.issuetype.name}}{%endraw%}</span>
+            </span>
+            <span ng-if="epic == null" ng-cloak>
+                <span>{%raw%}{{task.fields.project.name}}{%endraw%} {%raw%}{{task.fields.issuetype.name}}{%endraw%}</span>
+            </span>
+            <h3 ng-bind="task.fields.summary" class="mb-1" ng-cloak></h3>
             <div class="d-flex flex-md-row flex-column">
-                <span ng-if="epic != null" class="mr-2" ng-cloak>{%raw%}{{epic.fields.project.name}}{%endraw%} Epic  </span>
+                <span ng-if="epic != null" class="mr-2" ng-cloak>{%raw%}{{epic.fields.project.name}}{%endraw%} Epic: </span>
                 <span ng-if="epic != null">
                     <a ng-href="/task/?id={%raw%}{{epic.id}}{%endraw%}" ng-bind="epic.fields.summary" ng-cloak class="mr-1"></a> 
                 </span>
-                <span ng-if="epic != null" ng-cloak>
-                    <span> {%raw%}{{task.fields.project.name}}{%endraw%} {%raw%}{{task.fields.issuetype.name}}{%endraw%}</span>
-                </span>
-                <span ng-if="epic == null" ng-cloak>
-                    <span>{%raw%}{{task.fields.project.name}}{%endraw%} {%raw%}{{task.fields.issuetype.name}}{%endraw%}</span>
-                </span>
             </div>
-            <h3 ng-bind="task.fields.summary" class="mb-1" ng-cloak></h3>
+
         </div>
     </div>
     <hr class="mb-2"/>
