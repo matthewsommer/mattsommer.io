@@ -11,6 +11,9 @@ _site/
 .sass-cache/
 .jekyll-metadata
 
+# Bundler
+.bundle/
+
 # MacOS General Ignores
 *.DS_Store
 .AppleDouble
