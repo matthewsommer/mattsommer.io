@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="{{ "assets/main.css " | relative_url }}">
     <link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet">
     <link href="//cdn.rawgit.com/noelboss/featherlight/1.7.7/release/featherlight.min.css" type="text/css" rel="stylesheet" />
-    {% jekyll.environment == "production" %}
+    {% if jekyll.environment == "production" %}
     <script>
     var _rollbarConfig = {
         accessToken: "62855eba564d4a078f9d6019e0b50fd5",
