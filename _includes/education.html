@@ -16,7 +16,7 @@
                         <div ng-if="task.fields.components.length > 0" class="row" ng-cloak>
                             <div ng-cloak class="col-12">
                                 <span class="mt-0 mb-1" ng-cloak>
-                                    <span data-ng-repeat="component in task.fields.components"><a ng-href="{%raw%}{{component.description}}{%endraw%}" target="_blank">{%raw%}{{component.name}}{%endraw%}</a><font ng-show="!$last">, </font></span>
+                                    <span data-ng-repeat="component in task.fields.components"><a ng-href="{%raw%}{{component.description}}{%endraw%}" target="_blank">{%raw%}{{component.name}}{%endraw%}</a><font ng-show="!$last"> &#9679 </font></span>
                                 </span>
                             </div>
                         </div>
