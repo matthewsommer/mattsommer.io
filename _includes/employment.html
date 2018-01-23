@@ -11,7 +11,14 @@
                         <i ng-if="task.fields.status.name == 'Closed' " class='fas fa-check-circle' style='color:green; margin-left:0.5em; margin-right:0.5em;'></i>
                     </td>
                     <td>
-                        <h3 class="mb-1"><a ng-href="/task/?id={%raw%}{{task.id}}{%endraw%}" ng-bind="task.fields.summary"></a></h3>
+                        <h3 class="mb-0"><a ng-href="/task/?id={%raw%}{{task.id}}{%endraw%}" ng-bind="task.fields.summary"></a></h3>
+                        <div ng-if="task.fields.labels.length > 0" class="row" ng-cloak>
+                            <div ng-cloak class="col-12">
+                                <span class="mt-0 mb-1" ng-cloak>
+                                    <span data-ng-repeat="label in task.fields.labels"><span ng-bind="label"></span><font ng-show="!$last"> &bull; </font></span>
+                                </span>
+                            </div>
+                        </div>
                         <h6><span ng-if="task.renderedFields.customfield_10400" ng-bind-html="task.renderedFields.customfield_10400"></span></h6>
                         <span ng-bind-html="task.renderedFields.description"></span>
                     </td>
