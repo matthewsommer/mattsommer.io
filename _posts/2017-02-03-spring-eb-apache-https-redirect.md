@@ -21,7 +21,7 @@ me was putting the file here:
 <hr/>
     /src/main/webapp/.ebextensions/httpd/conf.d/elasticbeanstalk.conf
 <hr/>
-[Apache Module mod_rewrite documentation][MOD_REWRITE]{:target="_blank"} explains the syntax for mod_rewrite and there are also some [helpful examples given here][RewriteHTTPToHTTPS]{:target="_blank"}. The code I ended up using is from [AWS Labs][AWSLABS]{:target="_blank"} and is shown here (be careful copying and pasting, whitespace matters):
+[Apache Module mod_rewrite documentation][MOD_REWRITE]{:target="_blank"} explains the syntax for mod_rewrite. The code I ended up using is from [AWS Labs][AWSLABS]{:target="_blank"} and is shown here (be careful copying and pasting, whitespace matters):
 <hr/>
 {% highlight bash %}
 &lt;VirtualHost *:80&gt;
@@ -60,7 +60,6 @@ I've created an example Spring Boot app to help get you started: [<i class="fa f
 [HTTPS_REDIRECT]:https://raw.githubusercontent.com/awslabs/elastic-beanstalk-docs/a34abd27ee0a2a8d1eb17ef07b1f383fe624f97d/configuration-files/aws-provided/security-configuration/https-redirect/java-tomcat/https-redirect-java-tomcat/httpd/conf.d/elasticbeanstalk.conf
 [MOD_REWRITE]: http://httpd.apache.org/docs/current/mod/mod_rewrite.html
 [AWSLABS]: https://github.com/awslabs
-[RewriteHTTPToHTTPS]: https://wiki.apache.org/httpd/RewriteHTTPToHTTPS
 [ALB]: https://aws.amazon.com/elasticloadbalancing/applicationloadbalancer/
 [ZAGS]: http://stackoverflow.com/users/2800876/zags
 [STACK_QA]: http://stackoverflow.com/questions/14693852/how-to-force-https-on-elastic-beanstalk
