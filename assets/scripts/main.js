@@ -1,6 +1,6 @@
 
-function getTasksAsync(jql,startAt,callback) {
-    $.getJSON("https://jira.mattsommer.io/rest/api/2/search?jql=" + jql + "&startAt=" + startAt, function(result) {
+function getTasksAsync(jql,startAt,fields,callback) {
+    $.getJSON("https://jira.mattsommer.io/rest/api/2/search?jql=" + jql + "&startAt=" + startAt + "&fields=" + fields, function(result) {
         callback(result.issues);
         if(result.total > (result.startAt + result.maxResults)) {
             getTasksAsync(jql,result.startAt + result.maxResults, callback);
@@ -37,15 +37,15 @@ function getRepoData(id,callback) {
     });
 }
 
-function getTasks(query,callback) {
+function getTasks(query,fields,callback) {
     var tasks = [];
     var startAt = 0;
     var maxResults = 100;
-    $.getJSON("https://jira.mattsommer.io/rest/api/2/search?jql=" + query + "&startAt=" + startAt + "&maxResults=" + maxResults, function(result1) {
+    $.getJSON("https://jira.mattsommer.io/rest/api/2/search?jql=" + query + "&startAt=" + startAt + "&maxResults=" + maxResults+ "&fields=" + fields, function(result1) {
         tasks = result1.issues;
         startAt = startAt + maxResults;
         if(result1.total > (result1.startAt + result1.maxResults)) {
-            $.getJSON("https://jira.mattsommer.io/rest/api/2/search?jql=" + query + "&startAt=" + startAt + "&maxResults=" + maxResults, function(result2) {
+            $.getJSON("https://jira.mattsommer.io/rest/api/2/search?jql=" + query + "&startAt=" + startAt + "&maxResults=" + maxResults+ "&fields=" + fields, function(result2) {
                 tasks = $.merge(result1.issues, result2.issues);
                 callback(tasks);
             });

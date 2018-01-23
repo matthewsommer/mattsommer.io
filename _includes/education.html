@@ -29,6 +29,6 @@ app.controller('tasks', function($scope, $http) {
         $scope.tasks = tasks;
         $scope.$digest();
     }
-    getTasks(query,setView);
+    getTasks(query,fields,setView);
 });
 </script>

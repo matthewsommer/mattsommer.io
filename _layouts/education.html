@@ -7,5 +7,6 @@ layout: default
     var app = angular.module('myApp', []);
     var title = "My Education Epics";
     var query = "project%20%3D%20EDU%20AND%20issuetype%20%3D%20Epic%20ORDER%20BY%20cf%5B10904%5D%20DESC&expand=renderedFields";
+    var fields = "summary,status,project,description"
 </script>
 {% include education.html %}
