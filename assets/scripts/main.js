@@ -1,6 +1,6 @@
 
-function getTasksAsync(jql,startAt,fields,callback) {
-    $.getJSON("https://jira.mattsommer.io/rest/api/2/search?jql=" + jql + "&startAt=" + startAt + "&fields=" + fields, function(result) {
+function getTasksAsync(jql,startAt,callback) {
+    $.getJSON("https://jira.mattsommer.io/rest/api/2/search?jql=" + jql + "&startAt=" + startAt, function(result) {
         callback(result.issues);
         if(result.total > (result.startAt + result.maxResults)) {
             getTasksAsync(jql,result.startAt + result.maxResults, callback);
