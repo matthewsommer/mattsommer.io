@@ -4,7 +4,7 @@
     <hr/>
     <div class="row flex-wrap-reverse">
         <div class="col-md-12">
-            <table class="mb-3">
+            <table>
                 <tr ng-repeat="task in tasks" ng-cloak>
                     <td class="align-top pt-1">
                         <i ng-if="task.fields.status.name == 'In Progress' " class='fas fa-spinner' style='color:green; margin-left:0.5em; margin-right:0.5em;'></i>
@@ -12,7 +12,14 @@
                         <i ng-if="task.fields.status.name == 'Closed' " class='fas fa-check-circle' style='color:green; margin-left:0.5em; margin-right:0.5em;'></i>
                     </td>
                     <td>
-                        <h4><a ng-href="/task/?id={%raw%}{{task.id}}{%endraw%}" ng-bind="task.fields.summary"></a></h4>
+                        <h4 class="mb-0"><a ng-href="/task/?id={%raw%}{{task.id}}{%endraw%}" ng-bind="task.fields.summary"></a></h4>
+                        <div ng-if="task.fields.components.length > 0" class="row" ng-cloak>
+                            <div ng-cloak class="col-12">
+                                <span class="mt-0 mb-1" ng-cloak>
+                                    <span data-ng-repeat="component in task.fields.components"><a ng-href="{%raw%}{{component.description}}{%endraw%}" target="_blank">{%raw%}{{component.name}}{%endraw%}</a><font ng-show="!$last">, </font></span>
+                                </span>
+                            </div>
+                        </div>
                         <span ng-bind-html="task.renderedFields.description"></span>
                     </td>
                 </tr>
