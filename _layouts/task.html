@@ -51,6 +51,11 @@ layout: default
             <span class="mt-1 mb-1" ng-cloak>
                 <span data-ng-repeat="component in task.fields.components"><a ng-href="{%raw%}{{component.description}}{%endraw%}" target="_blank">{%raw%}{{component.name}}{%endraw%}</a><font ng-show="!$last">, </font></span>
             </span>
+            <div>
+            <span ng-if="task.renderedFields.customfield_10904" ng-bind="fixDate(task.renderedFields.customfield_10904) | date:'MMM yyyy'"></span>
+            <span ng-if="task.renderedFields.customfield_10905" ng-bind="fixDate(task.renderedFields.customfield_10905) | date:' to MMM yyyy'"></span>
+            <span ng-if="!task.renderedFields.customfield_10905 && task.renderedFields.customfield_10904"> to Present</span>
+        </div>
             <hr ng-if="task.renderedFields.description != null"/>
         </div>
     </div>
@@ -173,5 +178,10 @@ app.controller('task', function($scope, $http) {
     
     var id = getParameterByName("id");
     getTaskAsync(getParameterByName("id"),setView);
+
+    $scope.fixDate = function(date){
+        return new Date(date);
+    };
+
 });
 </script>
