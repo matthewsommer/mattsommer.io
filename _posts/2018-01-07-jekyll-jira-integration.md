@@ -6,8 +6,6 @@ categories: Productivity Jira Jekyll GitHub-Pages
 permalink: jekyll-jira-integration
 comments: true
 author: Matt Sommer
-custom_js:
-- jekyll-jira-chart
 ---
 
 I use Jira as my task tracking tool for both work and personal life and I integrated it with my personal website. Here is some background and a basic overview of what I set up.
