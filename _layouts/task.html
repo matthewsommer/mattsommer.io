@@ -52,11 +52,22 @@ layout: default
                 <span data-ng-repeat="component in task.fields.components"><a ng-href="{%raw%}{{component.description}}{%endraw%}" target="_blank">{%raw%}{{component.name}}{%endraw%}</a><font ng-show="!$last">, </font></span>
             </span>
             <div>
+        </div>
+            <hr ng-if="task.renderedFields.description != null"/>
+        </div>
+    </div>
+    <div ng-if="(task.renderedFields.customfield_10905 || task.renderedFields.customfield_10904) && task.fields.issuetype.name != 'Live Performance'" class="row" ng-cloak>
+        <div ng-cloak class="col-12">
             <span ng-if="task.renderedFields.customfield_10904" ng-bind="fixDate(task.renderedFields.customfield_10904) | date:'MMM yyyy'"></span>
             <span ng-if="task.renderedFields.customfield_10905" ng-bind="fixDate(task.renderedFields.customfield_10905) | date:' to MMM yyyy'"></span>
             <span ng-if="!task.renderedFields.customfield_10905 && task.renderedFields.customfield_10904"> to Present</span>
         </div>
-            <hr ng-if="task.renderedFields.description != null"/>
+    </div>
+    <div ng-if="task.fields.issuetype.name == 'Live Performance'" class="row" ng-cloak>
+        <div ng-cloak class="col-12">
+            <span ng-if="task.renderedFields.customfield_10904" ng-bind="fixDate(task.renderedFields.customfield_10904) | date:'MMM dd hh:mm a yyyy'"></span>
+            <span ng-if="task.renderedFields.customfield_10905" ng-bind="fixDate(task.renderedFields.customfield_10905) | date:' to MMM dd hh:mm a yyyy'"></span>
+            <span ng-if="!task.renderedFields.customfield_10905 && task.renderedFields.customfield_10904"> to Present</span>
         </div>
     </div>
     <div ng-if="task.renderedFields.customfield_12405" class="row" ng-cloak>
