@@ -20,8 +20,8 @@
                                 </span>
                             </div>
                         </div>
-                        <span ng-if="task.renderedFields.customfield_10904" ng-bind="fixDate(task.renderedFields.customfield_10904) | date:'MMM yyyy'"></span>
-                        <span ng-if="task.renderedFields.customfield_10905" ng-bind="fixDate(task.renderedFields.customfield_10905) | date:' to MMM yyyy'"></span>
+                        <span ng-if="task.renderedFields.customfield_10904" ng-bind="shortDate(task.renderedFields.customfield_10904)"></span>
+                        <span ng-if="task.renderedFields.customfield_10905" ng-bind="' to ' + shortDate(task.renderedFields.customfield_10905)"></span>
                         <span ng-if="!task.renderedFields.customfield_10905 && task.renderedFields.customfield_10904"> to Present</span>
                         <span ng-bind-html="task.renderedFields.description"></span>
                     </td>
@@ -41,8 +41,8 @@ app.controller('tasks', function($scope, $http) {
     }
     getTasks(query,fields,setView);
 
-    $scope.fixDate = function(date){
-        return new Date(date);
+    $scope.shortDate = function(date){
+        return moment(date, "DD/MMM/YY h:mm a").format("MMM Do, YYYY");
     };
 });
 </script>

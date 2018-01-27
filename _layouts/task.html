@@ -58,15 +58,15 @@ layout: default
     </div>
     <div ng-if="(task.renderedFields.customfield_10905 || task.renderedFields.customfield_10904) && task.fields.issuetype.name != 'Live Performance'" class="row" ng-cloak>
         <div ng-cloak class="col-12">
-            <span ng-if="task.renderedFields.customfield_10904" ng-bind="fixDate(task.renderedFields.customfield_10904) | date:'MMM yyyy'"></span>
-            <span ng-if="task.renderedFields.customfield_10905" ng-bind="fixDate(task.renderedFields.customfield_10905) | date:' to MMM yyyy'"></span>
+            <span ng-if="task.renderedFields.customfield_10904" ng-bind="shortDate(task.renderedFields.customfield_10904)"></span>
+            <span ng-if="task.renderedFields.customfield_10905" ng-bind="' to ' + shortDate(task.renderedFields.customfield_10905)"></span>
             <span ng-if="!task.renderedFields.customfield_10905 && task.renderedFields.customfield_10904"> to Present</span>
         </div>
     </div>
     <div ng-if="task.fields.issuetype.name == 'Live Performance'" class="row" ng-cloak>
         <div ng-cloak class="col-12">
-            <span ng-if="task.renderedFields.customfield_10904" ng-bind="fixDate(task.renderedFields.customfield_10904) | date:'MMM dd hh:mm a yyyy'"></span>
-            <span ng-if="task.renderedFields.customfield_10905" ng-bind="fixDate(task.renderedFields.customfield_10905) | date:' to MMM dd hh:mm a yyyy'"></span>
+            <span ng-if="task.renderedFields.customfield_10904" ng-bind="longDate(task.renderedFields.customfield_10904)"></span>
+            <span ng-if="task.renderedFields.customfield_10905" ng-bind="longDate(task.renderedFields.customfield_10905)"></span>
             <span ng-if="!task.renderedFields.customfield_10905 && task.renderedFields.customfield_10904"> to Present</span>
         </div>
     </div>
@@ -208,8 +208,12 @@ app.controller('task', function($scope, $http) {
     var id = getParameterByName("id");
     getTaskAsync(getParameterByName("id"),setView);
 
-    $scope.fixDate = function(date){
-        return new Date(date);
+    $scope.shortDate = function(date){
+        return moment(date, "DD/MMM/YY h:mm a").format("MMM Do, YYYY");
+    };
+
+    $scope.longDate = function(date){
+        return moment(date, "DD/MMM/YY h:mm a").format("MMM Do YYYY h:mm A");
     };
 
 });
