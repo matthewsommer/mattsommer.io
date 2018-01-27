@@ -59,6 +59,24 @@ layout: default
             <hr ng-if="task.renderedFields.description != null"/>
         </div>
     </div>
+    <div ng-if="task.renderedFields.customfield_12405" class="row" ng-cloak>
+        <div ng-cloak class="col-12">
+            <h6><u>Root Cause</u></h6>
+            <span ng-bind-html="task.renderedFields.customfield_12405"></span>
+        </div>
+    </div>
+    <div ng-if="task.renderedFields.customfield_12402" class="row" ng-cloak>
+        <div ng-cloak class="col-12">
+            <h6><u>Corrective Action</u></h6>
+            <span ng-bind-html="task.renderedFields.customfield_12402"></span>
+        </div>
+    </div>
+    <div ng-if="task.renderedFields.customfield_12403" class="row" ng-cloak>
+        <div ng-cloak class="col-12">
+            <h6><u>Preventative Action</u></h6>
+            <span ng-bind-html="task.renderedFields.customfield_12403"></span>
+        </div>
+    </div>
     <div ng-if="task.renderedFields.description != ''" class="row" ng-cloak>
             <div ng-cloak class="col-12">
                 <span ng-if="task.renderedFields.description != null" ng-bind-html="task.renderedFields.description" ng-cloak></span>
