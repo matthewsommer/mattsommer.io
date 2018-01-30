@@ -6,8 +6,11 @@ script:
   - bundle exec htmlproofer ./_site --allow-hash-href --alt-ignore ./assets/imgs/gallery/* --empty-alt-ignore --external_only --url-ignore https://www.facebook.com/matthew.sommer,https://www.linkedin.com/in/matthewsommer,https://angel.co/matt-sommer
 env:
   global:
-    - NOKOGIRI_USE_SYSTEM_LIBRARIES=true # speeds up installation of 
-    
+    - NOKOGIRI_USE_SYSTEM_LIBRARIES=true # speeds up installation
+
+branches:
+  only: dev
+
 deploy:
   provider: pages
   skip-cleanup: true
