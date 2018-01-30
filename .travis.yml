@@ -1,7 +1,7 @@
 language: ruby
 cache: bundler
 rvm:
-  - 2.1
+  - 2.2
 script:
   - bundle exec jekyll build
   - bundle exec htmlproofer ./_site --allow-hash-href --alt-ignore ./assets/imgs/gallery/* --empty-alt-ignore --external_only --url-ignore https://www.facebook.com/matthew.sommer,https://www.linkedin.com/in/matthewsommer,https://angel.co/matt-sommer
