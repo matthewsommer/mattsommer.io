@@ -16,7 +16,7 @@ deploy:
   name: matthewsommer
   email: matthew.sommer@gmail.com
   skip-cleanup: true
-  github-token: $GITHUB_TOKEN  # Set in travis-ci.org dashboard, marked secure
+  github-token: $GITHUB_TOKEN
   keep-history: true
   target-branch: master
   on:
