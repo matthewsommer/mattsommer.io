@@ -1,5 +1,5 @@
 current directory: /home/travis/build/matthewsommer/mattsommer.io/vendor/bundle/ruby/2.1.0/gems/nokogiri-1.8.1/ext/nokogiri
-/home/travis/.rvm/rubies/ruby-2.1.10/bin/ruby -r ./siteconf20180130-4810-cucmcr.rb extconf.rb
+/home/travis/.rvm/rubies/ruby-2.1.10/bin/ruby -r ./siteconf20180130-4810-10dlc08.rb extconf.rb
 checking if the C compiler accepts ... yes
 Building nokogiri using system libraries.
 WARNING: libxml2 version 2.9.3 or later is highly recommended, but proceeding anyway.
@@ -187,5 +187,5 @@ rm -rf /home/travis/build/matthewsommer/mattsommer.io/vendor/bundle/ruby/2.1.0/g
 
 current directory: /home/travis/build/matthewsommer/mattsommer.io/vendor/bundle/ruby/2.1.0/gems/nokogiri-1.8.1/ext/nokogiri
 make "DESTDIR=" install
-/usr/bin/install -m 0755 nokogiri.so ./.gem.20180130-4810-4u7k45/nokogiri
+/usr/bin/install -m 0755 nokogiri.so ./.gem.20180130-4810-129s7rk/nokogiri
 installing default nokogiri libraries
