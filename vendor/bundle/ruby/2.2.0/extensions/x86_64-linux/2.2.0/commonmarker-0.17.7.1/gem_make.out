@@ -1,5 +1,5 @@
 current directory: /home/travis/build/matthewsommer/mattsommer.io/vendor/bundle/ruby/2.2.0/gems/commonmarker-0.17.7.1/ext/commonmarker
-/home/travis/.rvm/rubies/ruby-2.2.7/bin/ruby -r ./siteconf20180130-2667-1uh7mjq.rb extconf.rb
+/home/travis/.rvm/rubies/ruby-2.2.7/bin/ruby -r ./siteconf20180131-2662-1le6nqn.rb extconf.rb
 creating Makefile
 
 current directory: /home/travis/build/matthewsommer/mattsommer.io/vendor/bundle/ruby/2.2.0/gems/commonmarker-0.17.7.1/ext/commonmarker
@@ -314,4 +314,4 @@ linking shared-object commonmarker/commonmarker.so
 
 current directory: /home/travis/build/matthewsommer/mattsommer.io/vendor/bundle/ruby/2.2.0/gems/commonmarker-0.17.7.1/ext/commonmarker
 make "DESTDIR=" install
-/usr/bin/install -m 0755 commonmarker.so ./.gem.20180130-2667-iek0pa/commonmarker
+/usr/bin/install -m 0755 commonmarker.so ./.gem.20180131-2662-yz1lrt/commonmarker
