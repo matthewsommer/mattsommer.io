@@ -1,0 +1,40 @@
+<div ng-app="myApp" ng-controller="tasks">
+    {% include task_nav.html %}
+    <h2 ng-bind="title" ng-cloak></h2>
+    <hr/>
+
+    <div ng-repeat="component in components track by $index">
+        <h3 ng-bind="component" class="pt-4"></h3>
+        <hr/>
+        <div ng-repeat="task in tasks" ng-if="task.fields.components.length != 0">
+            <div ng-repeat="taskComponent in task.fields.components" ng-if="taskComponent.name == component">
+                <i ng-if="task.fields.status.name == 'In Progress' " class='fas fa-spinner' style='color:green; margin-left:0.5em; margin-right:0.5em;'></i>
+                <i ng-if="task.fields.status.name == 'Open' " class='far fa-circle' style='color:green; margin-left:0.5em; margin-right:0.5em;'></i>
+                <i ng-if="task.fields.status.name == 'Closed' " class='fas fa-check-circle' style='color:green; margin-left:0.5em; margin-right:0.5em;'></i>
+                <a ng-href="/task/?id={%raw%}{{task.id}}{%endraw%}" ng-bind="task.fields.summary"></a>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+app.controller('tasks', function($scope, $http) {
+    function setView(tasks){
+        var components = $.unique(tasks.map(function (task) {
+            if(task.fields.components != null){
+                for(i = 0; i < task.fields.components.length; i++) {
+                    return task.fields.components[i].name;
+                }
+            } else {
+                return 0;
+            }
+        }));
+        components.sort();
+        components = components.filter(function(e){return e});
+        $scope.components = $.unique(components);
+        $scope.tasks = tasks;
+        $scope.title = title;
+        $scope.$digest();
+    }
+    getTasks(query,fields,setView);
+});
+</script>
