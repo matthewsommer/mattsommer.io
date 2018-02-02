@@ -16,6 +16,6 @@ There are so many interesting things that could be added to this set-up. Since E
 
 I've summarized a HUGE amount of this set-up and all that's involved with Jira but hopefully I made a little bit of sense. I would have preferred to make a multi-part series to explain, maybe I will some other day.
 
-*To help clarify I always refer to any work I do as a task but there are special types of tasks in three categories Epic, Story, and Task. I see all three of these as tasks but Epics are tasks which either take some time or are cross-functional, a Story is some mono-funcitonal tasks which has all the most important details of work to be done, and a simple Task is just a unit of work to be done which usually can be assigned some temporal quantity to it (for example a flight is a simple Task because the start and stop time is relativity short and clearly defined).
+*To help clarify I always refer to any work I do as a task but there are special types of tasks in three categories Epic, Story, and Task. I see all three of these as tasks but Epics are tasks which either take some time or are cross-functional, a Story is some mono-functional tasks which has all the most important details of work to be done, and a simple Task is just a unit of work to be done which usually can be assigned some temporal quantity to it (for example a flight is a simple Task because the start and stop time is relativity short and clearly defined).
 
 [EMPLOYMENT]: https://mattsommer.io/employment/

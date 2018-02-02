@@ -8,9 +8,7 @@ layout: default
 <div ng-app="myApp" ng-controller="task">
     <div class="row">
         <div class="col-12">
-            <span ng-if="epic != null" ng-cloak>
-                <span ng-bind="task.fields.project.name + ' ' + task.fields.issuetype.name"></span>
-            </span>
+            <span ng-bind="task.fields.project.name + ' ' + task.fields.issuetype.name" ng-cloak></span>
             <h3 ng-bind="task.fields.summary" class="mb-1" ng-cloak></h3>
             <div class="d-flex flex-md-row flex-column">
                 <span ng-if="epic != null" ng-bind="epic.fields.project.name + ' Epic:'" class="mr-2" ng-cloak></span>
@@ -123,6 +121,27 @@ layout: default
             </div>
         </div>
     </div>
+    <div ng-if="linkedTasks.length > 0" class="row">
+        <div class="col-12">
+            <h5 ng-bind="'Releated Work'"></h5>
+            <div ng-repeat="project in projectsLinked" ng-cloak>
+                <h6 ng-bind="project + ' Stories'"></h6>
+                <hr/>
+                <table class="mb-3">
+                    <tr ng-repeat="taskLinked in linkedTasks" ng-if="taskLinked.fields.project.name == project" ng-cloak>
+                        <td class="align-top">
+                            <i ng-if="taskLinked.fields.status.id == 6" class='fas fa-check-circle mr-1' style='color:green;'></i>
+                            <i ng-if="taskLinked.fields.status.id == 3" class='fas fa-spinner mr-1' style='color:green;'></i>
+                            <i ng-if="taskLinked.fields.status.id == 1" class='far fa-circle mr-1' style='color:green;'></i>        
+                        </td>
+                        <td>
+                            <a ng-href="/task/?id={%raw%}{{taskLinked.id}}{%endraw%}" ng-bind="taskLinked.fields.summary"></a>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
     <div ng-if="readme != null" class="row">
         <div class="col-12">
             <div ng-bind-html="readme"></div>
@@ -180,6 +199,14 @@ app.controller('task', function($scope, $http) {
         $scope.$digest();
     }
 
+    function setLinkedtasks(tasks) {
+        $scope.linkedTasks = tasks;
+        var projectsLinked = $.unique(tasks.map(function (task) {return task.fields.project.name;}));
+        projectsLinked.reverse();
+        $scope.projectsLinked = projectsLinked;
+        $scope.$digest();
+    }
+
     function setRepo(result) {
         $scope.result = result;
         $scope.$digest();
@@ -196,6 +223,7 @@ app.controller('task', function($scope, $http) {
         $scope.epic = epic;
         getSubtasksAsync(task.id,setSubtasks);
         getTasksAsync("\"Epic%20Link\"%20%3D%20" + task.id + "&fields=summary,project,status", 0, setStories);
+        getTasksAsync("issue%20in%20linkedIssues(" + task.id + ")&fields=summary,project,status", 0, setLinkedtasks);
         getRepoData(id, setRepo);
         if(task.fields.customfield_11401 != null) {
             getReadme(setReadme);
