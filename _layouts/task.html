@@ -234,11 +234,21 @@ app.controller('task', function($scope, $http) {
     getTaskAsync(getParameterByName("id"),setView);
 
     $scope.shortDate = function(date){
-        return moment(date, "DD/MMM/YY h:mm a").format("MMM Do, YYYY");
+        var momentDate = moment(date, "DD/MMM/YY h:mm a").format("MMM Do, YYYY");
+        if(momentDate != "Invalid date") {
+            return momentDate;
+        } else {
+            return date;
+        }
     };
 
     $scope.longDate = function(date){
-        return moment(date, "DD/MMM/YY h:mm a").format("MMM Do YYYY h:mm A");
+        var momentDate = moment(date, "DD/MMM/YY h:mm a").format("MMM Do YYYY h:mm A");
+        if(momentDate != "Invalid date") {
+            return momentDate;
+        } else {
+            return date;
+        }
     };
 
 });
