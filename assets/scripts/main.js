@@ -15,7 +15,7 @@ function getSubtasksAsync(id,callback) {
 }
 
 function getTaskAsync(id,callback) {
-    $.getJSON("https://jira.mattsommer.io/rest/api/2/issue/" + id + "?fields=summary,project,status,description,customfield_11401,customfield_10009,self,attachment,priority,customfield_10700,issuetype,components,subtasks,customfield_10904,customfield_10905,customfield_12405,customfield_12402,customfield_12403&expand=renderedFields", function(task) {
+    $.getJSON("https://jira.mattsommer.io/rest/api/2/issue/" + id + "?fields=summary,project,status,description,customfield_11401,customfield_10009,self,attachment,priority,customfield_10700,issuetype,components,subtasks,customfield_10904,customfield_10905,customfield_12405,customfield_12402,customfield_12403,fixVersions,versions&expand=renderedFields", function(task) {
         if(task.fields.customfield_10009 != null) {
             $.getJSON("https://jira.mattsommer.io/rest/api/2/issue/" + task.fields.customfield_10009 + "?fields=summary,project", function(epic) {
                 callback(task,epic);

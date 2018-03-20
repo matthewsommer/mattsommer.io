@@ -51,6 +51,28 @@ layout: default
             <hr ng-if="task.renderedFields.description != null"/>
         </div>
     </div>
+    <div ng-if="task.fields.fixVersions.length > 0" class="row" ng-cloak>
+        <div ng-cloak class="col-12">
+            <u><span class="mb-0" ng-bind="'Fix Version(s):'"></span></u>
+            <span class="mt-1 mb-1" ng-cloak>
+                <span data-ng-repeat="fixVersion in task.fields.fixVersions" ng-bind="fixVersion.name" target="_blank"><font ng-show="!$last" ng-bind="', '"></font></span>
+            </span>
+            <div>
+        </div>
+            <hr ng-if="task.renderedFields.description != null"/>
+        </div>
+    </div>
+    <div ng-if="task.fields.versions.length > 0" class="row" ng-cloak>
+        <div ng-cloak class="col-12">
+            <u><span class="mb-0" ng-bind="'Affects Version(s):'"></span></u>
+            <span class="mt-1 mb-1" ng-cloak>
+                <span data-ng-repeat="version in task.fields.versions" ng-bind="version.name" target="_blank"><font ng-show="!$last" ng-bind="', '"></font></span>
+            </span>
+            <div>
+        </div>
+            <hr ng-if="task.renderedFields.description != null"/>
+        </div>
+    </div>
     <div ng-if="(task.renderedFields.customfield_10905 || task.renderedFields.customfield_10904) && task.fields.issuetype.name != 'Live Performance'" class="row" ng-cloak>
         <div ng-cloak class="col-12">
             <span ng-if="task.renderedFields.customfield_10904" ng-bind="shortDate(task.renderedFields.customfield_10904)"></span>
