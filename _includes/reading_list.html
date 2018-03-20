@@ -1,0 +1,30 @@
+<div ng-app="myApp" ng-controller="tasks">
+    {% include task_nav.html %}
+    <h2 ng-bind="title" ng-cloak></h2>
+    <hr/>
+    <table class="mb-3">
+        <tr ng-repeat="task in tasks" ng-cloak>
+            <td class="align-top">
+                <i ng-if="task.fields.status.name == 'In Progress' " class='fas fa-spinner' style='color:green; margin-left:0.5em; margin-right:0.5em;'></i>
+                <i ng-if="task.fields.status.name == 'Open' " class='far fa-circle' style='color:green; margin-left:0.5em; margin-right:0.5em;'></i>
+                <i ng-if="task.fields.status.name == 'Closed' " class='fas fa-check-circle' style='color:green; margin-left:0.5em; margin-right:0.5em;'></i>
+            </td>
+            <td>
+                <a ng-href="/task/?id={%raw%}{{task.id}}{%endraw%}" ng-bind="task.fields.summary"></a><small><span ng-if="task.fields.customfield_10100 != null" ng-href="/task/?id={%raw%}{{task.id}}{%endraw%}" ng-bind="' by ' + task.fields.customfield_10100"></span></small>
+            </td>
+        </tr>
+    </table>
+</div>
+<script>
+app.controller('tasks', function($scope, $http) {
+    function setView(tasks){
+        var projects = $.unique(tasks.map(function (task) {return task.fields.project.name;}));
+        projects.reverse();
+        $scope.projects = projects;
+        $scope.tasks = tasks;
+        $scope.title = title;
+        $scope.$digest();
+    }
+    getTasks(query,fields,setView);
+});
+</script>

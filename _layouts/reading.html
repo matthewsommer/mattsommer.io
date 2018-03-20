@@ -5,9 +5,9 @@ layout: default
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
 <script>
     var app = angular.module('myApp', []);
-    var title = "What I'm Reading";
+    var title = "My Reading List";
     var query = "issuetype=Reading";
     var statuses = ["In Progress","Open","Closed"];
-    var fields = "summary,status,project"
+    var fields = "summary,status,project,customfield_10100"
 </script>
-{% include tasks_list.html %}
+{% include reading_list.html %}
