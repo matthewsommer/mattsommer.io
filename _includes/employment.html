@@ -6,24 +6,23 @@
             <table class="mb-3">
                 <tr ng-repeat="task in tasks" ng-cloak>
                     <td class="align-top pt-1">
-                        <i ng-if="task.fields.status.name == 'In Progress' " class='fas fa-spinner' style='color:green; margin-left:0.5em; margin-right:0.5em;'></i>
-                        <i ng-if="task.fields.status.name == 'Open' " class='far fa-circle' style='color:green; margin-left:0.5em; margin-right:0.5em;'></i>
-                        <i ng-if="task.fields.status.name == 'Closed' " class='fas fa-check-circle' style='color:green; margin-left:0.5em; margin-right:0.5em;'></i>
+                        <i ng-if="task.status == 'In Progress' " class='fas fa-spinner' style='color:green; margin-left:0.5em; margin-right:0.5em;'></i>
+                        <i ng-if="task.status == 'Open' " class='far fa-circle' style='color:green; margin-left:0.5em; margin-right:0.5em;'></i>
+                        <i ng-if="task.status == 'Closed' " class='fas fa-check-circle' style='color:green; margin-left:0.5em; margin-right:0.5em;'></i>
                     </td>
-                    <td>
-                        <h3 class="mb-0"><a ng-href="/task/?id={%raw%}{{task.id}}{%endraw%}" ng-bind="task.fields.summary"></a></h3>
-                        <div ng-if="task.fields.labels.length > 0" class="row" ng-cloak>
+                    <td class="pb-2">
+                        <h3 class="mb-0"><a ng-href="/task/?id={%raw%}{{task.id}}{%endraw%}" ng-bind="task.summary"></a></h3>
+                        <div ng-if="task.labels.length > 0" class="row" ng-cloak>
                             <div ng-cloak class="col-12">
                                 <span class="mt-0 mb-1" ng-cloak>
-                                    <span data-ng-repeat="label in task.fields.labels"><span ng-bind="label"></span><font ng-show="!$last"> &bull; </font></span>
+                                    <span data-ng-repeat="label in task.labels"><span ng-bind="label"></span><font ng-show="!$last"> &bull; </font></span>
                                 </span>
                             </div>
                         </div>
-                        <h6><span ng-if="task.renderedFields.customfield_10400" ng-bind-html="task.renderedFields.customfield_10400"></span></h6>
-                        <span ng-if="task.renderedFields.customfield_10904" ng-bind="shortDate(task.renderedFields.customfield_10904)"></span>
-                        <span ng-if="task.renderedFields.customfield_10905" ng-bind="' to ' + shortDate(task.renderedFields.customfield_10905)"></span>
-                        <span ng-if="!task.renderedFields.customfield_10905"> to Present</span>
-                        <span ng-bind-html="task.renderedFields.description"></span>
+                        <h5><span ng-if="task.title" ng-bind-html="task.title"></span></h5>
+                        <span ng-if="task.start" ng-bind="shortDate(task.start)"></span>
+                        <span ng-if="task.end" ng-bind="' to ' + shortDate(task.end)"></span>
+                        <span ng-if="!task.end"> to Present</span>
                     </td>
                 </tr>
             </table>
@@ -38,11 +37,12 @@ app.controller('tasks', function($scope, $http) {
         $scope.tasks = tasks;
         $scope.$digest();
     }
-    getTasks(query,fields,setView);
-
+    $.getJSON(dataUrl, function(result) {
+        setView(result)
+    });
+    
     $scope.shortDate = function(date){
-        return moment(date, "DD/MMM/YY h:mm a").format("MMM YYYY");
+        return moment(date, moment.ISO_8601).format("MMM YYYY");
     };
-
 });
 </script>

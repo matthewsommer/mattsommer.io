@@ -6,7 +6,6 @@ layout: default
 <script>
     var app = angular.module('myApp', []);
     var title = "My Stories";
-    var query = "issuetype%20not%20in%20(Epic%2C%20Sub-task%2C%20Reading)%20order%20by%20lastViewed%20DESC";
-    var fields = "summary,status,project"
+    var dataUrl = "https://tasks.mattsommer.io/stories";
 </script>
 {% include tasks_list.html %}

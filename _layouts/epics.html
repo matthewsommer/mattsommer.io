@@ -6,7 +6,6 @@ layout: default
 <script>
     var app = angular.module('myApp', []);
     var title = "My Epics";
-    var query = "issuetype=Epic";
-    var fields = "summary,status,project"
+    var dataUrl = "https://tasks.mattsommer.io/epics";
 </script>
 {% include tasks_list.html %}

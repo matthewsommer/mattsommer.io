@@ -5,9 +5,7 @@ layout: default
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
 <script>
     var app = angular.module('myApp', []);
-    var title = "What I'm currently up to...";
-    var query = "status='In Progress'";
-    var statuses = ["In Progress"];
-    var fields = "summary,status,project"
+    var title = "In Progress Tasks";
+    var dataUrl = "https://tasks.mattsommer.io/inprogress";
 </script>
 {% include tasks_list.html %}

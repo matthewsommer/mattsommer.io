@@ -8,14 +8,15 @@
                 <h4 ng-bind="project"></h4>
                 <hr ng-cloak/>
                 <table class="mb-3">
-                    <tr ng-repeat="task in tasks" ng-if="task.fields.project.name == project " ng-cloak>
+                    <tr ng-repeat="task in tasks" ng-if="task.project == project" ng-cloak>
                         <td class="align-top">
-                            <i ng-if="task.fields.status.name == 'In Progress' " class='fas fa-spinner' style='color:green; margin-left:0.5em; margin-right:0.5em;'></i>
-                            <i ng-if="task.fields.status.name == 'Open' " class='far fa-circle' style='color:green; margin-left:0.5em; margin-right:0.5em;'></i>
-                            <i ng-if="task.fields.status.name == 'Closed' " class='fas fa-check-circle' style='color:green; margin-left:0.5em; margin-right:0.5em;'></i>
+                            <i ng-if="task.status == 'In Progress' " class='fas fa-spinner' style='color:green; margin-left:0.5em; margin-right:0.5em;'></i>
+                            <i ng-if="task.status == 'Open' " class='far fa-circle' style='color:green; margin-left:0.5em; margin-right:0.5em;'></i>
+                            <i ng-if="task.status == 'Closed' " class='fas fa-check-circle' style='color:green; margin-left:0.5em; margin-right:0.5em;'></i>
                         </td>
                         <td>
-                            <a ng-href="/task/?id={%raw%}{{task.id}}{%endraw%}" ng-bind="task.fields.summary"></a>
+                            <a ng-if="task.type == 'Reading'" ng-href="/task/?id={%raw%}{{task.id}}{%endraw%}" ng-bind="'Reading ' + task.title + ' by ' + task.author"></a>
+                            <a ng-href="/task/?id={%raw%}{{task.id}}{%endraw%}" ng-bind="task.summary"></a>
                         </td>
                     </tr>
                 </table>
@@ -26,13 +27,15 @@
 <script>
 app.controller('tasks', function($scope, $http) {
     function setView(tasks){
-        var projects = $.unique(tasks.map(function (task) {return task.fields.project.name;}));
+        var projects = $.unique(tasks.map(function (task) {return task.project;}));
         projects.reverse();
         $scope.projects = projects;
         $scope.tasks = tasks;
         $scope.title = title;
         $scope.$digest();
     }
-    getTasks(query,fields,setView);
+    $.getJSON(dataUrl, function(result) {
+        setView(result)
+    });
 });
 </script>

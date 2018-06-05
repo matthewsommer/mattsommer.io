@@ -6,7 +6,6 @@ layout: default
 <script>
     var app = angular.module('myApp', []);
     var title = "My Employment Stories";
-    var query = "issuetype=Employment%20ORDER%20BY%20cf%5B10904%5D%20DESC&expand=renderedFields";
-    var fields = "summary,status,project,description,customfield_10400,labels,customfield_10904,customfield_10905"
+    var dataUrl = "https://tasks.mattsommer.io/employment";
 </script>
 {% include employment.html %}

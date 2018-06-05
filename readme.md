@@ -3,7 +3,6 @@
 # MattSommer.io Website Tech Stack
 
 [![BuildStatus](https://travis-ci.org/matthewsommer/mattsommer.io.svg?branch=master)](https://travis-ci.org/matthewsommer/mattsommer.io)
-[![Dependency Status](https://gemnasium.com/badges/github.com/matthewsommer/mattsommer.io.svg)](https://gemnasium.com/github.com/matthewsommer/mattsommer.io)
 
 ## Links
 
@@ -76,7 +75,7 @@ bundle exec htmlproofer ./_site --allow-hash-href --alt-ignore /assets/imgs/gall
 ```
 
 [1]: http://mattsommer.io
-[2]: https://github.com/matthewsommer/matthewsommer.github.io
+[2]: https://github.com/matthewsommer/mattsommer.io
 [3]: https://jekyllrb.com/
 [4]: http://sass-lang.com/
 [5]: https://pages.github.com/

@@ -6,12 +6,12 @@
     <div ng-repeat="component in components track by $index">
         <h3 ng-bind="component" class="pt-4"></h3>
         <hr/>
-        <div ng-repeat="task in tasks" ng-if="task.fields.components.length != 0">
-            <div ng-repeat="taskComponent in task.fields.components" ng-if="taskComponent.name == component">
-                <i ng-if="task.fields.status.name == 'In Progress' " class='fas fa-spinner' style='color:green; margin-left:0.5em; margin-right:0.5em;'></i>
-                <i ng-if="task.fields.status.name == 'Open' " class='far fa-circle' style='color:green; margin-left:0.5em; margin-right:0.5em;'></i>
-                <i ng-if="task.fields.status.name == 'Closed' " class='fas fa-check-circle' style='color:green; margin-left:0.5em; margin-right:0.5em;'></i>
-                <a ng-href="/task/?id={%raw%}{{task.id}}{%endraw%}" ng-bind="task.fields.summary"></a>
+        <div ng-repeat="task in tasks" ng-if="task.components.length != 0">
+            <div ng-repeat="taskComponent in task.components" ng-if="taskComponent.name == component">
+                <i ng-if="task.status == 'In Progress' " class='fas fa-spinner' style='color:green; margin-left:0.5em; margin-right:0.5em;'></i>
+                <i ng-if="task.status == 'Open' " class='far fa-circle' style='color:green; margin-left:0.5em; margin-right:0.5em;'></i>
+                <i ng-if="task.status == 'Closed' " class='fas fa-check-circle' style='color:green; margin-left:0.5em; margin-right:0.5em;'></i>
+                <a ng-href="/task/?id={%raw%}{{task.id}}{%endraw%}" ng-bind="task.summary"></a>
             </div>
         </div>
     </div>
@@ -20,9 +20,9 @@
 app.controller('tasks', function($scope, $http) {
     function setView(tasks){
         var components = $.unique(tasks.map(function (task) {
-            if(task.fields.components != null){
-                for(i = 0; i < task.fields.components.length; i++) {
-                    return task.fields.components[i].name;
+            if(task.components != null){
+                for(i = 0; i < task.components.length; i++) {
+                    return task.components[i].name;
                 }
             } else {
                 return 0;
@@ -35,6 +35,8 @@ app.controller('tasks', function($scope, $http) {
         $scope.title = title;
         $scope.$digest();
     }
-    getTasks(query,fields,setView);
+    $.getJSON(dataUrl, function(result) {
+        setView(result)
+    });
 });
 </script>
