@@ -3,7 +3,6 @@
 # MattSommer.io Website Tech Stack
 
 [![BuildStatus](https://travis-ci.org/matthewsommer/mattsommer.io.svg?branch=master)](https://travis-ci.org/matthewsommer/mattsommer.io)
-[![Dependency Status](https://gemnasium.com/badges/github.com/matthewsommer/mattsommer.io.svg)](https://gemnasium.com/github.com/matthewsommer/mattsommer.io)
 
 ## Links
 
