@@ -1,3 +1,12 @@
+# Project dependencies
+.cache
+node_modules
+yarn-error.log
+
+# Build directory
+/public
+.DS_Store
+
 # Visual Studio Code
 .vscode/
 .vscode/*
@@ -5,38 +14,3 @@
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
-
-# Jekyll
-_site/
-.sass-cache/
-.jekyll-metadata
-
-# Bundler
-.bundle/
-
-# MacOS General Ignores
-*.DS_Store
-.AppleDouble
-.LSOverride
-
-# Icon must end with two \r
-Icon
-
-# MacOS Thumbnails
-._*
-
-# MacOS: Files that might appear in the root of a volume
-.DocumentRevisions-V100
-.fseventsd
-.Spotlight-V100
-.TemporaryItems
-.Trashes
-.VolumeIcon.icns
-.com.apple.timemachine.donotpresent
-
-# MacOS: Directories potentially created on remote AFP share
-.AppleDB
-.AppleDesktop
-Network Trash Folder
-Temporary Items
-.apdisk
