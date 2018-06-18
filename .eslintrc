@@ -1,0 +1,13 @@
+{
+    "rules": {
+      "no-undef": 0,
+      "no-console": 0,
+      "indent": ["error", 2],
+      "space-before-function-paren": ["error", "always"]
+    },
+    "extends": "eslint:recommended",
+    "parserOptions": {
+      "ecmaVersion": 2017,
+      "sourceType": "module"
+    }
+  }

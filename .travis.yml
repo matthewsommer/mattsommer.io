@@ -1,24 +1,5 @@
-language: ruby
-
-rvm:
-  - 2.2
-  
+language: node_js
+node_js:
+  - "node"
 script:
-  - bundle exec jekyll build
-env:
-  global:
-    - NOKOGIRI_USE_SYSTEM_LIBRARIES=true
-
-branches:
-  only: dev
-
-deploy:
-  provider: pages
-  name: matthewsommer
-  email: matthew.sommer@gmail.com
-  skip-cleanup: true
-  github-token: $GITHUB_TOKEN
-  keep-history: true
-  target-branch: master
-  on:
-    branch: dev
+  - npm run lint

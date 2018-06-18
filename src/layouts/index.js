@@ -14,6 +14,9 @@ const Layout = ({ children, data }) => (
         { name: 'description', content: 'Matt Sommer\'s personal website' },
         { name: 'keywords', content: 'blog' },
       ]}
+      link={[
+        { rel: 'stylesheet', href: 'https://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css' }
+      ]}
     />
     <div
       style={{
