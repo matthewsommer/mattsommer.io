@@ -1,7 +1,7 @@
 import React from 'react'
 import Link from 'gatsby-link'
 
-const TasksPage = (props) => {
+const EpicsPage = (props) => {
     const tasks = props.data.epics.edges;
 
     return (
@@ -21,11 +21,11 @@ const TasksPage = (props) => {
     );
 };
 
-export default TasksPage
+export default EpicsPage
 
 export const query = graphql`
-    query TasksQuery {
-        epics: allJiraIssue(filter: {status: {eq: "In Progress"}}) {
+    query EpicsQuery {
+        epics: allJiraIssue(filter: {type: {eq: "Epic"}}) {
             edges {
                 node {
                     slug

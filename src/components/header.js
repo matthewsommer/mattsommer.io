@@ -10,18 +10,19 @@ const Header = ({ siteTitle }) => (
       <div className="pr-2"><Link to="/tasks/">*What I'm up to</Link></div>
     </div>
     <div className="d-flex flex-row pb-2 underline">
-      <div className="pr-2"><Link to="/epics/">*My Goals</Link></div>
-      <div className="pr-2"><Link to="/stories/">*My Stories</Link></div>
+      <div className="pr-2"><Link to="/epics/">*Epics</Link></div>
+      <div className="pr-2"><Link to="/stories/">*Stories</Link></div>
     </div>
     <div className="d-flex flex-row pb-2 underline">
       <div className="pr-2"><Link to="/reading/">*Reading List</Link></div>
       <div className="pr-2"><Link to="/employment/">*Work History</Link></div>
-      <div className="pr-2"><Link to="/education/">*Formal Education</Link></div>
+      <div className="pr-2"><Link to="/education/">*Education</Link></div>
     </div>
     <div className="d-flex flex-row pb-2 underline">
       <div className="pr-2"><Link to="/taskstats/">*Task Stats</Link></div>
       <div className="pr-2"><Link to="/components/">*Topics</Link></div>
     </div>
+    <hr/>
   </div>
 )
 

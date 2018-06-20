@@ -1,7 +1,7 @@
 import React from 'react'
 import Link from 'gatsby-link'
 
-const TasksPage = (props) => {
+const EmploymentPage = (props) => {
     const tasks = props.data.epics.edges;
 
     return (
@@ -10,7 +10,7 @@ const TasksPage = (props) => {
                 const taskNode = task.node;
                 return (
                     <div key={i}>
-                    
+
                         <Link to={taskNode.slug}>{taskNode.jiraIssue.jiraFields.summary}</Link>
                         <p>{taskNode.author}</p>
                         <p>{taskNode.description}</p>
@@ -21,23 +21,23 @@ const TasksPage = (props) => {
     );
 };
 
-export default TasksPage
+export default EmploymentPage
 
 export const query = graphql`
-    query TasksQuery {
-        epics: allJiraIssue(filter: {status: {eq: "In Progress"}}) {
+    query EmploymentQuery {
+        epics: allJiraIssue(filter: {type: {eq: "Employment"}, project: {eq: "Finance"}}) {
             edges {
                 node {
-                    slug
-                    jiraIssue {
-                        id
-                        jiraFields {
-                            summary
-                            project {
-                                name
-                            }
-                        }
+                slug
+                jiraIssue {
+                    id
+                    jiraFields {
+                    summary
+                    project {
+                        name
                     }
+                    }
+                }
                 }
             }
         }
