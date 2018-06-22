@@ -6,6 +6,7 @@ const StoriesPage = (props) => {
 
     return (
         <div>
+            <h1>Stories</h1>
             {tasks.map((task, i) => {
                 const taskNode = task.node;
                 return (
