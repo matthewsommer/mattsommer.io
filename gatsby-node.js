@@ -77,19 +77,7 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
                         },
                     });
                 }
-
-                let issuetypes = new Set();
-                result.data.allJiraIssue.edges.map(({ node }) => { return issuetypes.add(node.jiraIssue.jiraFields.issuetype.name) });
-
-                for (let type of issuetypes) {
-                    createPage({
-                        path: type.replace(/[^\w\s]/gi, '').replace(/\s+/g, '-').toLowerCase(),
-                        component: path.resolve(`./src/templates/type-list.js`),
-                        context: {
-                            type: type
-                        },
-                    });
-                }
+                
                 resolve();
             });
     });

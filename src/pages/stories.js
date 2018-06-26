@@ -11,7 +11,6 @@ const StoriesPage = (props) => {
                 const taskNode = task.node;
                 return (
                     <div key={i}>
-                    
                         <Link to={taskNode.slug}>{taskNode.jiraIssue.jiraFields.summary}</Link>
                         <p>{taskNode.author}</p>
                         <p>{taskNode.description}</p>

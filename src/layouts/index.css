@@ -634,3 +634,13 @@ pre tt:after {
 .footer ul li {
   margin-bottom: 0;
 }
+
+.nav a {
+  color: black;
+  text-decoration: none;
+}
+
+.nav a:hover {
+  color: black;
+  text-decoration: none;
+}

@@ -3,26 +3,15 @@ import Link from 'gatsby-link'
 
 const Header = ({ siteTitle }) => (
   <div>
-    <h4 className="pt-2"><Link to="/">{siteTitle}</Link></h4>
-    <div className="d-flex flex-row pb-2 underline">
-      <div className="pr-2"><Link to="/blog/">*Blog</Link></div>
-      <div className="pr-2"><Link to="/photography/">*Photography</Link></div>
-      <div className="pr-2"><Link to="/tasks/">*What I'm up to</Link></div>
+    <div className="d-flex flex-md-row flex-column underline justify-content-between pt-2 nav">
+      <div className="h5"><Link to="/">{siteTitle}</Link></div>
+      <div><Link to="/blog/">Blog</Link></div>
+      <div><Link to="/photography/">Photography</Link></div>
+      <div><Link to="/tasks/">Presently</Link></div>
+      <div><Link to="/epics/">Epics</Link></div>
+      <div><Link to="/reading/">Reading</Link></div>
     </div>
-    <div className="d-flex flex-row pb-2 underline">
-      <div className="pr-2"><Link to="/epics/">*Epics</Link></div>
-      <div className="pr-2"><Link to="/stories/">*Stories</Link></div>
-    </div>
-    <div className="d-flex flex-row pb-2 underline">
-      <div className="pr-2"><Link to="/reading/">*Reading List</Link></div>
-      <div className="pr-2"><Link to="/employment/">*Work History</Link></div>
-      <div className="pr-2"><Link to="/education/">*Education</Link></div>
-    </div>
-    <div className="d-flex flex-row pb-2 underline">
-      <div className="pr-2"><Link to="/taskstats/">*Task Stats</Link></div>
-      <div className="pr-2"><Link to="/components/">*Topics</Link></div>
-    </div>
-    <hr/>
+    <hr className="mt-sm-1"/>
   </div>
 )
 

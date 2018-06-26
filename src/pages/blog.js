@@ -6,6 +6,7 @@ const BlogPostsPage = (props) => {
 
     return (
         <div>
+            <h5>Blog Posts</h5>
             {tasks.map((task, i) => {
                 const taskNode = task.node;
                 return (

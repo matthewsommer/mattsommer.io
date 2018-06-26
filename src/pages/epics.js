@@ -6,6 +6,7 @@ const EpicsPage = (props) => {
 
     return (
         <div>
+            <h5>Epics</h5>
             {tasks.map((task, i) => {
                 const taskNode = task.node;
                 return (

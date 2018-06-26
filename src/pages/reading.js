@@ -6,13 +6,12 @@ const ReadingPage = (props) => {
 
     return (
         <div>
+            <h5>Reading List</h5>
             {tasks.map((task, i) => {
                 const taskNode = task.node;
                 return (
                     <div key={i}>
-                        <Link to={taskNode.slug}>{taskNode.jiraIssue.jiraFields.summary}</Link>
-                        <p>{taskNode.author}</p>
-                        <p>{taskNode.description}</p>
+                        <Link to={taskNode.slug}>{taskNode.jiraIssue.jiraFields.summary}</Link> by {taskNode.jiraIssue.jiraFields.customfield_10100}
                     </div>
                 )
             })}
@@ -32,6 +31,7 @@ export const query = graphql`
                     id
                     jiraFields {
                     summary
+                    customfield_10100
                     project {
                         name
                     }
