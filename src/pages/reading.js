@@ -1,6 +1,12 @@
 import React from 'react'
 import Link from 'gatsby-link'
 
+function importAll(r) {
+    return r.keys().map(r);
+}
+
+const photography = importAll(require.context('./', false, /\.(png|jpe?g|svg)$/));
+
 const ReadingPage = (props) => {
     const tasks = props.data.epics.edges;
 
@@ -11,7 +17,8 @@ const ReadingPage = (props) => {
                 const taskNode = task.node;
                 return (
                     <div key={i}>
-                        <Link to={taskNode.slug}>{taskNode.jiraIssue.jiraFields.summary}</Link> by {taskNode.jiraIssue.jiraFields.customfield_10100}
+                        {taskNode.jiraIssue.jiraFields.status.name == 'Open' ? <img src={photography[0]} alt="icon" className="status"/> : <img src={photography[1]} alt="icon" className="status"/>}
+                        <Link to={'/' + taskNode.slug}>{taskNode.jiraIssue.jiraFields.summary}</Link> by {taskNode.jiraIssue.jiraFields.customfield_10100}
                     </div>
                 )
             })}
@@ -31,6 +38,9 @@ export const query = graphql`
                     id
                     jiraFields {
                     summary
+                    status {
+                        name
+                    }
                     customfield_10100
                     project {
                         name
