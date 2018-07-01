@@ -1,29 +1,9 @@
 import React from 'react'
-import Link from 'gatsby-link'
+import TasksByField from "../components/tasks-by-field"
 
 const EpicsPage = (props) => {
-    const tasks = props.data.epics.edges;
-    const projects = Array.from(new Set(tasks.map(task => task.node.jiraIssue.jiraFields.project.name).sort()));
     return (
-        <div>
-            <h2>Epics</h2>
-            {projects.map((project, i) => {
-                return ([
-                    <h3 key={i}>{project}</h3>,
-                    tasks.map((task, i) => {
-                        const taskNode = task.node;
-                        if (taskNode.jiraIssue.jiraFields.project.name === project) {
-                            return (
-                                <div key={i}>
-                                    <Link to={'/' + taskNode.slug}>{taskNode.jiraIssue.jiraFields.summary}</Link>
-                                </div>
-                            )
-                        }
-                    })
-                ])
-            })}
-
-        </div>
+        <TasksByField tasks={props.data.epics.edges} title="Epics" field="project"/>
     );
 };
 
@@ -39,6 +19,9 @@ export const query = graphql`
                         id
                         jiraFields {
                             summary
+                            status {
+                                name
+                            }
                             project {
                                 name
                             }

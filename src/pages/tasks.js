@@ -1,23 +1,9 @@
 import React from 'react'
-import Link from 'gatsby-link'
+import TasksByField from "../components/tasks-by-field"
 
 const TasksPage = (props) => {
-    const tasks = props.data.epics.edges;
-
     return (
-        <div>
-            <h5>What I'm Currently Working On...</h5>
-            {tasks.map((task, i) => {
-                const taskNode = task.node;
-                return (
-                    <div key={i}>
-                        <Link to={'/' + taskNode.slug}>{taskNode.jiraIssue.jiraFields.summary}</Link>
-                        <p>{taskNode.author}</p>
-                        <p>{taskNode.description}</p>
-                    </div>
-                )
-            })}
-        </div>
+        <TasksByField tasks={props.data.epics.edges} title="What I'm Currently Working On..." field="project"/>
     );
 };
 
@@ -33,6 +19,9 @@ export const query = graphql`
                         id
                         jiraFields {
                             summary
+                            status {
+                                name
+                            }
                             project {
                                 name
                             }

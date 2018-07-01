@@ -1,38 +1,9 @@
 import React from 'react'
-import Link from 'gatsby-link'
-
-function importAll(r) {
-    return r.keys().map(r);
-}
-
-function StatusIcon(status) {
-    if (status == 'Open') {
-        return <img src={photography[0]} alt="icon" className="status" />;
-    } else if (status == 'Closed') {
-        return <img src={photography[1]} alt="icon" className="status" />;
-    } else if (status == 'In Progress') {
-        return <img src={photography[2]} alt="icon" className="status" />;
-    }
-}
-
-const photography = importAll(require.context('./', false, /\.(png|jpe?g|svg)$/));
+import TasksByField from "../components/tasks-by-field"
 
 const ReadingPage = (props) => {
-    const tasks = props.data.epics.edges;
-
     return (
-        <div>
-            <h5>Reading List</h5>
-            {tasks.map((task, i) => {
-                const taskNode = task.node;
-                return (
-                    <div key={i}>
-                        {StatusIcon(taskNode.jiraIssue.jiraFields.status.name)}
-                        <Link to={'/' + taskNode.slug}>{taskNode.jiraIssue.jiraFields.summary}</Link> by {taskNode.jiraIssue.jiraFields.customfield_10100}
-                    </div>
-                )
-            })}
-        </div>
+        <TasksByField tasks={props.data.reading.edges} title="My Reading List" field="priority"/>
     );
 };
 
@@ -40,7 +11,7 @@ export default ReadingPage
 
 export const query = graphql`
     query ReadingQuery {
-        epics: allJiraIssue(filter: {type: {eq: "Reading"}, project: {eq: "Education"}}) {
+        reading: allJiraIssue(filter: {type: {eq: "Reading"}, project: {eq: "Education"}}) {
             edges {
                 node {
                 slug
@@ -52,7 +23,7 @@ export const query = graphql`
                         name
                     }
                     customfield_10100
-                    project {
+                    priority {
                         name
                     }
                     }
