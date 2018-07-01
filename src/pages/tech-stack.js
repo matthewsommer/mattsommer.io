@@ -5,8 +5,8 @@ const TechStack = () => (
   <div>
     <h1>Technology Used on this Website</h1>
     <ul>
-      <li><Link to="https://www.gatsbyjs.org/">GatsbyJS</Link></li>
-      <li><Link to="https://github.com/matthewsommer/gatsby-source-jira">Gatsby Source Jira</Link></li>
+      <li><a href="https://www.gatsbyjs.org/" target="_blank">GatsbyJS</a></li>
+      <li><a href="https://github.com/matthewsommer/gatsby-source-jira" target="_blank">Gatsby Source Jira</a></li>
     </ul>
   </div>
 )
