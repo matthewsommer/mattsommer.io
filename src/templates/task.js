@@ -1,7 +1,6 @@
 import React from "react";
-import EpicListItem from "../components/epic-list-item";
-import StoriesList from "../components/stories-list";
 import SubtaskList from "../components/subtask-list";
+import TasksByField from "../components/tasks-by-field"
 
 export default ({ data }) => {
     const task = data.jiraIssue.jiraIssue;
@@ -12,12 +11,13 @@ export default ({ data }) => {
     }
     return (
         <div>
-            {epic != null ? <a href={'../' + data.epic.slug}>{epic.jiraIssue.jiraFields.summary}</a> : ""}
-            <h1 style={{ marginBottom: 10 }}>{task.jiraFields.summary}</h1>
             <div>{task.jiraFields.project.name + " " + task.jiraFields.issuetype.name}</div>
+            <h1 style={{ marginBottom: 10 }}>{task.jiraFields.summary}</h1>
+            {epic != null ? <a href={'../' + data.epic.slug}>{epic.jiraIssue.jiraFields.summary}</a> : ""}
             <div>
                 {task.jiraFields.description != null ? <h3 style={{ marginBottom: 10, marginTop: 15 }}>Description</h3> : ""}
-                {task.jiraFields.description}
+                {/* {task.renderedFields.description} */}
+                <div dangerouslySetInnerHTML={{ __html: task.renderedFields.description}} />
                 <h3 style={{ marginBottom: 10, marginTop: 15 }}>Details</h3>
                 <ul>
                     <li><a href={'https://timetopretend.atlassian.net/browse/' + task.key} target='_blank'>Jira Link: {task.key}</a></li>
@@ -27,7 +27,7 @@ export default ({ data }) => {
                     {/* <li><b>Labels:</b> {task.labels.map((label, i) => { return label + " " })}</li> */}
                 </ul>
                 <SubtaskList value={task.jiraFields.subtasks} />
-                <StoriesList value={stories} />
+                <TasksByField tasks={stories} type="Stories" field="project"/>
             </div>
         </div>
     );
@@ -39,6 +39,9 @@ export const query = graphql`
         jiraIssue {
             id
             key
+            renderedFields {
+                description
+            }
             jiraFields {
                 summary
                 description
@@ -59,7 +62,7 @@ export const query = graphql`
                     jiraFields {
                         summary
                         status {
-                        name
+                            name
                         }
                     }
                 }
@@ -85,6 +88,9 @@ export const query = graphql`
                     id
                     jiraFields {
                         summary
+                        status {
+                            name
+                        }
                         project {
                             name
                         }

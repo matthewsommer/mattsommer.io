@@ -1,20 +1,19 @@
 import React from 'react'
 import Link from 'gatsby-link'
+import Moment from 'moment';
 
 const BlogPostsPage = (props) => {
-    const tasks = props.data.epics.edges;
-
+    const tasks = props.data.blogpost.edges;
+    Moment.locale('en');
     return (
         <div>
-            <h5>Blog Posts</h5>
+            <h2>Blog Posts</h2>
             {tasks.map((task, i) => {
                 const taskNode = task.node;
                 return (
                     <div key={i}>
-                    
                         <Link to={'/' + taskNode.slug}>{taskNode.jiraIssue.jiraFields.summary}</Link>
-                        <p>{taskNode.author}</p>
-                        <p>{taskNode.description}</p>
+                        <p>By {taskNode.jiraIssue.jiraFields.assignee.displayName} - {Moment(taskNode.jiraIssue.jiraFields.updated).format('MMMM Do, YYYY')}</p>
                     </div>
                 )
             })}
@@ -26,7 +25,7 @@ export default BlogPostsPage
 
 export const query = graphql`
     query BlogPostsQuery {
-        epics: allJiraIssue(filter: {type: {eq: "Blog Post"}}) {
+        blogpost: allJiraIssue(filter: {type: {eq: "Blog Post"}}) {
             edges {
                 node {
                     slug
@@ -34,6 +33,10 @@ export const query = graphql`
                         id
                         jiraFields {
                             summary
+                            updated
+                            assignee {
+                                displayName
+                            }
                             project {
                                 name
                             }

@@ -39,9 +39,13 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
         }
       `).then(result => {
                 result.data.allJiraIssue.edges.map(({ node }) => {
+                    var template = './src/templates/task.js';
+                    if (node.jiraIssue.jiraFields.issuetype.name == 'Blog Post') {
+                        template = './src/templates/blog-post.js';
+                    }
                     createPage({
                         path: node.slug,
-                        component: path.resolve(`./src/templates/task.js`),
+                        component: path.resolve(template),
                         context: {
                             // Data passed to context is available in page queries as GraphQL variables.
                             slug: node.slug,
