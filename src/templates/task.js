@@ -1,6 +1,8 @@
 import React from "react";
 import SubtaskList from "../components/subtask-list";
 import TasksByField from "../components/tasks-by-field"
+import StatusShield from "../components/status-shield";
+import PriorityShield from "../components/priority-shield";
 
 export default ({ data }) => {
     const task = data.jiraIssue.jiraIssue;
@@ -15,6 +17,8 @@ export default ({ data }) => {
             <h1 style={{ marginBottom: 10 }}>{task.jiraFields.summary}</h1>
             {epic != null ? <a href={'../' + data.epic.slug}>{epic.jiraIssue.jiraFields.summary}</a> : ""}
             <div>
+                <StatusShield status={task.jiraFields.status.name}/>
+                <PriorityShield priority={task.jiraFields.priority.name}/>
                 {task.jiraFields.description != null ? <h3 style={{ marginBottom: 10, marginTop: 15 }}>Description</h3> : ""}
                 {/* {task.renderedFields.description} */}
                 <div dangerouslySetInnerHTML={{ __html: task.renderedFields.description}} />

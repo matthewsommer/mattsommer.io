@@ -12,7 +12,7 @@ const BlogPostsPage = (props) => {
                 const taskNode = task.node;
                 return (
                     <div key={i}>
-                        <Link to={'/' + taskNode.slug}>{taskNode.jiraIssue.jiraFields.summary}</Link>
+                        <h4><Link to={'/' + taskNode.slug}>{taskNode.jiraIssue.jiraFields.summary}</Link></h4>
                         <p>By {taskNode.jiraIssue.jiraFields.assignee.displayName} - {Moment(taskNode.jiraIssue.jiraFields.updated).format('MMMM Do, YYYY')}</p>
                     </div>
                 )
