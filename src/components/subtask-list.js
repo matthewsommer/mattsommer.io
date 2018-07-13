@@ -1,16 +1,17 @@
-import React from "react";
+import React from "react"
+import StatusIcon from "../components/status-icon/status-icon"
 
 class SubtaskList extends React.Component {
     render() {
         if (this.props.value.length > 0) {
             return (
                 <div>
-                    <h3 style={{marginBottom: 10,marginTop:15}}>Tasks</h3>
-                    <ul>
-                        {this.props.value.map((task, i) => {
-                            return <li key={i}>{task.jiraFields.status.name + " - " + task.jiraFields.summary}</li>;
-                        })}
-                    </ul>
+                    <h3 className="text-dark">Tasks</h3>
+                    {this.props.value.map((task, i) => {
+                        return ([
+                            <div key={i}><StatusIcon status={task.jiraFields.status.name} />{task.jiraFields.summary}</div>
+                        ]);
+                    })}
                 </div>
             );
         } else {

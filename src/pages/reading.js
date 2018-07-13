@@ -3,7 +3,7 @@ import TasksByField from "../components/tasks-by-field"
 
 const ReadingPage = (props) => {
     return (
-        <TasksByField tasks={props.data.reading.edges} title="My Reading List" field="priority"/>
+        <TasksByField tasks={props.data.reading.edges} title="My Reading List" field="priority" />
     );
 };
 
@@ -24,6 +24,9 @@ export const query = graphql`
                     }
                     customfield_10100
                     priority {
+                        name
+                    }
+                    issuetype {
                         name
                     }
                     }

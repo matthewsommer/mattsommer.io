@@ -5,6 +5,7 @@ html {
 }
 body {
   margin: 0;
+  color: gray;
 }
 article,
 aside,
@@ -268,7 +269,6 @@ h3 {
   text-rendering: optimizeLegibility;
   font-size: 1.38316rem;
   line-height: 1.1;
-  text-decoration: underline;
 }
 h4 {
   margin-left: 0;
@@ -659,4 +659,8 @@ h4 a {
 .h4 a:hover {
   color: black;
   text-decoration: none;
+}
+
+a {
+  color: black;
 }

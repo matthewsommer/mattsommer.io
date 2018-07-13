@@ -1,8 +1,12 @@
 import React from "react";
 import SubtaskList from "../components/subtask-list";
 import TasksByField from "../components/tasks-by-field"
+import TaskComponentsList from "../components/task-component-list";
 import StatusShield from "../components/status-shield";
 import PriorityShield from "../components/priority-shield";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faDatabase } from '@fortawesome/free-solid-svg-icons';
+
 
 export default ({ data }) => {
     const task = data.jiraIssue.jiraIssue;
@@ -13,25 +17,23 @@ export default ({ data }) => {
     }
     return (
         <div>
-            <div>{task.jiraFields.project.name + " " + task.jiraFields.issuetype.name}</div>
-            <h1 style={{ marginBottom: 10 }}>{task.jiraFields.summary}</h1>
-            {epic != null ? <a href={'../' + data.epic.slug}>{epic.jiraIssue.jiraFields.summary}</a> : ""}
+            <div className="text-secondary">
+                {task.jiraFields.project.name + " " + task.jiraFields.issuetype.name}
+                {epic != null ? <span><span className=""> for {epic.jiraIssue.jiraFields.project.name} Epic </span><a href={'../' + data.epic.slug} className="text-secondary">{epic.jiraIssue.jiraFields.summary}</a></span> : ""}
+            </div>
+            <h1 className="text-dark">{task.jiraFields.summary}</h1>
             <div>
                 <StatusShield status={task.jiraFields.status.name}/>
                 <PriorityShield priority={task.jiraFields.priority.name}/>
-                {task.jiraFields.description != null ? <h3 style={{ marginBottom: 10, marginTop: 15 }}>Description</h3> : ""}
-                {/* {task.renderedFields.description} */}
-                <div dangerouslySetInnerHTML={{ __html: task.renderedFields.description}} />
-                <h3 style={{ marginBottom: 10, marginTop: 15 }}>Details</h3>
+                <a href={'https://timetopretend.atlassian.net/browse/' + task.key} target='_blank' className="text-muted"><FontAwesomeIcon icon={faDatabase} className="align-middle" /></a>
+                <TaskComponentsList components={task.jiraFields.components}/>
+                <div dangerouslySetInnerHTML={{ __html: task.renderedFields.description}} className="text-secondary mt-2" />
                 <ul>
-                    <li><a href={'https://timetopretend.atlassian.net/browse/' + task.key} target='_blank'>Jira Link: {task.key}</a></li>
-                    <li><b>Priority:</b> {task.jiraFields.priority.name}</li>
-                    <li><b>Status:</b> {task.jiraFields.status.name}</li>
                     {/* <li><b>Components:</b> {task.components.map((component, i) => { return (<a href={component.description} target='_blank' key={i}>{component.name}, </a>) })}</li> */}
                     {/* <li><b>Labels:</b> {task.labels.map((label, i) => { return label + " " })}</li> */}
                 </ul>
                 <SubtaskList value={task.jiraFields.subtasks} />
-                <TasksByField tasks={stories} type="Stories" field="project"/>
+                <TasksByField tasks={stories} type="Stories" field="project" monoType="true"/>
             </div>
         </div>
     );
@@ -49,6 +51,10 @@ export const query = graphql`
             jiraFields {
                 summary
                 description
+                components {
+                    name
+                    description
+                }
                 issuetype {
                     name
                 }
@@ -80,6 +86,9 @@ export const query = graphql`
             id
             jiraFields {
                 summary
+                project {
+                    name
+                }
             }
         }
     }
@@ -93,9 +102,13 @@ export const query = graphql`
                     jiraFields {
                         summary
                         status {
+                            id
                             name
                         }
                         project {
+                            name
+                        }
+                        issuetype {
                             name
                         }
                     }

@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 const Img = styled.img`
     margin-right: 5px;
+    margin-bottom: 0px;
 `;
 
 class StatusShield extends React.Component {
@@ -10,7 +11,7 @@ class StatusShield extends React.Component {
         if (this.props.status != null) {
             if (this.props.status === "In Progress") {
                 return (
-                    <Img src='https://img.shields.io/badge/Status-In--Progress-blue.svg'></Img>
+                    <Img src='https://img.shields.io/badge/Status-In--Progress-brightgreen.svg'></Img>
                 );
             } else if (this.props.status === "Open") {
                 return (
@@ -18,7 +19,7 @@ class StatusShield extends React.Component {
                 );
             } else if (this.props.status === "Closed") {
                 return (
-                    <Img src='https://img.shields.io/badge/Status-Closed-brightgreen.svg'></Img>
+                    <Img src='https://img.shields.io/badge/Status-Closed-blue.svg'></Img>
                 );
             }
             return (

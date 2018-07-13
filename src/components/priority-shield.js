@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 const Img = styled.img`
     margin-right: 5px;
+    margin-bottom: 0px;
 `;
 
 class PriorityShield extends React.Component {

@@ -43,6 +43,9 @@ export const query = graphql`
                 status {
                     name
                 }
+                issuetype {
+                    name
+                }
                 subtasks {
                     id
                     jiraFields {

@@ -4,6 +4,9 @@
   "version": "1.0.0",
   "author": "Matt Sommer <matthew.sommer@gmail.com>",
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.0-14",
+    "@fortawesome/free-solid-svg-icons": "^5.1.0-11",
+    "@fortawesome/react-fontawesome": "0.1.0-11",
     "bootstrap": "^4.1.1",
     "eslint": "^4.19.1",
     "gatsby": "^1.9.272",

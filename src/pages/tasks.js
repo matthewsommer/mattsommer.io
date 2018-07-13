@@ -3,7 +3,7 @@ import TasksByField from "../components/tasks-by-field"
 
 const TasksPage = (props) => {
     return (
-        <TasksByField tasks={props.data.epics.edges} title="What I'm Currently Working On..." field="project"/>
+        <TasksByField tasks={props.data.epics.edges} title="What I'm Currently Working On..." field="project" monoType="false"/>
     );
 };
 
@@ -23,6 +23,9 @@ export const query = graphql`
                                 name
                             }
                             project {
+                                name
+                            }
+                            issuetype {
                                 name
                             }
                         }
