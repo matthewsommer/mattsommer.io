@@ -1,12 +1,13 @@
-import React from "react";
-import SubtaskList from "../components/subtask-list";
+import React from "react"
+import SubtaskList from "../components/subtask-list"
 import TasksByField from "../components/tasks-by-field"
-import TaskComponentsList from "../components/task-component-list";
-import StatusShield from "../components/status-shield/status-shield";
-import PriorityShield from "../components/priority-shield/priority-shield";
-import PercentCompleteBar from "../components/percent-complete-bar/percent-complete-bar";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faDatabase } from '@fortawesome/free-solid-svg-icons';
+import TaskComponentsList from "../components/task-component-list"
+import StatusShield from "../components/status-shield/status-shield"
+import PriorityShield from "../components/priority-shield/priority-shield"
+import ProgressShield from "../components/progress-shield/progress-shield"
+import PercentCompleteBar from "../components/percent-complete-bar/percent-complete-bar"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faDatabase } from '@fortawesome/free-solid-svg-icons'
 
 export default ({ data }) => {
     const task = data.jiraIssue.jiraIssue;
@@ -25,10 +26,11 @@ export default ({ data }) => {
             </div>
             <h1 className="text-dark">{task.jiraFields.summary}</h1>
             <div>
-                <StatusShield status={task.jiraFields.status.name}/>
                 <PriorityShield priority={task.jiraFields.priority.name}/>
+                <StatusShield status={task.jiraFields.status.name}/>
+                {task.jiraFields.issuetype.name != 'Epic' ? <ProgressShield subTasks={task.jiraFields.subtasks}/> : ""}
+                {task.jiraFields.issuetype.name === 'Epic' ? <ProgressShield subTasks={storyList}/> : ""}
                 <a href={'https://timetopretend.atlassian.net/browse/' + task.key} target='_blank' className="text-muted"><FontAwesomeIcon icon={faDatabase} className="align-middle" /></a>
-                {console.log(storyList)}
                 <PercentCompleteBar subTasks={storyList}/>
                 {/* <PercentCompleteBar subTasks={task.jiraFields.subtasks}/> */}
                 <TaskComponentsList components={task.jiraFields.components}/>
