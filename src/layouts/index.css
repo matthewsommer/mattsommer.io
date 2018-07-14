@@ -630,6 +630,7 @@ pre tt:after {
 
 .footer ul {
   list-style-type: none;
+  margin: 0;
 }
 
 .footer ul li {

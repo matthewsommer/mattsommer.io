@@ -8,7 +8,7 @@ class TaskComponentsList extends React.Component {
                     <span className="text-secondary">Links: </span>
                     {this.props.components.map((component, i) => {
                         return (
-                            <span>
+                            <span key={i}>
                                 <a href={component.description} key={i} target="_blank" className="text-secondary">{component.name}</a>{i != (this.props.components.length - 1) ? ', ' : ' '}
                             </span>
                         );

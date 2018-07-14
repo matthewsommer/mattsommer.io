@@ -6,21 +6,21 @@ const Img = styled.img`
     margin-bottom: 0px;
 `;
 
+function importAll(r) {
+    return r.keys().map(r);
+}
+
+const icons = importAll(require.context('/', false, /\.(png|jpe?g|svg)$/));
+
 class StatusShield extends React.Component {
     render() {
         if (this.props.status != null) {
-            if (this.props.status === "In Progress") {
-                return (
-                    <Img src='https://img.shields.io/badge/Status-In--Progress-brightgreen.svg'></Img>
-                );
-            } else if (this.props.status === "Open") {
-                return (
-                    <Img src='https://img.shields.io/badge/Status-To--Do-red.svg'></Img>
-                );
+            if (this.props.status === "Open") {
+                return <Img src={icons[0]} alt="Open" />;
+            } else if (this.props.status === "In Progress") {
+                return <Img src={icons[1]} alt="In Progress" />;
             } else if (this.props.status === "Closed") {
-                return (
-                    <Img src='https://img.shields.io/badge/Status-Closed-blue.svg'></Img>
-                );
+                return <Img src={icons[2]} alt="Closed" />;
             }
             return (
                 <div>

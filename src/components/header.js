@@ -11,7 +11,7 @@ const Header = ({ siteTitle }) => (
       <div><Link to="/epics/" className="text-secondary">Epics</Link></div>
       <div><Link to="/reading/" className="text-secondary">Reading</Link></div>
     </div>
-    <hr className="mt-sm-1"/>
+    <hr className="mt-2"/>
   </div>
 )
 

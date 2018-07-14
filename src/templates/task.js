@@ -2,18 +2,20 @@ import React from "react";
 import SubtaskList from "../components/subtask-list";
 import TasksByField from "../components/tasks-by-field"
 import TaskComponentsList from "../components/task-component-list";
-import StatusShield from "../components/status-shield";
-import PriorityShield from "../components/priority-shield";
+import StatusShield from "../components/status-shield/status-shield";
+import PriorityShield from "../components/priority-shield/priority-shield";
+import PercentCompleteBar from "../components/percent-complete-bar/percent-complete-bar";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faDatabase } from '@fortawesome/free-solid-svg-icons';
-
 
 export default ({ data }) => {
     const task = data.jiraIssue.jiraIssue;
     const epic = data.epic;
     var stories = [];
+    var storyList = [];
     if (data.stories != null) {
         stories = data.stories.edges;
+        storyList = Array.from(data.stories.edges.map(task => task.node.jiraIssue));
     }
     return (
         <div>
@@ -26,6 +28,9 @@ export default ({ data }) => {
                 <StatusShield status={task.jiraFields.status.name}/>
                 <PriorityShield priority={task.jiraFields.priority.name}/>
                 <a href={'https://timetopretend.atlassian.net/browse/' + task.key} target='_blank' className="text-muted"><FontAwesomeIcon icon={faDatabase} className="align-middle" /></a>
+                {console.log(storyList)}
+                <PercentCompleteBar subTasks={storyList}/>
+                {/* <PercentCompleteBar subTasks={task.jiraFields.subtasks}/> */}
                 <TaskComponentsList components={task.jiraFields.components}/>
                 <div dangerouslySetInnerHTML={{ __html: task.renderedFields.description}} className="text-secondary mt-2" />
                 <ul>

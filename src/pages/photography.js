@@ -1,5 +1,4 @@
 import React from 'react'
-import Link from 'gatsby-link'
 
 function importAll(r) {
   return r.keys().map(r);
@@ -9,9 +8,9 @@ const photography = importAll(require.context('./photography/', false, /\.(png|j
 
 const PhotographyPage = () => (
   <div className="gallery">
-      {photography.map((img) => {
+      {photography.map((img, i) => {
         return (
-          <div><img src={img} alt="photography"/></div>
+          <div key={i}><img src={img} alt="photography"/></div>
         )
       })}
   </div>
