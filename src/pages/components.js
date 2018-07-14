@@ -1,31 +1,17 @@
 import React from 'react'
-import Link from 'gatsby-link'
+import TasksByComponent from "../components/tasks-by-component"
 
 const ComponentsPage = (props) => {
-    const tasks = props.data.epics.edges;
-
     return (
-        <div>
-            {tasks.map((task, i) => {
-                const taskNode = task.node;
-                return (
-                    <div key={i}>
-                    
-                        <Link to={taskNode.slug}>{taskNode.jiraIssue.jiraFields.summary}</Link>
-                        <p>{taskNode.author}</p>
-                        <p>{taskNode.description}</p>
-                    </div>
-                )
-            })}
-        </div>
+        <TasksByComponent tasks={props.data.epics.edges} title="Tasks by Skill" field="components"/>
     );
 };
 
 export default ComponentsPage
 
 export const query = graphql`
-    query ComponentsQuery {
-        epics: allJiraIssue(filter: {type: {eq: "Story"}}) {
+    query AllQuery {
+        epics: allJiraIssue {
             edges {
                 node {
                     slug
@@ -33,9 +19,18 @@ export const query = graphql`
                         id
                         jiraFields {
                             summary
+                            status {
+                                name
+                            }
                             project {
                                 name
                             }
+                            issuetype {
+                                name
+                            }
+                            components {
+                                name
+                              }
                         }
                     }
                 }

@@ -28,6 +28,9 @@ export const query = graphql`
                             issuetype {
                                 name
                             }
+                            components {
+                                name
+                            }
                         }
                     }
                 }

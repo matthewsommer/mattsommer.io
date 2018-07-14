@@ -2,18 +2,23 @@ import React from "react"
 import Link from 'gatsby-link'
 import StatusIcon from "../components/status-icon/status-icon"
 
-const TasksByField = ({ tasks, title, type = "", field, monoType = 'true' }) => {
+const TasksByComponent = ({ tasks, title, field, monoType = 'true' }) => {
     if (tasks.length > 0) {
-        const headers = Array.from(new Set(tasks.map(task => task.node.jiraIssue.jiraFields[field] != null ? task.node.jiraIssue.jiraFields[field]["name"] : null).sort()));
+
+        const tasksWithComponent = tasks.filter(task => task.node.jiraIssue.jiraFields[field] != null && task.node.jiraIssue.jiraFields.components.length > 0);
+        const componentsArray = Array.from(new Set(tasksWithComponent.map(task => task.node.jiraIssue.jiraFields[field])));
+        var merged = [].concat.apply([], componentsArray);
+        const headers = Array.from(new Set(merged.map(item => item.name))).sort();
+
         return (
             <div>
                 <h2>{title}</h2>
-                {headers.map((project, i) => {
+                {headers.map((component, i) => {
                     return ([
-                        <h3 key={i} className="text-dark mt-3">{project} {type}</h3>,
-                        tasks.map((task, i) => {
+                        <h3 key={i} className="text-dark mt-3">{component}</h3>,
+                        tasksWithComponent.map((task, i) => {
                             const taskNode = task.node;
-                            if (taskNode.jiraIssue.jiraFields[field] != null && taskNode.jiraIssue.jiraFields[field].name === project) {
+                            if (taskNode.jiraIssue.jiraFields[field].findIndex(task => task.name === component) != -1) {
                                 return (
                                     <div key={i}>
                                         <StatusIcon status={taskNode.jiraIssue.jiraFields.status.name} />
@@ -31,4 +36,4 @@ const TasksByField = ({ tasks, title, type = "", field, monoType = 'true' }) => 
     }
 }
 
-export default TasksByField;
+export default TasksByComponent;

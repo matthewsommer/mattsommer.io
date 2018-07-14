@@ -24,14 +24,14 @@ export default ({ data }) => {
                 {task.jiraFields.project.name + " " + task.jiraFields.issuetype.name}
                 {epic != null ? <span><span className=""> for {epic.jiraIssue.jiraFields.project.name} Epic </span><a href={'../' + data.epic.slug} className="text-secondary">{epic.jiraIssue.jiraFields.summary}</a></span> : ""}
             </div>
-            <h1 className="text-dark">{task.jiraFields.summary}</h1>
+            <h2 className="text-dark">{task.jiraFields.summary}</h2>
             <div>
                 <PriorityShield priority={task.jiraFields.priority.name}/>
                 <StatusShield status={task.jiraFields.status.name}/>
-                {task.jiraFields.issuetype.name != 'Epic' ? <ProgressShield subTasks={task.jiraFields.subtasks}/> : ""}
-                {task.jiraFields.issuetype.name === 'Epic' ? <ProgressShield subTasks={storyList}/> : ""}
+                {task.jiraFields.issuetype.name != 'Epic' ? <ProgressShield subTasks={task.jiraFields.subtasks} parentTask={task}/> : ""}
+                {task.jiraFields.issuetype.name === 'Epic' ? <ProgressShield subTasks={storyList} parentTask={task}/> : ""}
                 <a href={'https://timetopretend.atlassian.net/browse/' + task.key} target='_blank' className="text-muted"><FontAwesomeIcon icon={faDatabase} className="align-middle" /></a>
-                <PercentCompleteBar subTasks={storyList}/>
+                {/* <PercentCompleteBar subTasks={storyList}/> */}
                 {/* <PercentCompleteBar subTasks={task.jiraFields.subtasks}/> */}
                 <TaskComponentsList components={task.jiraFields.components}/>
                 <div dangerouslySetInnerHTML={{ __html: task.renderedFields.description}} className="text-secondary mt-2" />
@@ -74,6 +74,9 @@ export const query = graphql`
                 status {
                     name
                 }
+                components {
+                    name
+                  }
                 subtasks {
                     id
                     jiraFields {
@@ -118,6 +121,9 @@ export const query = graphql`
                         issuetype {
                             name
                         }
+                        components {
+                            name
+                          }
                     }
                 }
             }

@@ -15,9 +15,13 @@ const icons = importAll(require.context('/', false, /\.(png|jpe?g|svg)$/));
 class ProgressShield extends React.Component {
     render() {
         const subTasks = this.props.subTasks;
+        const parentTask = this.props.parentTask;
         const closedCount = subTasks.filter(task => task.jiraFields.status.name == "Closed").length;
         const percentComplete = (closedCount/subTasks.length) * 100;
         
+        if(parentTask.jiraFields.status.name === 'Closed') {
+            return (<Img src={'https://Img.shields.io/badge/Progress-100%25-brightgreen.svg'}></Img>);
+        }
         if (percentComplete != null && percentComplete >= 0 && percentComplete <= 100) {
             return (<Img src={'https://Img.shields.io/badge/Progress-' + percentComplete + '%25-brightgreen.svg'}></Img>);
         } else {
