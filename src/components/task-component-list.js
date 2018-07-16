@@ -5,7 +5,7 @@ class TaskComponentsList extends React.Component {
         if (this.props.components != null && this.props.components.length > 0) {
             return (
                 <div className="mt-2">
-                    <span className="text-secondary">Links: </span>
+                    <span className="text-secondary">External Links: </span>
                     {this.props.components.map((component, i) => {
                         return (
                             <span key={i}>

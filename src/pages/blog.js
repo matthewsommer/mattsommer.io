@@ -1,19 +1,22 @@
 import React from 'react'
 import Link from 'gatsby-link'
-import Moment from 'moment';
+import Moment from 'moment'
+import CustomShield from '../components/custom-shield/custom-shield'
 
 const BlogPostsPage = (props) => {
     const tasks = props.data.blogpost.edges;
-    Moment.locale('en');
+
     return (
         <div>
             <h2>Blog</h2>
-            {tasks.map((task, i) => {
-                const taskNode = task.node;
+            {tasks.map((taskNode, i) => {
+                const slug = taskNode.node.slug
+                const task = taskNode.node.jiraIssue
+
                 return (
                     <div key={i}>
-                        <h4><Link to={'/' + taskNode.slug} className="text-dark">{taskNode.jiraIssue.jiraFields.summary}</Link></h4>
-                        <p>Posted by {taskNode.jiraIssue.jiraFields.assignee.displayName} on {Moment(taskNode.jiraIssue.jiraFields.customfield_10905).format('MMMM Do, YYYY')}</p>
+                        <h4><Link to={'/' + slug} className="text-dark">{task.jiraFields.summary}</Link></h4>
+                        <p>Posted by {task.jiraFields.assignee.displayName} on {Moment(task.jiraFields.customfield_10905).format('MMMM Do, YYYY')}</p>
                     </div>
                 )
             })}

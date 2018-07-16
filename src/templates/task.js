@@ -8,6 +8,7 @@ import ProgressShield from "../components/progress-shield/progress-shield"
 import PercentCompleteBar from "../components/percent-complete-bar/percent-complete-bar"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faDatabase } from '@fortawesome/free-solid-svg-icons'
+import RelatedTasks from '../components/related-tasks/related-tasks'
 
 export default ({ data }) => {
     const task = data.jiraIssue.jiraIssue;
@@ -33,6 +34,7 @@ export default ({ data }) => {
                 <a href={'https://timetopretend.atlassian.net/browse/' + task.key} target='_blank' className="text-muted"><FontAwesomeIcon icon={faDatabase} className="align-middle" /></a>
                 {/* <PercentCompleteBar subTasks={storyList}/> */}
                 {/* <PercentCompleteBar subTasks={task.jiraFields.subtasks}/> */}
+                <RelatedTasks taskLinks={task.jiraFields.issuelinks} />
                 <TaskComponentsList components={task.jiraFields.components}/>
                 <div dangerouslySetInnerHTML={{ __html: task.renderedFields.description}} className="text-secondary mt-2" />
                 <ul>
@@ -62,6 +64,29 @@ export const query = graphql`
                     name
                     description
                 }
+                issuelinks {
+                    id
+                    inwardIssue {
+                        id
+                        key
+                        jiraFields {
+                            summary
+                            issuetype {
+                                name
+                            }
+                        }
+                    }
+                    outwardIssue {
+                        id
+                        key
+                        jiraFields {
+                            summary
+                            issuetype {
+                                name
+                            }
+                        }
+                    }
+                }
                 issuetype {
                     name
                 }
@@ -74,9 +99,6 @@ export const query = graphql`
                 status {
                     name
                 }
-                components {
-                    name
-                  }
                 subtasks {
                     id
                     jiraFields {
