@@ -6,6 +6,9 @@ import Header from '../components/header'
 import Footer from '../components/footer'
 import './index.css'
 
+import favicon from '../static/favicon.ico'
+
+
 const Layout = ({ children, data }) => (
   <div>
     <Helmet
@@ -15,7 +18,8 @@ const Layout = ({ children, data }) => (
         { name: 'keywords', content: 'blog' },
       ]}
       link={[
-        { rel: 'stylesheet', href: 'https://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css' }
+        { rel: 'stylesheet', href: 'https://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css' },
+        { rel: 'shortcut icon', type: 'image/png', href: `${favicon}` }
       ]}
     />
     <div

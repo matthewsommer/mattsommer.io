@@ -1,5 +1,5 @@
-import React from "react";
-import Disqus from 'disqus-react';
+import React from "react"
+import Disqus from 'disqus-react'
 
 export default ({ data }) => {
     const task = data.jiraIssue.jiraIssue;
@@ -7,7 +7,7 @@ export default ({ data }) => {
     const disqusShortname = data.jiraIssue.slug.replace("/","-");
 
     const disqusConfig = {
-        url: 'https://mattsommer.io/',
+        url: 'https://mattsommer.io/' + data.jiraIssue.slug,
         identifier: disqusShortname,
         title: task.jiraFields.summary,
     };
@@ -18,7 +18,7 @@ export default ({ data }) => {
             <div>
                 <div dangerouslySetInnerHTML={{ __html: task.renderedFields.description}} />
             </div>
-            <Disqus.DiscussionEmbed shortname={disqusShortname} config={disqusConfig} />
+            <Disqus.DiscussionEmbed shortname={'mattsommer-io'} config={disqusConfig} />
         </div>
     );
 };

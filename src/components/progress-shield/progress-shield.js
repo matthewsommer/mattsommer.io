@@ -17,7 +17,7 @@ class ProgressShield extends React.Component {
         const subTasks = this.props.subTasks;
         const parentTask = this.props.parentTask;
         const closedCount = subTasks.filter(task => task.jiraFields.status.name == "Closed").length;
-        const percentComplete = (closedCount/subTasks.length) * 100;
+        const percentComplete = (closedCount/subTasks.length).toFixed(2) * 100;
         
         if(parentTask.jiraFields.status.name === 'Closed') {
             return (<Img src={'https://Img.shields.io/badge/Progress-100%25-brightgreen.svg'}></Img>);
