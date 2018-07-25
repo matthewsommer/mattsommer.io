@@ -13,7 +13,11 @@ class CustomShield extends React.Component {
         const color = this.props.color;
         const imgSrc = 'https://img.shields.io/badge/' + subject + '-' + status + '-' + color + '.svg';
 
-        return (<Img src={imgSrc}></Img>);
+        if(subject != null && status != null && status != "Invalid date") {
+            return (<Img src={imgSrc}></Img>);
+        } else {
+            return (null);
+        }
     }
 }
 

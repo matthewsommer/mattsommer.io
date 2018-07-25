@@ -7,10 +7,10 @@ const TasksByField = ({ tasks, title, type = "", field, monoType = 'true' }) => 
         const headers = Array.from(new Set(tasks.map(task => task.node.jiraIssue.jiraFields[field] != null ? task.node.jiraIssue.jiraFields[field]["name"] : null).sort()));
         return (
             <div>
-                <h2>{title}</h2>
+                <div className="text-secondary">{title}</div>
                 {headers.map((project, i) => {
                     return ([
-                        <h3 key={i} className="text-dark mt-3">{project} {type}</h3>,
+                        <h5 key={i} className="text-dark mt-1 mb-1">{project} {type}</h5>,
                         tasks.map((task, i) => {
                             const taskNode = task.node;
                             if (taskNode.jiraIssue.jiraFields[field] != null && taskNode.jiraIssue.jiraFields[field].name === project) {
@@ -27,7 +27,7 @@ const TasksByField = ({ tasks, title, type = "", field, monoType = 'true' }) => 
             </div>
         );
     } else {
-        return (<div />);
+        return (null);
     }
 }
 

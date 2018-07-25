@@ -3,7 +3,7 @@ import TasksByField from "../components/tasks-by-field"
 
 const TasksPage = (props) => {
     return (
-        <TasksByField tasks={props.data.epics.edges} title="What I'm Currently Working On..." field="project" monoType="false"/>
+        <TasksByField tasks={props.data.epics.edges} title="Presently I'm..." field="project" monoType="false"/>
     );
 };
 

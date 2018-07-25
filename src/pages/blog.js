@@ -2,21 +2,22 @@ import React from 'react'
 import Link from 'gatsby-link'
 import Moment from 'moment'
 import CustomShield from '../components/custom-shield/custom-shield'
+import TaskLabels from '../components/task-labels/task-labels'
 
 const BlogPostsPage = (props) => {
     const tasks = props.data.blogpost.edges;
-
     return (
         <div>
-            <h2>Blog</h2>
+            <div className="text-secondary mb-2">Blog Posts</div>
             {tasks.map((taskNode, i) => {
                 const slug = taskNode.node.slug
                 const task = taskNode.node.jiraIssue
-
                 return (
                     <div key={i}>
-                        <h4><Link to={'/' + slug} className="text-dark">{task.jiraFields.summary}</Link></h4>
-                        <p>Posted by {task.jiraFields.assignee.displayName} on {Moment(task.jiraFields.customfield_10905).format('MMMM Do, YYYY')}</p>
+                        <h5 className="pb-0 mb-0"><Link to={'/' + slug} className="text-dark">{task.jiraFields.summary}</Link></h5>
+                        <CustomShield subject="Published" status={Moment(task.jiraFields.customfield_10905).format('MMMM Do, YYYY')} color="blue"/>
+                        <TaskLabels labels={task.jiraFields.labels} className="smaller"/>
+                        {i != (tasks.length - 1) ? <hr/> : ' '}
                     </div>
                 )
             })}
@@ -38,6 +39,7 @@ export const query = graphql`
                             summary
                             updated
                             customfield_10905
+                            labels
                             assignee {
                                 displayName
                             }

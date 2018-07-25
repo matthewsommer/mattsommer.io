@@ -8,11 +8,11 @@ const icons = importAll(require.context('/', false, /\.(png|jpe?g|svg)$/));
 
 const StatusIcon = ({ status }) => {
     if (status == 'Open') {
-        return <img src={icons[0]} alt="icon" className="status" />;
+        return <img src={icons[0]} alt="icon" className="status mb-1" />;
     } else if (status == 'Closed') {
-        return <img src={icons[1]} alt="icon" className="status" />;
+        return <img src={icons[1]} alt="icon" className="status mb-1" />;
     } else if (status == 'In Progress') {
-        return <img src={icons[2]} alt="icon" className="status" />;
+        return <img src={icons[2]} alt="icon" className="status mb-1" />;
     }
 }
 

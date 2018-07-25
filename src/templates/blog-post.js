@@ -4,6 +4,9 @@ import Moment from 'moment'
 import CustomShield from '../components/custom-shield/custom-shield'
 import TaskComponentsList from "../components/task-component-list"
 import RelatedTasks from '../components/related-tasks/related-tasks'
+import JiraIconLink from '../components/jira-icon-link/jira-icon-link'
+import TaskLabels from '../components/task-labels/task-labels'
+import StatusShield from "../components/status-shield/status-shield"
 
 export default ({ data }) => {
     const task = data.jiraIssue.jiraIssue;
@@ -24,14 +27,16 @@ export default ({ data }) => {
             <h1 className="mt-0 mb-0">{task.jiraFields.summary}</h1>
             <CustomShield subject="Author" status={task.jiraFields.assignee.displayName} color="blue"/>
             <CustomShield subject="Published" status={Moment(task.jiraFields.customfield_10905).format('MMMM Do, YYYY')} color="blue"/>
+            {task.jiraFields.status.name != "Closed" ? <StatusShield status={task.jiraFields.status.name}/> : ""}
+            <JiraIconLink taskKey={task.key} />
+            <TaskLabels labels={task.jiraFields.labels}/>
             <RelatedTasks taskLinks={task.jiraFields.issuelinks} />
             <TaskComponentsList components={task.jiraFields.components}/>
             <hr className="mb-2 mt-2"/>
             <div>
                 <div dangerouslySetInnerHTML={{ __html: task.renderedFields.description}} />
             </div>
-            <h2>{task.jiraFields.assignee.displayName}</h2>
-            <hr/>
+            {task.jiraFields.status.name === "Closed" ? <div><p>Much Love!</p><h2>{task.jiraFields.assignee.displayName}</h2></div> : ""}
             <Disqus.DiscussionEmbed shortname={'mattsommer-io'} config={disqusConfig} />
         </div>
     );
@@ -50,6 +55,7 @@ export const query = graphql`
             jiraFields {
                 summary
                 description
+                labels
                 issuetype {
                     name
                 }
