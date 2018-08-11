@@ -1,8 +1,5 @@
-html {
-  font-family: "Josefin Sans","Helvetica Neue",Helvetica,Arial,sans-serif !important;
-  -ms-text-size-adjust: 100%;
-  -webkit-text-size-adjust: 100%;
-}
+@import url('https://fonts.googleapis.com/css?family=Josefin+Sans:300,400|Open+Sans:300,400,600');
+
 body {
   margin: 0;
   color: gray;
@@ -184,10 +181,14 @@ textarea {
   font: inherit;
 }
 html {
-  font: 112.5%/1.45em georgia, serif;
+  font: 112.5%/1.45em 'Josefin Sans', sans-serif;
+  font-weight: 400;
   box-sizing: border-box;
   overflow-y: scroll;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
 }
+
 * {
   box-sizing: inherit;
 }
@@ -198,9 +199,9 @@ html {
   box-sizing: inherit;
 }
 body {
-  color: hsla(0, 0%, 0%, 0.8);
-  font-family: georgia, serif;
-  font-weight: normal;
+  color: hsla(0, 0%, 23%, 0.8);
+  font: 112.5%/1.45em 'Josefin Sans', sans-serif;
+  font-weight: 300;
   word-wrap: break-word;
   font-kerning: normal;
   -moz-font-feature-settings: "kern", "liga", "clig", "calt";
@@ -234,7 +235,7 @@ h1 {
   font-weight: bold;
   text-rendering: optimizeLegibility;
   font-size: 2.25rem;
-  line-height: 1.1;
+  line-height: 1.0;
 }
 h2 {
   margin-left: 0;
@@ -251,7 +252,7 @@ h2 {
   font-weight: bold;
   text-rendering: optimizeLegibility;
   font-size: 1.62671rem;
-  line-height: 1.1;
+  line-height: 1.0;
 }
 h3 {
   margin-left: 0;
@@ -268,7 +269,7 @@ h3 {
   font-weight: bold;
   text-rendering: optimizeLegibility;
   font-size: 1.38316rem;
-  line-height: 1.1;
+  line-height: 1.0;
 }
 h4 {
   margin-left: 0;
@@ -285,7 +286,7 @@ h4 {
   font-weight: bold;
   text-rendering: optimizeLegibility;
   font-size: 1rem;
-  line-height: 1.1;
+  line-height: 1.0;
 }
 h5 {
   margin-left: 0;
@@ -302,7 +303,7 @@ h5 {
   font-weight: bold;
   text-rendering: optimizeLegibility;
   font-size: 0.85028rem;
-  line-height: 1.1;
+  line-height: 1.0;
 }
 h6 {
   margin-left: 0;
@@ -319,7 +320,7 @@ h6 {
   font-weight: bold;
   text-rendering: optimizeLegibility;
   font-size: 0.78405rem;
-  line-height: 1.1;
+  line-height: 1.0;
 }
 hgroup {
   margin-left: 0;

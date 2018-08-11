@@ -12,10 +12,10 @@ const TasksByComponent = ({ tasks, title, field, monoType = 'true' }) => {
 
         return (
             <div>
-                <h2>{title}</h2>
+                <div className="text-secondary h2">{title}</div>
                 {headers.map((component, i) => {
                     return ([
-                        <h3 key={i} className="text-dark mt-3">{component}</h3>,
+                        <h3 key={i} className="text-dark mt-2">{component}</h3>,
                         tasksWithComponent.map((task, i) => {
                             const taskNode = task.node;
                             if (taskNode.jiraIssue.jiraFields[field].findIndex(task => task.name === component) != -1) {

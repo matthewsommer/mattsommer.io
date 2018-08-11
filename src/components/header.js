@@ -4,7 +4,7 @@ import Link from 'gatsby-link'
 const Header = ({ siteTitle }) => (
   <div>
     <div className="d-flex flex-md-row flex-column underline justify-content-between pt-2 nav">
-      <div className="h5"><Link to="/" className="text-dark">{siteTitle}</Link></div>
+      <div className="h3"><Link to="/" className="text-dark">{siteTitle}</Link></div>
       <div><Link to="/blog/" className="text-secondary">Blog</Link></div>
       <div><Link to="/photography/" className="text-secondary">Photography</Link></div>
       <div><Link to="/tasks/" className="text-secondary">Presently</Link></div>

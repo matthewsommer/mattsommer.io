@@ -4,10 +4,10 @@ import Helmet from 'react-helmet'
 
 import Header from '../components/header'
 import Footer from '../components/footer'
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css'
 
 import favicon from '../static/favicon.ico'
-
 
 const Layout = ({ children, data }) => (
   <div>
@@ -18,10 +18,18 @@ const Layout = ({ children, data }) => (
         { name: 'keywords', content: 'blog' },
       ]}
       link={[
-        { rel: 'stylesheet', href: 'https://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css' },
         { rel: 'shortcut icon', type: 'image/png', href: `${favicon}` }
       ]}
     />
+    {/* <!-- Global site tag (gtag.js) - Google Analytics --> */}
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-91408509-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){'{dataLayer.push(arguments);}' }
+      gtag('js', new Date());
+      gtag('config', 'UA-91408509-1');
+    </script>
+
     <div
       style={{
         margin: '0 auto',

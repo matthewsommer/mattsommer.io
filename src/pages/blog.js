@@ -8,15 +8,14 @@ const BlogPostsPage = (props) => {
     const tasks = props.data.blogpost.edges;
     return (
         <div>
-            <div className="text-secondary mb-2">Blog Posts</div>
+                <div className="text-secondary h2">Blog Posts</div>
             {tasks.map((taskNode, i) => {
                 const slug = taskNode.node.slug
                 const task = taskNode.node.jiraIssue
                 return (
                     <div key={i}>
-                        <h5 className="pb-0 mb-0"><Link to={'/' + slug} className="text-dark">{task.jiraFields.summary}</Link></h5>
-                        <CustomShield subject="Published" status={Moment(task.jiraFields.customfield_10905).format('MMMM Do, YYYY')} color="blue"/>
-                        <TaskLabels labels={task.jiraFields.labels} className="smaller"/>
+                        <h3 className=""><Link to={'/' + slug} className="text-dark">{task.jiraFields.summary}</Link></h3>
+                        {Moment(task.jiraFields.customfield_10905).format('MMMM Do, YYYY')}
                         {i != (tasks.length - 1) ? <hr/> : ' '}
                     </div>
                 )
