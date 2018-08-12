@@ -22,7 +22,7 @@ export default ({ data }) => {
         <div>
             <div className="text-secondary">
                 {task.jiraFields.project.name + " " + task.jiraFields.issuetype.name}
-                {epic != null ? <span><span className=""> for {epic.jiraIssue.jiraFields.project.name} Epic </span><a href={'../' + data.epic.slug} className="text-secondary">{epic.jiraIssue.jiraFields.summary}</a></span> : ""}
+                {epic != null ? <span><span className=""> for {epic.jiraIssue.jiraFields.project.name} Epic </span><a href={'/' + data.epic.slug} className="text-secondary">{epic.jiraIssue.jiraFields.summary}</a></span> : ""}
             </div>
             <h2 className="text-dark mb-0">{task.jiraFields.summary}</h2>
             <div>
