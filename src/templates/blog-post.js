@@ -25,7 +25,7 @@ export default ({ data }) => {
                 {task.jiraFields.issuetype.name}
             </div>
             <h1 className="mt-0 mb-0">{task.jiraFields.summary}</h1>
-            <CustomShield subject="Author" status={task.jiraFields.assignee.displayName} color="blue"/>
+            <CustomShield subject="Author" status={task.jiraFields.assignee.displayName} color="blue"/> 
             <CustomShield subject="Published" status={Moment(task.jiraFields.customfield_10905).format('MMMM Do, YYYY')} color="blue"/>
             {task.jiraFields.status.name != "Closed" ? <StatusShield status={task.jiraFields.status.name}/> : ""}
             <JiraIconLink taskKey={task.key} />

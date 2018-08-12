@@ -6,7 +6,7 @@ module.exports = {
     'gatsby-plugin-react-helmet', {
       resolve: "gatsby-source-jira",
       options: {
-        host: "jira.mattsommer.io",
+        host: "timetopretend.atlassian.net",
         epic_field_id: "customfield_10009",
       }
     },
@@ -15,6 +15,7 @@ module.exports = {
       options: {
         trackingId: "UA-91408509-1",
         // Puts tracking script in the head instead of the body
+        
         head: false,
         // Setting this parameter is optional
         anonymize: false,
