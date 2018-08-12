@@ -1,15 +1,14 @@
 import React from 'react'
-import Link from 'gatsby-link'
 
 function importAll(r) {
   return r.keys().map(r);
 }
 const img_urls = require.context('./imgs/', false, /\.(png|jpe?g|svg)$/);
-const imgs = importAll(img_urls);
+const images = importAll(img_urls);
 
 const SocialMediaIcons = () => (
   <div className="gallery">
-    {imgs.map((img, i) => {
+    {images.map((img, i) => {
       if (i == 0) {
         return (
           <a key={i} href='https://facebook.com/matthewsommer' target="_blank"><img src={img} alt="facebook icon" style={{ width: '2em' }} className='m-2' /></a>

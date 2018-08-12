@@ -6,7 +6,7 @@ const ReadingPage = (props) => {
     const statuses = [{ name: "In Progress", label: "Currently Reading" }, { name: "Closed", label: "Have Read" }, { name: "Open", label: "Want to Read" }]
     return (
         <div>
-            <div className="text-secondary h2">Reading List</div>
+            <div className="text-dark h2">Reading List</div>
             {statuses.map((status, i) => {
                 return ([
                     <div className="text-dark h2 mb-0 mt-4">{status.label}</div>,

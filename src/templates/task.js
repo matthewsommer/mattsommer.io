@@ -30,6 +30,8 @@ export default ({ data }) => {
                 <StatusShield status={task.jiraFields.status.name}/>
                 {task.jiraFields.issuetype.name != 'Epic' ? <ProgressShield subTasks={task.jiraFields.subtasks} parentTask={task}/> : ""}
                 {task.jiraFields.issuetype.name === 'Epic' ? <ProgressShield subTasks={storyList} parentTask={task}/> : ""}
+            </div>
+            <div>
                 <JiraIconLink taskKey={task.key} />
                 <RelatedTasks taskLinks={task.jiraFields.issuelinks} />
                 <TaskLabels labels={task.jiraFields.labels}/>

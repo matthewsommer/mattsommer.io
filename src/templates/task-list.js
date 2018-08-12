@@ -1,4 +1,5 @@
 import React from "react";
+import Link from 'gatsby-link'
 
 const TaskList = (props) => {
     const tasks = props.data.allJiraIssue.edges;
@@ -8,7 +9,7 @@ const TaskList = (props) => {
                 const taskNode = task.node;
                 return (
                     <div key={i}>
-                        <a href={taskNode.slug}><h4>{taskNode.jiraIssue.jiraFields.summary}</h4></a>
+                        <Link to={taskNode.slug}><h4>{taskNode.jiraIssue.jiraFields.summary}</h4></Link>
                         <p>{taskNode.jiraIssue.jiraFields.description}</p>
                     </div>
                 )
