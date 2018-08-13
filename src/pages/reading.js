@@ -16,8 +16,8 @@ const ReadingPage = (props) => {
                         if (task.jiraFields.status != null && task.jiraFields.status.name === status.name) {
                             return (
                                 <div className="pt-2">
-                                    <h4>{task.jiraFields.summary}</h4>
-                                    <Link to={'/' + taskNode.slug} className="text-secondary">By {task.jiraFields.customfield_10100}</Link>
+                                    <Link to={'/' + slug} className="text-secondary"><h4>{task.jiraFields.summary}</h4></Link>
+                                    By {task.jiraFields.customfield_10100}
                                 </div>
                             )
                         }
