@@ -12,7 +12,7 @@ export default function BlogPostsPage({ data }) {
         const { slug } = taskNode.node.slug;
         const task = taskNode.node.jiraIssue;
         return (
-          <div key={task.jiraFields.key}>
+          <div key={task.id}>
             <h3 className="">
               <Link to={`/${slug}`} className="text-dark">{task.jiraFields.summary}</Link>
             </h3>

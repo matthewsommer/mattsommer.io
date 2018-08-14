@@ -30,7 +30,7 @@ export default function TasksByField({
             if (taskNode.jiraIssue.jiraFields[field] != null
               && taskNode.jiraIssue.jiraFields[field].name === project) {
               return (
-                <div key={taskNode.jiraFields.key}>
+                <div key={taskNode.id}>
                   <div>
                     <StatusIcon status={taskNode.jiraIssue.jiraFields.status.name} />
                     <Link to={`/${taskNode.slug}`} className="text-secondary">
@@ -52,7 +52,7 @@ export default function TasksByField({
 TasksByField.propTypes = {
   tasks: PropTypes.arrayOf(PropTypes.object).isRequired,
   title: PropTypes.string.isRequired,
-  type: PropTypes.string.isRequired,
+  type: PropTypes.string,
   field: PropTypes.string.isRequired,
-  monoType: PropTypes.string.isRequired,
+  monoType: PropTypes.string,
 };
