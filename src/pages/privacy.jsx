@@ -1,5 +1,4 @@
-import React from 'react'
-import Link from 'gatsby-link'
+import React from 'react';
 
 const PrivacyPolicy = () => (
   <div>
@@ -14,7 +13,7 @@ const PrivacyPolicy = () => (
     <ol type="a">
       <li>
         Permission is granted to temporarily download one copy of the materials (information or software) on Matt Sommer's website for personal, non-commercial transitory viewing only. This is the grant of a license, not a transfer of title, and under this license you may not:
-  
+
       <ol type="i">
           <li>modify or copy the materials;</li>
           <li>use the materials for any commercial purpose, or for any public display (commercial or non-commercial);</li>

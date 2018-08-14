@@ -1,26 +1,28 @@
-import React from 'react'
-import Link from 'gatsby-link'
+import React from 'react';
+import Link from 'gatsby-link';
 
-const EmploymentPage = (props) => {
-    const tasks = props.data.epics.edges;
+export default function EmploymentPage({ data }) {
+  const tasks = data.epics.edges;
 
-    return (
-        <div>
-            {tasks.map((task, i) => {
-                const taskNode = task.node;
-                return (
-                    <div key={i}>
-                        <Link to={taskNode.slug}>{taskNode.jiraIssue.jiraFields.summary}</Link>
-                        <p>{taskNode.author}</p>
-                        <p>{taskNode.description}</p>
-                    </div>
-                )
-            })}
-        </div>
-    );
+  return (
+    <div>
+      {tasks.map((task) => {
+        const taskNode = task.node;
+        return (
+          <div key={taskNode.jiraIssue.jiraFields.key}>
+            <Link to={taskNode.slug}>{taskNode.jiraIssue.jiraFields.summary}</Link>
+            <p>{taskNode.author}</p>
+            <p>{taskNode.description}</p>
+          </div>
+        )
+      })}
+    </div>
+  );
 };
 
-export default EmploymentPage
+EmploymentPage.propTypes = {
+  data: PropTypes.arrayOf(PropTypes.object).isRequired,
+};
 
 export const query = graphql`
     query EmploymentQuery {

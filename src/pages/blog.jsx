@@ -9,12 +9,12 @@ export default function BlogPostsPage({ data }) {
     <div>
       <div className="text-dark h2">Blog Posts</div>
       {tasks.map((taskNode, i) => {
-        const slug = taskNode.node.slug;
+        const { slug } = taskNode.node.slug;
         const task = taskNode.node.jiraIssue;
         return (
-          <div key={i}>
+          <div key={task.jiraFields.key}>
             <h3 className="">
-              <Link to={'/' + slug} className="text-dark">{task.jiraFields.summary}</Link>
+              <Link to={`/${slug}`} className="text-dark">{task.jiraFields.summary}</Link>
             </h3>
             {Moment(task.jiraFields.customfield_10905).format('MMMM Do, YYYY')}
             {i !== (tasks.length - 1) ? <hr /> : ' '}
@@ -23,7 +23,7 @@ export default function BlogPostsPage({ data }) {
       })}
     </div>
   );
-};
+}
 
 BlogPostsPage.propTypes = {
   data: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types

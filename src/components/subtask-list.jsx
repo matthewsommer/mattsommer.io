@@ -5,15 +5,12 @@ import StatusIcon from './status-icon/status-icon';
 export default function SubtaskList({ value }) {
   return (
     <div>
-      <h3 className="text-dark"></h3>
-      {value.map((task) => {
-        return ([
-          <div key={task.jiraFields.key}>
-            <StatusIcon status={task.jiraFields.status.name} />
-            {task.jiraFields.summary}
-          </div>,
-        ]);
-      })}
+      {value.length > 0 ? <h3 className="text-dark">Tasks</h3> : ''}
+      {value.map((task) =>
+        <div key={task.jiraFields.key}>
+          <StatusIcon status={task.jiraFields.status.name} />
+          {task.jiraFields.summary}
+        </div>)}
     </div>
   );
 }

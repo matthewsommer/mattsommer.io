@@ -39,9 +39,9 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
         }
       `).then(result => {
                 result.data.allJiraIssue.edges.map(({ node }) => {
-                    var template = './src/templates/task.js';
+                    var template = './src/templates/task.jsx';
                     if (node.jiraIssue.jiraFields.issuetype.name == 'Blog Post') {
-                        template = './src/templates/blog-post.js';
+                        template = './src/templates/blog-post.jsx';
                     }
                     createPage({
                         path: node.slug,
@@ -62,7 +62,7 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
                 for (let project of projects) {
                     createPage({
                         path: project.replace(/[^\w\s]/gi, '').replace(/\s+/g, '-').toLowerCase(),
-                        component: path.resolve(`./src/templates/task-list.js`),
+                        component: path.resolve(`./src/templates/task-list.jsx`),
                         context: {
                             project: project
                         },
@@ -75,13 +75,13 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
                 for (let status of statuss) {
                     createPage({
                         path: status.replace(/\s+/g, '-').toLowerCase(),
-                        component: path.resolve(`./src/templates/status-list.js`),
+                        component: path.resolve(`./src/templates/status-list.jsx`),
                         context: {
                             status: status
                         },
                     });
                 }
-                
+
                 resolve();
             });
     });

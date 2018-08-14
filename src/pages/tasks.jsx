@@ -14,7 +14,7 @@ export default function TasksPage({ data }) {
     const headers = Array.from(headersSet);
     return (
       <div>
-        <div className="text-dark h2">Currently It&#39m...</div>
+        <div className="text-dark h2">Currently I’m...</div>
         {headers.map((project) => {
           return ([
             tasks.map((task) => {
@@ -40,7 +40,7 @@ export default function TasksPage({ data }) {
   }
   return (
     <div>
-      It's a mystery, for now.
+      It’s a mystery, for now.
     </div>
   );
 }

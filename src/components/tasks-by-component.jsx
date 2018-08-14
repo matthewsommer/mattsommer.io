@@ -53,5 +53,8 @@ export default function TasksByComponent({
 }
 
 TasksByComponent.propTypes = {
-  tasks: PropTypes.arrayOf(PropTypes.object),
+  tasks: PropTypes.arrayOf(PropTypes.object).isRequired,
+  field: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  monoType: PropTypes.string.isRequired,
 };
