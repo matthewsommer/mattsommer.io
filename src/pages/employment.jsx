@@ -1,9 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Link from 'gatsby-link';
 
 export default function EmploymentPage({ data }) {
   const tasks = data.epics.edges;
-
   return (
     <div>
       {tasks.map((task) => {
@@ -14,11 +14,11 @@ export default function EmploymentPage({ data }) {
             <p>{taskNode.author}</p>
             <p>{taskNode.description}</p>
           </div>
-        )
+        );
       })}
     </div>
   );
-};
+}
 
 EmploymentPage.propTypes = {
   data: PropTypes.arrayOf(PropTypes.object).isRequired,

@@ -6,7 +6,7 @@ export default function ComponentsPage({ data }) {
   return (
     <TasksByComponent tasks={data.epics.edges} title="Tasks by Skill" field="components" />
   );
-};
+}
 
 ComponentsPage.propTypes = {
   data: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types

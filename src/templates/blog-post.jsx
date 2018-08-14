@@ -25,7 +25,7 @@ export default function BlogPost({ data }) {
       <h1 className="mt-0 mb-0">{task.jiraFields.summary}</h1>
       <CustomShield subject="Author" status={task.jiraFields.assignee.displayName} color="blue" />
       <CustomShield subject="Published" status={Moment(task.jiraFields.customfield_10905).format('MMMM Do, YYYY')} color="blue" />
-      {task.jiraFields.status.name !== "Closed" ? <StatusShield status={task.jiraFields.status.name} /> : ""}
+      {task.jiraFields.status.name !== 'Closed' ? <StatusShield status={task.jiraFields.status.name} /> : ""}
       <JiraIconLink taskKey={task.key} />
       <TaskLabels labels={task.jiraFields.labels} />
       <RelatedTasks taskLinks={task.jiraFields.issuelinks} />
@@ -34,7 +34,7 @@ export default function BlogPost({ data }) {
       <div>
         <div dangerouslySetInnerHTML={{ __html: task.renderedFields.description }} />
       </div>
-      {task.jiraFields.status.name === "Closed" ? <div><p>Much Love!</p><h2>{task.jiraFields.assignee.displayName}</h2></div> : ""}
+      {task.jiraFields.status.name === 'Closed' ? <div><p>Much Love!</p><h2>{task.jiraFields.assignee.displayName}</h2></div> : ""}
       <Disqus.DiscussionEmbed shortname={'mattsommer-io'} config={disqusConfig} />
     </div>
   );
