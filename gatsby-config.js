@@ -32,6 +32,7 @@ module.exports = {
           families: ['Josefin Sans:300,400', 'sans-serif']
         }
       }
-    }
+    },
+    'gatsby-plugin-eslint'
   ]
 }
