@@ -53,8 +53,7 @@ export default function TaskStatsPage({ data }) {
 }
 
 TaskStatsPage.propTypes = {
-  data:
-    PropTypes.arrayOf(PropTypes.object).isRequired, // eslint-disable-line react/forbid-prop-types
+  data: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
 };
 
 export const query = graphql`

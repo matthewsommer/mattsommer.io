@@ -82,5 +82,5 @@ export default function RelatedTasksList({ taskLinks }) {
 }
 
 RelatedTasksList.propTypes = {
-  taskLinks: PropTypes.string.isRequired,
+  taskLinks: PropTypes.arrayOf(PropTypes.object).isRequired,
 };

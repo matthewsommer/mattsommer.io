@@ -1,13 +1,18 @@
-import React from 'react'
-import TasksByField from "../components/tasks-by-field"
+import React from 'react';
+import PropTypes from 'prop-types';
+import TasksByField from '../components/tasks-by-field';
 
-const EpicsPage = (props) => {
-    return (
-        <TasksByField tasks={props.data.epics.edges} title="Epics" field="project"/>
-    );
+export default function EpicsPage(props) {
+  const { data } = this.props;
+  return (
+    <TasksByField tasks={data.epics.edges} title="Epics" field="project" />
+  );
+}
+
+EpicsPage.propTypes = {
+  props: PropTypes.arrayOf(PropTypes.object).isRequired,
+  data: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
-
-export default EpicsPage
 
 export const query = graphql`
     query EpicsQuery {

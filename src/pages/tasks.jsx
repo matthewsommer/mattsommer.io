@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Link from 'gatsby-link';
 
-export default function TasksPage({ props }) {
-  const { tasks } = props.data.epics.edges;
+export default function TasksPage({ data }) {
+  const { tasks } = data.epics.edges;
   if (tasks && tasks.length > 0) {
     const headersSet = new Set(
       tasks.map(
@@ -40,14 +40,13 @@ export default function TasksPage({ props }) {
   }
   return (
     <div>
-      It&#39s a mystery, for now.
+      It's a mystery, for now.
     </div>
   );
 }
 
 TasksPage.propTypes = {
-  props: PropTypes.arrayOf(PropTypes.object).isRequired,
-  data: PropTypes.arrayOf(PropTypes.object).isRequired,
+  data: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
 };
 
 export const query = graphql`

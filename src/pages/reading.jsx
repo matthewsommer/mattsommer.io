@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Link from 'gatsby-link';
 
-export default function ReadingPage({ props }) {
-  const tasks = props.data.reading.edges;
+export default function ReadingPage({ data }) {
+  const tasks = data.reading.edges;
   const statuses = [{ name: 'In Progress', label: 'Currently Reading' }, { name: 'Closed', label: 'Have Read' }, { name: 'Open', label: 'Want to Read' }];
   return (
     <div>
@@ -34,7 +34,7 @@ export default function ReadingPage({ props }) {
 };
 
 ReadingPage.propTypes = {
-  props: PropTypes.arrayOf(PropTypes.object),
+  data: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
 };
 
 export const query = graphql`

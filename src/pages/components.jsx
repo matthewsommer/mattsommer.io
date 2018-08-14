@@ -1,13 +1,16 @@
-import React from 'react'
-import TasksByComponent from "../components/tasks-by-component"
+import React from 'react';
+import PropTypes from 'prop-types';
+import TasksByComponent from '../components/tasks-by-component';
 
-const ComponentsPage = (props) => {
+export default function ComponentsPage({ data }) {
     return (
-        <TasksByComponent tasks={props.data.epics.edges} title="Tasks by Skill" field="components"/>
+        <TasksByComponent tasks={data.epics.edges} title="Tasks by Skill" field="components" />
     );
 };
 
-export default ComponentsPage
+ComponentsPage.propTypes = {
+    data: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
+};
 
 export const query = graphql`
     query AllQuery {

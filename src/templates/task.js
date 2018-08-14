@@ -26,20 +26,20 @@ export default ({ data }) => {
             </div>
             <h2 className="text-dark mb-0">{task.jiraFields.summary}</h2>
             <div>
-                <PriorityShield priority={task.jiraFields.priority.name}/>
-                <StatusShield status={task.jiraFields.status.name}/>
-                {task.jiraFields.issuetype.name != 'Epic' ? <ProgressShield subTasks={task.jiraFields.subtasks} parentTask={task}/> : ""}
-                {task.jiraFields.issuetype.name === 'Epic' ? <ProgressShield subTasks={storyList} parentTask={task}/> : ""}
+                <PriorityShield priority={task.jiraFields.priority.name} />
+                <StatusShield status={task.jiraFields.status.name} />
+                {task.jiraFields.issuetype.name != 'Epic' ? <ProgressShield subTasks={task.jiraFields.subtasks} parentTask={task} /> : ""}
+                {task.jiraFields.issuetype.name === 'Epic' ? <ProgressShield subTasks={storyList} parentTask={task} /> : ""}
             </div>
             <div>
                 <JiraIconLink taskKey={task.key} />
                 <RelatedTasks taskLinks={task.jiraFields.issuelinks} />
-                <TaskLabels labels={task.jiraFields.labels}/>
-                <TaskComponentsList components={task.jiraFields.components}/>
+                <TaskLabels labels={task.jiraFields.labels} />
+                <TaskComponentsList components={task.jiraFields.components} />
                 {task.renderedFields.description != "" ? <hr className="mt-2 mb-1" /> : ''}
-                {task.renderedFields.description != "" ? <div dangerouslySetInnerHTML={{ __html: task.renderedFields.description}} className="text-secondary mt-2" /> : ''}
+                {task.renderedFields.description != "" ? <div dangerouslySetInnerHTML={{ __html: task.renderedFields.description }} className="text-secondary mt-2" /> : ''}
                 <SubtaskList value={task.jiraFields.subtasks} />
-                <TasksByField tasks={stories} type="Stories" field="project" monoType="true"/>
+                <TasksByField tasks={stories} type="Stories" field="project" monoType="true" title="" />
             </div>
         </div>
     );

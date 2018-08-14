@@ -13,20 +13,20 @@ function importAll(r) {
 
 const icons = importAll(require.context('/', false, /\.(png|jpe?g|svg)$/));
 
-export default function PriorityShield() {
-  if (this.props.priority === 'P1-Highest') {
+export default function PriorityShield({ priority }) {
+  if (priority === 'P1-Highest') {
     return <Img src={icons[0]} alt="P1-Highest Priority" />;
   }
-  if (this.props.priority === 'P2-High') {
+  if (priority === 'P2-High') {
     return <Img src={icons[1]} alt="P2-High" />;
   }
-  if (this.props.priority === 'P3-Medium') {
+  if (priority === 'P3-Medium') {
     return <Img src={icons[2]} alt="P3-Medium" />;
   }
-  if (this.props.priority === 'P4-Low') {
+  if (priority === 'P4-Low') {
     return <Img src={icons[3]} alt="P4-Low" />;
   }
-  if (this.props.priority === 'P5-Undefined') {
+  if (priority === 'P5-Undefined') {
     return <Img src={icons[4]} alt="P5-Undefined" />;
   }
 }
