@@ -3,14 +3,14 @@ import PropTypes from 'prop-types';
 import TasksByField from '../components/tasks-by-field';
 
 export default function EpicsPage(props) {
-    const tasks = props.data.epics.edges;
-    return (
-        <TasksByField tasks={tasks} title="Epics" field="project" />
-    );
+  const { data } = props;
+  return (
+    <TasksByField tasks={data.epics.edges} title="Epics" field="project" />
+  );
 }
 
 EpicsPage.propTypes = {
-    props: PropTypes.object, // eslint-disable-line react/forbid-prop-types
+  data: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
 };
 
 export const query = graphql`

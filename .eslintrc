@@ -1,6 +1,6 @@
 {
   "parser": "babel-eslint",
-  "extends": "",
+  "extends": "airbnb",
   "globals": {
     "graphql": true
   }

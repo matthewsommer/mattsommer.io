@@ -8,87 +8,59 @@ function getFieldName(task, field) {
 }
 
 function ListItem(props) {
+  const { task } = props;
   return (
     <div>
-      <StatusIcon status={props.value.jiraIssue.jiraFields.status.name} />
-      <Link to={`/${props.value.slug}`} className="text-secondary">{props.value.jiraIssue.jiraFields.summary}</Link>
+      <StatusIcon status={task.jiraIssue.jiraFields.status.name} />
+      <Link to={`/${task.slug}`} className="text-secondary">{task.jiraIssue.jiraFields.summary}</Link>
     </div>
   );
 }
 
+ListItem.propTypes = {
+  task: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
+};
+
 function HeaderGroup(props) {
-  const listItems = props.tasks.map((task) =>
-    <ListItem key={task.slug} value={task} />
-  );
+  const { header } = props;
+  const { tasks } = props;
+  const listItems = tasks.map(t => <ListItem key={t.slug} task={t} />);
   return (
     <div>
-      <h3>{props.header}</h3>
+      <div className="text-dark h2">{header}</div>
       {listItems}
     </div>
   );
 }
 
-export default function TasksByField({ tasks, title, type = '', field, monoType = 'true' }) {
+HeaderGroup.propTypes = {
+  header: PropTypes.string.isRequired,
+  tasks: PropTypes.arrayOf(PropTypes.object).isRequired,
+};
+
+export default function TasksByField({ tasks, title, field }) {
   const taskList = Array.from(tasks.map(t => t.node));
   const headersArray = taskList.map(t => getFieldName(t, field)).sort();
   const headersSet = new Set(headersArray);
   const headers = Array.from(headersSet);
-  const fieldSection = headers.map((fieldValue) =>
-    <div key={fieldValue}>
-      <div className="text-dark h2">{fieldValue}</div>
-      <HeaderGroup tasks={taskList.filter(t => t.jiraIssue.jiraFields[field].name === fieldValue)} />
-    </div>
-  );
+  const section = headers.map(header => (
+    <div key={header}>
+      <HeaderGroup
+        header={header}
+        tasks={taskList.filter(t => t.jiraIssue.jiraFields[field].name === header)}
+      />
+    </div>));
 
   return (
     <div>
       <div className="h2 text-dark">{title}</div>
-      {fieldSection}
+      {section}
     </div>
   );
-  // const headersArray = tasks.map(
-  //   task => task.node.jiraIssue.jiraFields[field] != null
-  //     ? task.node.jiraIssue.jiraFields[field].name
-  //     : null,
-  // ).sort();
-  // const headersSet = new Set(headersArray);
-  // const headers = Array.from(headersSet);
-  // return (
-  //   <div>
-  //     <div className="h2 text-dark">{title}</div>
-  //     {headers.map((project) => {
-  //       return ([
-  //         <div key={project} className="text-dark h2 mb-0 mt-4">
-  //           {project}
-  //           {type}</div>,
-  //         tasks.map((task) => {
-  //           const taskNode = task.node;
-  //           if (taskNode.jiraIssue.jiraFields[field] != null
-  //             && taskNode.jiraIssue.jiraFields[field].name === project) {
-  //             return (
-  //               <div key={taskNode.id}>
-  //                 <div>
-  //                   <StatusIcon status={taskNode.jiraIssue.jiraFields.status.name} />
-  //                   <Link to={`/${taskNode.slug}`} className="text-secondary">
-  //                     {monoType === 'false' ? `${taskNode.jiraIssue.jiraFields.issuetype.name} - ` : ''}
-  //                     {taskNode.jiraIssue.jiraFields.summary}
-  //                   </Link>
-  //                 </div>
-  //               </div>
-  //             );
-  //           }
-  //           return null;
-  //         }),
-  //       ]);
-  //     })}
-  //   </div>
-  // );
 }
 
 TasksByField.propTypes = {
   tasks: PropTypes.arrayOf(PropTypes.object).isRequired,
   title: PropTypes.string.isRequired,
-  type: PropTypes.string,
   field: PropTypes.string.isRequired,
-  monoType: PropTypes.string,
 };

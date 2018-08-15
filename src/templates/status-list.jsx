@@ -6,10 +6,10 @@ export default function TaskList({ data }) {
   const { tasks } = data.allJiraIssue.edges;
   return (
     <div>
-      {tasks.map((task, i) => {
+      {tasks.map((task) => {
         const taskNode = task.node;
         return (
-          <div key={i}>
+          <div key={taskNode.jiraIssue.key}>
             <Link to={`/${taskNode.slug}`}>{taskNode.jiraIssue.jiraFields.summary}</Link>
             <p>{taskNode.jiraIssue.jiraFields.description}</p>
           </div>

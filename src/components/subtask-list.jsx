@@ -6,11 +6,11 @@ export default function SubtaskList({ value }) {
   return (
     <div>
       {value.length > 0 ? <h3 className="text-dark">Tasks</h3> : ''}
-      {value.map((task) =>
+      {value.map(task => (
         <div key={task.jiraFields.key}>
           <StatusIcon status={task.jiraFields.status.name} />
           {task.jiraFields.summary}
-        </div>)}
+        </div>))}
     </div>
   );
 }
