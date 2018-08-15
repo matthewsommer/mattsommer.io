@@ -10,7 +10,7 @@ import TaskLabels from '../components/task-labels/task-labels';
 import StatusShield from '../components/status-shield/status-shield';
 
 export default function BlogPost({ data }) {
-    const { task } = data.jiraIssue.jiraIssue;
+    const { jiraIssue: task } = data.jiraIssue;
     const disqusShortname = data.jiraIssue.slug.replace('/', '-');
     const disqusConfig = {
         url: `https://mattsommer.io/${data.jiraIssue.slug}`,

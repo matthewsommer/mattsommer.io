@@ -12,8 +12,8 @@ export default function ReadingPage({ data }) {
         return ([
           <div className="text-dark h2 mb-0 mt-4">{status.label}</div>,
           tasks.map((taskNode) => {
-            const { task } = taskNode.node.jiraIssue;
-            const { slug } = taskNode.node.slug;
+            const { jiraIssue: task } = taskNode.node;
+            const { slug } = taskNode.node;
             if (task.jiraFields.status != null && task.jiraFields.status.name === status.name) {
               return (
                 <div className="pt-2">

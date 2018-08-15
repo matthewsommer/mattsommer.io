@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Link from 'gatsby-link';
 
 export default function TasksPage({ data }) {
-  const { tasks } = data.epics.edges;
+  const { edges: tasks } = data.tasks;
   if (tasks && tasks.length > 0) {
     const headersSet = new Set(
       tasks.map(
@@ -51,7 +51,7 @@ TasksPage.propTypes = {
 
 export const query = graphql`
     query TasksQuery {
-        epics: allJiraIssue(filter: {status: {eq: "In Progress"}}) {
+      tasks: allJiraIssue(filter: {status: {eq: "In Progress"}}) {
             edges {
                 node {
                     slug

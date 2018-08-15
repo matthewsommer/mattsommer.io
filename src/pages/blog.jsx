@@ -9,7 +9,7 @@ export default function BlogPostsPage({ data }) {
     <div>
       <div className="text-dark h2">Blog Posts</div>
       {tasks.map((taskNode, i) => {
-        const { slug } = taskNode.node.slug;
+        const { slug } = taskNode.node;
         const task = taskNode.node.jiraIssue;
         return (
           <div key={task.id}>
