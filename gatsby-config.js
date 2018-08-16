@@ -3,26 +3,29 @@ module.exports = {
     title: 'MattSommer.io',
   },
   plugins: [
-    'gatsby-plugin-react-helmet', {
-      resolve: "gatsby-source-jira",
+    {
+      resolve: 'gatsby-plugin-react-helmet'
+    },
+    {
+      resolve: 'gatsby-source-jira',
       options: {
-        host: "timetopretend.atlassian.net",
-        epic_field_id: "customfield_10009",
+        host: 'timetopretend.atlassian.net',
+        epic_field_id: 'customfield_10009',
       }
     },
     {
-      resolve: `gatsby-plugin-google-analytics`,
+      resolve: 'gatsby-plugin-google-analytics',
       options: {
-        trackingId: "UA-91408509-1",
+        trackingId: 'UA-91408509-1',
         // Puts tracking script in the head instead of the body
-        
+
         head: false,
         // Setting this parameter is optional
         anonymize: false,
         // Setting this parameter is also optional
         respectDNT: false,
         // Avoids sending pageview hits from custom paths
-        exclude: ["/preview/**", "/do-not-track/me/too/"],
+        exclude: ['/preview/**', '/do-not-track/me/too/'],
       },
     },
     {

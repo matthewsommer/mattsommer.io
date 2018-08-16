@@ -11,7 +11,7 @@
     "gatsby-plugin-google-analytics": "^1.0.31",
     "gatsby-plugin-react-helmet": "^2.0.10",
     "gatsby-plugin-web-font-loader": "^1.0.3",
-    "gatsby-source-jira": "^1.0.1",
+    "gatsby-source-jira": "^1.0.2",
     "jquery": "^3.3.1",
     "moment": "^2.22.2",
     "popper": "^1.0.1",
