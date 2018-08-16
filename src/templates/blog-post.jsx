@@ -53,7 +53,9 @@ export default function BlogPost({ data }) {
       <TaskComponentsList components={task.jiraFields.components} />
       <hr className="mb-2 mt-2" />
       <div>
+        {/* eslint-disable */}
         <div dangerouslySetInnerHTML={{ __html: task.renderedFields.description }} />
+        {/* eslint-enable */}
       </div>
       {task.jiraFields.status.name === 'Closed' ? Signature(task.jiraFields.assignee.displayName) : ''}
       <Disqus.DiscussionEmbed shortname="mattsommer-io" config={disqusConfig} />

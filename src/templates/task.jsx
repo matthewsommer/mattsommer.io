@@ -36,7 +36,9 @@ export default function Task({ data }) {
         <TaskLabels labels={task.jiraFields.labels} />
         <TaskComponentsList components={task.jiraFields.components} />
         {task.renderedFields.description !== '' ? <hr className="mt-2 mb-1" /> : ''}
+        {/* eslint-disable */}
         {task.renderedFields.description !== '' ? <div dangerouslySetInnerHTML={{ __html: task.renderedFields.description }} className="text-secondary mt-2" /> : ''}
+        {/* eslint-enable */}
         <SubtaskList value={task.jiraFields.subtasks} />
         {storyNodes === null ? '' : <TasksByField tasks={storyNodes && storyNodes.edges} type="Stories" field="project" monoType="true" title="" />}
       </div>
