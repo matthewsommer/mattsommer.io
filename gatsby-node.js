@@ -56,31 +56,31 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
                     });
                 });
 
-                let projects = new Set();
-                result.data.allJiraIssue.edges.map(({ node }) => { return projects.add(node.jiraIssue.jiraFields.project.name) });
+                // let projects = new Set();
+                // result.data.allJiraIssue.edges.map(({ node }) => { return projects.add(node.jiraIssue.jiraFields.project.name) });
 
-                for (let project of projects) {
-                    createPage({
-                        path: project.replace(/[^\w\s]/gi, '').replace(/\s+/g, '-').toLowerCase(),
-                        component: path.resolve(`./src/templates/task-list.jsx`),
-                        context: {
-                            project: project
-                        },
-                    });
-                }
+                // for (let project of projects) {
+                //     createPage({
+                //         path: project.replace(/[^\w\s]/gi, '').replace(/\s+/g, '-').toLowerCase(),
+                //         component: path.resolve(`./src/templates/task-list.jsx`),
+                //         context: {
+                //             project: project
+                //         },
+                //     });
+                // }
 
-                let statuss = new Set();
-                result.data.allJiraIssue.edges.map(({ node }) => { return statuss.add(node.jiraIssue.jiraFields.status.name) });
+                // let statuss = new Set();
+                // result.data.allJiraIssue.edges.map(({ node }) => { return statuss.add(node.jiraIssue.jiraFields.status.name) });
 
-                for (let status of statuss) {
-                    createPage({
-                        path: status.replace(/\s+/g, '-').toLowerCase(),
-                        component: path.resolve(`./src/templates/status-list.jsx`),
-                        context: {
-                            status: status
-                        },
-                    });
-                }
+                // for (let status of statuss) {
+                //     createPage({
+                //         path: status.replace(/\s+/g, '-').toLowerCase(),
+                //         component: path.resolve(`./src/templates/status-list.jsx`),
+                //         context: {
+                //             status: status
+                //         },
+                //     });
+                // }
 
                 resolve();
             });

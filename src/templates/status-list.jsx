@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Link from 'gatsby-link';
 
-export default function TaskList({ data }) {
+export default function StatusList({ data }) {
   const { tasks } = data.allJiraIssue.edges;
   return (
     <div>
@@ -19,7 +19,7 @@ export default function TaskList({ data }) {
   );
 }
 
-TaskList.propTypes = {
+StatusList.propTypes = {
   data: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
 };
 

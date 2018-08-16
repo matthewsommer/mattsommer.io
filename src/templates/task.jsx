@@ -27,17 +27,25 @@ export default function Task({ data }) {
       <div>
         <PriorityShield priority={task.jiraFields.priority.name} />
         <StatusShield status={task.jiraFields.status.name} />
-        {task.jiraFields.issuetype.name !== 'Epic' && task.jiraFields.subtasks ? <ProgressShield subTasks={task.jiraFields.subtasks} parentTask={task} /> : ''}
-        {task.jiraFields.issuetype.name === 'Epic' && storyList ? <ProgressShield subTasks={storyList} parentTask={task} /> : ''}
+        {task.jiraFields.issuetype.name !== 'Epic'
+          && task.jiraFields.subtasks
+          ? <ProgressShield subTasks={task.jiraFields.subtasks} parentTask={task} /> : ''}
+        {task.jiraFields.issuetype.name === 'Epic'
+          && storyList ? <ProgressShield subTasks={storyList} parentTask={task} /> : ''}
       </div>
       <div>
         <JiraIconLink taskKey={task.key} />
         <RelatedTasks taskLinks={task.jiraFields.issuelinks} />
         <TaskLabels labels={task.jiraFields.labels} />
-        <TaskComponentsList components={task.jiraFields.components} />
-        {task.renderedFields.description !== '' ? <hr className="mt-2 mb-1" /> : ''}
+        {task.jiraFields.components !== null
+          ? <TaskComponentsList components={task.jiraFields.components} /> : null}
+        {task.renderedFields.description !== ''
+          ? <hr className="mt-2 mb-1" /> : ''}
         {/* eslint-disable */}
-        {task.renderedFields.description !== '' ? <div dangerouslySetInnerHTML={{ __html: task.renderedFields.description }} className="text-secondary mt-2" /> : ''}
+        {task.renderedFields.description !== ''
+          ? <div
+            dangerouslySetInnerHTML={{ __html: task.renderedFields.description }}
+            className="text-secondary mt-2" /> : ''}
         {/* eslint-enable */}
         <SubtaskList value={task.jiraFields.subtasks} />
         {storyNodes === null ? '' : <TasksByField tasks={storyNodes && storyNodes.edges} type="Stories" field="project" monoType="true" title="" />}

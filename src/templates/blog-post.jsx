@@ -50,7 +50,10 @@ export default function BlogPost({ data }) {
       <JiraIconLink taskKey={task.key} />
       <TaskLabels labels={task.jiraFields.labels} />
       <RelatedTasks taskLinks={task.jiraFields.issuelinks} />
-      <TaskComponentsList components={task.jiraFields.components} />
+      {
+        task.jiraFields.components !== null
+          ? <TaskComponentsList components={task.jiraFields.components} /> : null
+      }
       <hr className="mb-2 mt-2" />
       <div>
         {/* eslint-disable */}
